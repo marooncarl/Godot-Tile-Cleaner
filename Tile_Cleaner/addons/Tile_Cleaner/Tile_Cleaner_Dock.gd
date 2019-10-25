@@ -5,6 +5,8 @@
 tool
 extends Panel
 
+const SAVE_DIALOG_SCALE = Vector2(0.66, 0.66)
+
 var editor_interface : EditorInterface = null
 
 func _ready():
@@ -16,7 +18,9 @@ func on_save_pressed():
 	if editor_interface:
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
-			$Save_File_Dialog.popup_centered()
+			var window_size := Vector2(get_tree().root.size.x * SAVE_DIALOG_SCALE.x, \
+					get_tree().root.size.y * SAVE_DIALOG_SCALE.y)
+			$Save_File_Dialog.popup_centered(window_size)
 		else:
 			print("Open an Autotile Setup to save rules!")
 
