@@ -23,6 +23,12 @@ _global_script_class_icons={
 config/name="Tile Cleaner"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/warnings/unused_class_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [editor_plugins]
 
 enabled=PoolStringArray( "Tile_Cleaner" )
