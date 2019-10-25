@@ -5,4 +5,4 @@
 extends Resource
 class_name AutotileRuleset
 
-var rules := []
+export(Array, Dictionary) var rules := []

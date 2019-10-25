@@ -10,6 +10,8 @@ var dock = null
 
 func _enter_tree():
 	dock = dock_scene.instance()
+	# Give dock access to the editor interface
+	dock.editor_interface = get_editor_interface()
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_UL, dock)
 
 func _exit_tree():
