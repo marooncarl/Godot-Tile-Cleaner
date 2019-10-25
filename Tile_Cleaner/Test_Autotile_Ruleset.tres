@@ -4,4 +4,150 @@
 
 [resource]
 script = ExtResource( 1 )
-rules = [  ]
+rules = [ {
+Vector2( 1, 1 ): {
+
+},
+Vector2( 1, 2 ): {
+
+},
+Vector2( 2, 1 ): {
+
+},
+Vector2( 2, 2 ): {
+
+}
+}, {
+Vector2( 4, 1 ): {
+
+},
+Vector2( 5, 2 ): {
+
+}
+}, {
+Vector2( 7, 2 ): {
+
+},
+Vector2( 8, 1 ): {
+
+},
+Vector2( 9, 2 ): {
+
+},
+Vector2( 10, 1 ): {
+
+},
+Vector2( 11, 2 ): {
+
+}
+}, {
+Vector2( 1, 4 ): {
+
+},
+Vector2( 1, 5 ): {
+
+},
+Vector2( 2, 4 ): {
+
+},
+Vector2( 3, 4 ): {
+
+},
+Vector2( 4, 4 ): {
+
+},
+Vector2( 4, 5 ): {
+
+}
+}, {
+Vector2( 6, 4 ): {
+
+},
+Vector2( 6, 5 ): {
+
+},
+Vector2( 7, 4 ): {
+
+},
+Vector2( 7, 5 ): {
+
+},
+Vector2( 8, 4 ): {
+
+},
+Vector2( 8, 5 ): {
+
+},
+Vector2( 9, 4 ): {
+
+},
+Vector2( 9, 5 ): {
+
+}
+}, {
+Vector2( 1, 7 ): {
+
+},
+Vector2( 1, 8 ): {
+
+},
+Vector2( 1, 9 ): {
+
+},
+Vector2( 1, 10 ): {
+
+},
+Vector2( 2, 10 ): {
+
+},
+Vector2( 2, 11 ): {
+
+},
+Vector2( 2, 12 ): {
+
+},
+Vector2( 2, 13 ): {
+
+},
+Vector2( 2, 14 ): {
+
+},
+Vector2( 3, 14 ): {
+
+}
+}, {
+Vector2( 5, 8 ): {
+
+},
+Vector2( 5, 9 ): {
+
+},
+Vector2( 6, 8 ): {
+
+},
+Vector2( 6, 9 ): {
+
+}
+}, {
+Vector2( 5, 11 ): {
+
+},
+Vector2( 6, 11 ): {
+
+},
+Vector2( 7, 11 ): {
+
+},
+Vector2( 8, 8 ): {
+
+},
+Vector2( 8, 9 ): {
+
+},
+Vector2( 8, 10 ): {
+
+},
+Vector2( 8, 11 ): {
+
+}
+} ]
