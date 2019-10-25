@@ -6,148 +6,378 @@
 script = ExtResource( 1 )
 rules = [ {
 Vector2( 1, 1 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 1, 2 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 1 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 2 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 4, 1 ): {
-
+"input": {
+"id": 4,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 5, 2 ): {
-
+"input": {
+"id": 8,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 7, 2 ): {
-
+"input": {
+"id": 1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 1 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 9, 2 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 10, 1 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 11, 2 ): {
-
+"input": {
+"id": 5,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 1, 4 ): {
-
+"input": {
+"id": 1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 1, 5 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 4 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 3, 4 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 4, 4 ): {
-
+"input": {
+"id": 5,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 4, 5 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 6, 4 ): {
-
+"input": {
+"id": 17,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 6, 5 ): {
-
+"input": {
+"id": 27,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 7, 4 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 7, 5 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 4 ): {
-
+"input": {
+"id": 18,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 5 ): {
-
+"input": {
+"id": 28,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 9, 4 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 9, 5 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 1, 7 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 1, 8 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 1, 9 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 1, 10 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 10 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 11 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 12 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 13 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 2, 14 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 3, 14 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 5, 8 ): {
-
+"input": {
+"id": 4,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 5, 9 ): {
-
+"input": {
+"id": 1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 6, 8 ): {
-
+"input": {
+"id": 8,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 6, 9 ): {
-
+"input": {
+"id": 5,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 }, {
 Vector2( 5, 11 ): {
-
+"input": {
+"id": 1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 6, 11 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 7, 11 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 8 ): {
-
+"input": {
+"id": 1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 9 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 10 ): {
-
+"input": {
+"id": 0,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 },
 Vector2( 8, 11 ): {
-
+"input": {
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
 }
 } ]
