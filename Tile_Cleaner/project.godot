@@ -8,15 +8,24 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Resource",
+"class": "AutotileRuleset",
+"language": "GDScript",
+"path": "res://addons/Tile_Cleaner/Autotile_Ruleset.gd"
+} ]
 _global_script_class_icons={
-
+"AutotileRuleset": ""
 }
 
 [application]
 
 config/name="Tile Cleaner"
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "Tile_Cleaner" )
 
 [rendering]
 
