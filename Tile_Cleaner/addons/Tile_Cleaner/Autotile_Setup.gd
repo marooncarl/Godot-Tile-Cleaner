@@ -19,22 +19,27 @@ const ADJACENT_POSITIONS = [
 func create_autotile_rules() -> Array:
 	# Make sure the required tilemaps are present
 	var regions_map : TileMap = null
-	if has_node("Regions"):
-		regions_map = $Regions
-	elif has_node("regions"):
-		regions_map = $regions
+	for n in ["Regions", "regions"]:
+		if has_node(n):
+			regions_map = get_node(n)
+			break
+		
 	var input_map : TileMap = null
-	if has_node("Input"):
-		input_map = $Input
-	elif has_node("input"):
-		input_map = $input
+	for n in ["Input", "input"]:
+		if has_node(n):
+			input_map = get_node(n)
+			break
+		
+	var output_map : TileMap = null
+	for n in ["Output", "output"]:
+		if has_node(n):
+			output_map = get_node(n)
+			break
 	
-	if !regions_map:
-		print("Missing regions map!")
-		return []
-	if !input_map:
-		print("Missing input map!")
-		return []
+	for map in [[regions_map, "regions"], [input_map, "input"], [output_map, "output"]]:
+		if !map[0]:
+			print("Missing %s map!" % map[1])
+			return []
 	
 	# Determine regions
 	var regions := []
