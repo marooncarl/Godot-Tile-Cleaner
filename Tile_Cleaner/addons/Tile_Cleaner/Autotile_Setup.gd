@@ -49,15 +49,16 @@ func create_autotile_rules() -> Array:
 			regions.append(new_region)
 			gather_cell(cell, new_region, regions, regions_map)
 	
-	# Add input data
+	# Add input and output data
 	for region in regions:
 		for cell in region.keys():
-			region[cell]["input"] = {
-				"id": input_map.get_cell(cell.x, cell.y),
-				"x_flip": input_map.is_cell_x_flipped(cell.x, cell.y),
-				"y_flip": input_map.is_cell_y_flipped(cell.x, cell.y),
-				"transpose": input_map.is_cell_transposed(cell.x, cell.y),
-			}
+			for prop in [[input_map, "input"], [output_map, "output"]]:
+				region[cell][prop[1]] = {
+					"id": prop[0].get_cell(cell.x, cell.y),
+					"x_flip": prop[0].is_cell_x_flipped(cell.x, cell.y),
+					"y_flip": prop[0].is_cell_y_flipped(cell.x, cell.y),
+					"transpose": prop[0].is_cell_transposed(cell.x, cell.y),
+				}
 			# In input, empty should be regarded as a wildcard
 			if region[cell]["input"]["id"] == TileMap.INVALID_CELL:
 				region[cell]["input"]["id"] = "any"
