@@ -28,11 +28,15 @@ func clean_tiles(undoredo : UndoRedo):
 			"autotile_coord": t.get_cell_autotile_coord(cell.x, cell.y),
 		}
 	
-	# Add undo/redo action
-	undoredo.create_action("Clean Tiles")
-	undoredo.add_do_method(self, "change_tilemap", t, changes)
-	undoredo.add_undo_method(self, "change_tilemap", t, before)
-	undoredo.commit_action()
+	if undoredo:
+		# Add undo/redo action
+		undoredo.create_action("Clean Tiles")
+		undoredo.add_do_method(self, "change_tilemap", t, changes)
+		undoredo.add_undo_method(self, "change_tilemap", t, before)
+		undoredo.commit_action()
+	else:
+		# Just change the tiles if undo/redo isn't available
+		change_tilemap(t, changes)
 
 func run_autotile(t : TileMap) -> Dictionary:
 	var num_matches := 0
