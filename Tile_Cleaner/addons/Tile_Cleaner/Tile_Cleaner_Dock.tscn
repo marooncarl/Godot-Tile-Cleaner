@@ -16,6 +16,15 @@ margin_right = 67.5
 margin_bottom = 63.1579
 text = "Save Autotile Rules"
 
+[node name="Clean_Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -67.5
+margin_top = 94.1274
+margin_right = 67.5
+margin_bottom = 114.127
+text = "Clean Tiles"
+
 [node name="Save_File_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
