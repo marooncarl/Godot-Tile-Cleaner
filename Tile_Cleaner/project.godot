@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Tile Cleaner"
+run/main_scene="res://Example_Map.tscn"
 config/icon="res://icon.png"
 
 [debug]
