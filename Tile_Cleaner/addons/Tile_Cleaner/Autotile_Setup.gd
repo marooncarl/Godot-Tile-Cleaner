@@ -43,6 +43,13 @@ func create_autotile_rules() -> Array:
 			empty_map = get_node(n)
 			break
 	
+	var delete_map : TileMap = null
+	for n in ["Delete", "Delete"]:
+		if has_node(n):
+			delete_map = get_node(n)
+			break
+	
+	# Abort if a required map isn't present
 	for map in [[regions_map, "regions"], [input_map, "input"], [output_map, "output"]]:
 		if !map[0]:
 			print("Missing %s map!" % map[1])
@@ -75,6 +82,11 @@ func create_autotile_rules() -> Array:
 			if empty_map:
 				if empty_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
 					region[cell]["input"]["id"] = TileMap.INVALID_CELL
+			
+			# Cells marked to be deleted overwrite output cells if present
+			if delete_map:
+				if delete_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
+					region[cell]["output"]["id"] = "delete"
 	
 	return regions
 

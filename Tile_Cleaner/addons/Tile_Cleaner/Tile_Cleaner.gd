@@ -62,7 +62,15 @@ func run_autotile(t : TileMap) -> Dictionary:
 								# Record a change to be made later
 								for rule_cell2 in rule.keys():
 									var offset = rule_cell2 - rule_cell
-									if rule[rule_cell2]["output"]["id"] != TileMap.INVALID_CELL:
+									if !rule[rule_cell2]["output"]["id"] is int && rule[rule_cell2]["output"]["id"] == "delete":
+										changes[map_cell + offset] = {
+											"id": TileMap.INVALID_CELL,
+											"x_flip": false,
+											"y_flip": false,
+											"transpose": false,
+											"autotile_coord": Vector2(0, 0),
+										}
+									elif rule[rule_cell2]["output"]["id"] != TileMap.INVALID_CELL:
 										changes[map_cell + offset] = {
 											"id": rule[rule_cell2]["output"]["id"],
 											"x_flip": rule[rule_cell2]["output"]["x_flip"],
