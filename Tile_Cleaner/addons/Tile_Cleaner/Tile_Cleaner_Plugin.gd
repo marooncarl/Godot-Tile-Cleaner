@@ -15,10 +15,12 @@ func _enter_tree():
 	dock.undo_redo = get_undo_redo()
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_UL, dock)
 	
-	# Create custom node type
+	# Create custom node types
 	add_custom_type("Tile_Cleaner", "Node", preload("Tile_Cleaner.gd"), preload("Tile_Cleaner_Icon.png"))
+	add_custom_type("Autotile_Setup", "Node2D", preload("Autotile_Setup.gd"), preload("Autotile_Setup_Icon.png"))
 
 func _exit_tree():
 	remove_control_from_docks(dock)
 	dock.free()
 	remove_custom_type("Tile_Cleaner")
+	remove_custom_type("Autotile_Setup")
