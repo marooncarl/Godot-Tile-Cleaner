@@ -36,6 +36,13 @@ func create_autotile_rules() -> Array:
 			output_map = get_node(n)
 			break
 	
+	# Optional maps
+	var empty_map : TileMap = null
+	for n in ["Empty", "empty"]:
+		if has_node(n):
+			empty_map = get_node(n)
+			break
+	
 	for map in [[regions_map, "regions"], [input_map, "input"], [output_map, "output"]]:
 		if !map[0]:
 			print("Missing %s map!" % map[1])
@@ -60,9 +67,14 @@ func create_autotile_rules() -> Array:
 					"transpose": prop[0].is_cell_transposed(cell.x, cell.y),
 					"autotile_coord": prop[0].get_cell_autotile_coord(cell.x, cell.y),
 				}
-			# In input, empty should be regarded as a wildcard
-			if region[cell]["input"]["id"] == TileMap.INVALID_CELL:
-				region[cell]["input"]["id"] = "any"
+				# In input, empty should be regarded as a wildcard
+				if prop[1] == "input" && region[cell]["input"]["id"] == TileMap.INVALID_CELL:
+					region[cell]["input"]["id"] = "any"
+			
+			# Cells marked empty overwrite input cells if present
+			if empty_map:
+				if empty_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
+					region[cell]["input"]["id"] = TileMap.INVALID_CELL
 	
 	return regions
 
