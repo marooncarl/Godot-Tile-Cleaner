@@ -6,6 +6,8 @@
 tool
 extends Node
 
+const ADJACENT_POSITIONS = preload("Autotile_Setup.gd").ADJACENT_POSITIONS
+
 export(Array, Resource) var rulesets := []
 
 func clean_tiles(undoredo : UndoRedo):
@@ -18,6 +20,7 @@ func clean_tiles(undoredo : UndoRedo):
 	var changes := run_autotile(t)
 	
 	# Record the tilemap's current state at the cells that need changing
+	# Also include tiles that are adjacent to the changed cells, due to updating the bitmasks
 	var before := {}
 	for cell in changes.keys():
 		before[cell] = {
@@ -27,12 +30,23 @@ func clean_tiles(undoredo : UndoRedo):
 			"transpose": t.is_cell_transposed(cell.x, cell.y),
 			"autotile_coord": t.get_cell_autotile_coord(cell.x, cell.y),
 		}
+		for adj in ADJACENT_POSITIONS:
+			if !before.has(cell + adj):
+				var x : int = (cell + adj).x
+				var y : int = (cell + adj).y
+				before[cell + adj] = {
+					"id": t.get_cell(x, y),
+					"x_flip": t.is_cell_x_flipped(x, y),
+					"y_flip": t.is_cell_y_flipped(x, y),
+					"transpose": t.is_cell_transposed(x, y),
+					"autotile_coord": t.get_cell_autotile_coord(x, y),
+				}
 	
 	if undoredo:
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
-		undoredo.add_do_method(self, "change_tilemap", t, changes)
-		undoredo.add_undo_method(self, "change_tilemap", t, before)
+		undoredo.add_do_method(self, "change_tilemap", t, changes, true)
+		undoredo.add_undo_method(self, "change_tilemap", t, before, false)
 		undoredo.commit_action()
 	else:
 		# Just change the tiles if undo/redo isn't available
@@ -119,7 +133,7 @@ func does_tile_match_input(input_tile : Dictionary, map : TileMap, changes: Dict
 			(!check_autotile || input_tile["autotile_coord"] == compare["autotile_coord"])
 
 # Used with undo/redo to actually change the tilemap
-func change_tilemap(t : TileMap, changes : Dictionary):
+func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = false):
 	if t:
 		for cell in changes.keys():
 			var id = t.get_cell(cell.x, cell.y) if !"id" in changes[cell] else changes[cell]["id"]
@@ -128,3 +142,5 @@ func change_tilemap(t : TileMap, changes : Dictionary):
 			var transpose = t.is_cell_transposed(cell.x, cell.y) if !"transpose" in changes[cell] else changes[cell]["transpose"]
 			var autotile_coord = t.get_cell_autotile_coord(cell.x, cell.y) if !"autotile_coord" in changes[cell] else changes[cell]["autotile_coord"]
 			t.set_cell(cell.x, cell.y, id, flip_x, flip_y, transpose, autotile_coord)
+			if update_bitmasks:
+				t.update_bitmask_area(cell)
