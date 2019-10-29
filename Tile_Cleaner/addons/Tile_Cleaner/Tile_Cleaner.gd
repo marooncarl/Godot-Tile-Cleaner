@@ -21,31 +21,31 @@ func clean_tiles(undoredo : UndoRedo):
 	
 	var changes := run_autotile(t)
 	
-	# Record the tilemap's current state at the cells that need changing
-	# Also include tiles that are adjacent to the changed cells, due to updating the bitmasks
-	var before := {}
-	for cell in changes.keys():
-		before[cell] = {
-			"id": t.get_cell(cell.x, cell.y),
-			"x_flip": t.is_cell_x_flipped(cell.x, cell.y),
-			"y_flip": t.is_cell_y_flipped(cell.x, cell.y),
-			"transpose": t.is_cell_transposed(cell.x, cell.y),
-			"autotile_coord": t.get_cell_autotile_coord(cell.x, cell.y),
-		}
-		if update_bitmasks:
-			for adj in ADJACENT_POSITIONS:
-				if !before.has(cell + adj):
-					var x : int = (cell + adj).x
-					var y : int = (cell + adj).y
-					before[cell + adj] = {
-						"id": t.get_cell(x, y),
-						"x_flip": t.is_cell_x_flipped(x, y),
-						"y_flip": t.is_cell_y_flipped(x, y),
-						"transpose": t.is_cell_transposed(x, y),
-						"autotile_coord": t.get_cell_autotile_coord(x, y),
-					}
-	
 	if undoredo:
+		# Record the tilemap's current state at the cells that need changing
+		# Also include tiles that are adjacent to the changed cells, due to updating the bitmasks
+		var before := {}
+		for cell in changes.keys():
+			before[cell] = {
+				"id": t.get_cell(cell.x, cell.y),
+				"x_flip": t.is_cell_x_flipped(cell.x, cell.y),
+				"y_flip": t.is_cell_y_flipped(cell.x, cell.y),
+				"transpose": t.is_cell_transposed(cell.x, cell.y),
+				"autotile_coord": t.get_cell_autotile_coord(cell.x, cell.y),
+			}
+			if update_bitmasks:
+				for adj in ADJACENT_POSITIONS:
+					if !before.has(cell + adj):
+						var x : int = (cell + adj).x
+						var y : int = (cell + adj).y
+						before[cell + adj] = {
+							"id": t.get_cell(x, y),
+							"x_flip": t.is_cell_x_flipped(x, y),
+							"y_flip": t.is_cell_y_flipped(x, y),
+							"transpose": t.is_cell_transposed(x, y),
+							"autotile_coord": t.get_cell_autotile_coord(x, y),
+						}
+		
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
 		undoredo.add_do_method(self, "change_tilemap", t, changes, update_bitmasks)
