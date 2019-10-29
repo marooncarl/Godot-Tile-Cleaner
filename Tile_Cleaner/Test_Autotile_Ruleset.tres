@@ -961,3 +961,5 @@ Vector2( 13, 15 ): {
 }
 }
 } ]
+match_flipping = true
+match_bitmask = false

@@ -16,6 +16,9 @@ const ADJACENT_POSITIONS = [
 	Vector2(1, 1),
 ]
 
+export(bool) var match_flipping := true
+export(bool) var match_bitmask := false
+
 func create_autotile_rules() -> Array:
 	# Make sure the required tilemaps are present
 	var regions_map : TileMap = null

@@ -30,9 +30,15 @@ func on_save_file_selected(path: String):
 	if editor_interface:
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
+			
 			# Actually save the ruleset
 			var ruleset = AutotileRuleset.new()
 			ruleset.rules = setup.create_autotile_rules()
+			if "match_flipping" in setup:
+				ruleset.match_flipping = setup.match_flipping
+			if "match_bitmask" in setup:
+				ruleset.match_bitmask = setup.match_bitmask
+				
 			ResourceSaver.save(path, ruleset)
 			print("Saved autotile rules")
 			return

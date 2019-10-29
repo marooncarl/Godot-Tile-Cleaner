@@ -78,7 +78,8 @@ func run_autotile(t : TileMap) -> Dictionary:
 							var matching := true
 							for rule_cell2 in rule.keys():
 								var offset = rule_cell2 - rule_cell
-								if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, true, true, true, false):
+								if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, \
+								ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask):
 									matching = false
 									break
 							if matching:
