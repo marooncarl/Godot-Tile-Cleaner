@@ -17,7 +17,7 @@ func _enter_tree():
 	
 	# Create custom node types
 	add_custom_type("Tile_Cleaner", "Node", preload("Tile_Cleaner.gd"), preload("Tile_Cleaner_Icon.png"))
-	add_custom_type("Autotile_Setup", "Node2D", preload("Autotile_Setup.gd"), preload("Autotile_Setup_Icon.png"))
+	add_custom_type("Autotile_Setup", "Node", preload("Autotile_Setup.gd"), preload("Autotile_Setup_Icon.png"))
 
 func _exit_tree():
 	remove_control_from_docks(dock)

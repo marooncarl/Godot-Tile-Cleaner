@@ -3,7 +3,7 @@
 # Creates autotile rules using child tilemaps
 
 tool
-extends Node2D
+extends Node
 
 const ADJACENT_POSITIONS = [
 	Vector2(-1, -1),
