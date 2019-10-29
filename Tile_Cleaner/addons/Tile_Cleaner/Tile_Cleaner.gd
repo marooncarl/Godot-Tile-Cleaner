@@ -50,12 +50,18 @@ func run_autotile(t : TileMap) -> Dictionary:
 				for rule_cell in rule.keys():
 					var search_id = rule[rule_cell]["input"]["id"]
 					if search_id is int && search_id != TileMap.INVALID_CELL:
-						for map_cell in t.get_used_cells_by_id(search_id):
+						# Search through actual tilemap cells with the search id, as well as changes that will be set with the id
+						var search_cells = t.get_used_cells_by_id(search_id)
+						for cell in changes.keys():
+							if changes[cell].has("id") && changes[cell]["id"] == search_id && !search_cells.has(cell):
+								search_cells.append(cell)
+						
+						for map_cell in search_cells:
 							# Check surrounding cells to see if they all match the current pattern
 							var matching := true
 							for rule_cell2 in rule.keys():
 								var offset = rule_cell2 - rule_cell
-								if !does_tile_match_input(rule[rule_cell2]["input"], t, map_cell + offset, true, true, true, false):
+								if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, true, true, true, false):
 									matching = false
 									break
 							if matching:
@@ -84,16 +90,33 @@ func run_autotile(t : TileMap) -> Dictionary:
 	print("Tile Cleaner: Found %s matches" % num_matches)
 	return changes
 
-func does_tile_match_input(input_tile : Dictionary, map : TileMap, map_cell : Vector2, \
+func does_tile_match_input(input_tile : Dictionary, map : TileMap, changes: Dictionary, map_cell : Vector2, \
 		check_flip_x : bool, check_flip_y : bool, check_transpose : bool, check_autotile : bool):
 	
 	var x := int(map_cell.x)
 	var y := int(map_cell.y)
-	return (!input_tile["id"] is int || input_tile["id"] == map.get_cell(x, y)) && \
-			(!check_flip_x || input_tile["x_flip"] == map.is_cell_x_flipped(x, y)) && \
-			(!check_flip_y || input_tile["y_flip"] == map.is_cell_y_flipped(x, y)) && \
-			(!check_transpose || input_tile["transpose"] == map.is_cell_transposed(x, y)) && \
-			(!check_autotile || input_tile["autotile_coord"] == map.get_cell_autotile_coord(x, y))
+	
+	# Use changes to get tile info if possible, otherwise fall back on the actual tilemap
+	var compare := {}
+	for prop in ["id", "x_flip", "y_flip", "transpose", "autotile_coord"]:
+		if changes.has(map_cell) && changes[map_cell].has(prop):
+			compare[prop] = changes[map_cell][prop]
+	if !compare.has("id"):
+		compare["id"] = map.get_cell(x, y)
+	if !compare.has("x_flip"):
+		compare["x_flip"] = map.is_cell_x_flipped(x, y)
+	if !compare.has("y_flip"):
+		compare["y_flip"] = map.is_cell_y_flipped(x, y)
+	if !compare.has("transpose"):
+		compare["transpose"] = map.is_cell_transposed(x, y)
+	if !compare.has("autotile_coord"):
+		compare["autotile_coord"] = map.get_cell_autotile_coord(x, y)
+	
+	return (!input_tile["id"] is int || input_tile["id"] == compare["id"]) && \
+			(!check_flip_x || input_tile["x_flip"] == compare["x_flip"]) && \
+			(!check_flip_y || input_tile["y_flip"] == compare["y_flip"]) && \
+			(!check_transpose || input_tile["transpose"] == compare["transpose"]) && \
+			(!check_autotile || input_tile["autotile_coord"] == compare["autotile_coord"])
 
 # Used with undo/redo to actually change the tilemap
 func change_tilemap(t : TileMap, changes : Dictionary):
