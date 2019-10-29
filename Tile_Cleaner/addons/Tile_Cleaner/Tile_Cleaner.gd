@@ -9,6 +9,8 @@ extends Node
 const ADJACENT_POSITIONS = preload("Autotile_Setup.gd").ADJACENT_POSITIONS
 
 export(Array, Resource) var rulesets := []
+export(bool) var update_bitmasks := true
+
 
 func clean_tiles(undoredo : UndoRedo):
 	if !get_parent() is TileMap:
@@ -30,27 +32,28 @@ func clean_tiles(undoredo : UndoRedo):
 			"transpose": t.is_cell_transposed(cell.x, cell.y),
 			"autotile_coord": t.get_cell_autotile_coord(cell.x, cell.y),
 		}
-		for adj in ADJACENT_POSITIONS:
-			if !before.has(cell + adj):
-				var x : int = (cell + adj).x
-				var y : int = (cell + adj).y
-				before[cell + adj] = {
-					"id": t.get_cell(x, y),
-					"x_flip": t.is_cell_x_flipped(x, y),
-					"y_flip": t.is_cell_y_flipped(x, y),
-					"transpose": t.is_cell_transposed(x, y),
-					"autotile_coord": t.get_cell_autotile_coord(x, y),
-				}
+		if update_bitmasks:
+			for adj in ADJACENT_POSITIONS:
+				if !before.has(cell + adj):
+					var x : int = (cell + adj).x
+					var y : int = (cell + adj).y
+					before[cell + adj] = {
+						"id": t.get_cell(x, y),
+						"x_flip": t.is_cell_x_flipped(x, y),
+						"y_flip": t.is_cell_y_flipped(x, y),
+						"transpose": t.is_cell_transposed(x, y),
+						"autotile_coord": t.get_cell_autotile_coord(x, y),
+					}
 	
 	if undoredo:
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
-		undoredo.add_do_method(self, "change_tilemap", t, changes, true)
+		undoredo.add_do_method(self, "change_tilemap", t, changes, update_bitmasks)
 		undoredo.add_undo_method(self, "change_tilemap", t, before, false)
 		undoredo.commit_action()
 	else:
 		# Just change the tiles if undo/redo isn't available
-		change_tilemap(t, changes)
+		change_tilemap(t, changes, update_bitmasks)
 
 func run_autotile(t : TileMap) -> Dictionary:
 	var num_matches := 0
