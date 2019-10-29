@@ -34,4 +34,5 @@ tile_data = PoolIntArray( 65540, 1, 0, 65544, 1, 0, 65546, 5, 0, 131077, 5, 0, 1
 [node name="Delete" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 12, 12 )
-tile_data = PoolIntArray( 851978, 0, 65546, 851981, 0, 65546, 983050, 0, 65546, 983053, 0, 65546 )
+format = 1
+tile_data = PoolIntArray( 0, 65546, 0, 65546, 983053, 0, 851978, 0, 65546, 851981, 0, 65546, 983050, 0, 65546, 983053, 0, 65546 )

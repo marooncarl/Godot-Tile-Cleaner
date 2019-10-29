@@ -96,7 +96,7 @@ Vector2( 10, 1 ): {
 },
 "output": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": 5,
+"id": "delete",
 "transpose": false,
 "x_flip": false,
 "y_flip": false
@@ -823,6 +823,138 @@ Vector2( 8, 11 ): {
 "output": {
 "autotile_coord": Vector2( 0, 0 ),
 "id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 9, 13 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 27,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 10, 13 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "delete",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 12, 13 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 28,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 13, 13 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "delete",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 9, 15 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 17,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 10, 15 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "delete",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 12, 15 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 18,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 13, 15 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "delete",
 "transpose": false,
 "x_flip": false,
 "y_flip": false
