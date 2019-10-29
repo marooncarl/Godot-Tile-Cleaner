@@ -525,7 +525,7 @@ Vector2( 11, 7 ): {
 Vector2( 11, 8 ): {
 "input": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": "any",
+"id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
@@ -557,7 +557,7 @@ Vector2( 11, 9 ): {
 Vector2( 12, 7 ): {
 "input": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": "any",
+"id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
@@ -573,7 +573,7 @@ Vector2( 12, 7 ): {
 Vector2( 12, 8 ): {
 "input": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": "any",
+"id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
@@ -589,7 +589,7 @@ Vector2( 12, 8 ): {
 Vector2( 12, 9 ): {
 "input": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": "any",
+"id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
@@ -621,7 +621,7 @@ Vector2( 13, 7 ): {
 Vector2( 13, 8 ): {
 "input": {
 "autotile_coord": Vector2( 0, 0 ),
-"id": "any",
+"id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
