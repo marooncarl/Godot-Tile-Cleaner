@@ -60,9 +60,9 @@ func create_autotile_rules() -> Array:
 					"transpose": prop[0].is_cell_transposed(cell.x, cell.y),
 					"autotile_coord": prop[0].get_cell_autotile_coord(cell.x, cell.y),
 				}
-			# In input, empty should be regarded as a wildcard
-			if region[cell]["input"]["id"] == TileMap.INVALID_CELL:
-				region[cell]["input"]["id"] = "any"
+				# In input, empty should be regarded as a wildcard
+				if prop[1] == "input" && region[cell]["input"]["id"] == TileMap.INVALID_CELL:
+					region[cell]["input"]["id"] = "any"
 	
 	return regions
 
