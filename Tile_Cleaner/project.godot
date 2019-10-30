@@ -15,7 +15,7 @@ _global_script_classes=[ {
 "path": "res://addons/Tile_Cleaner/Autotile_Ruleset.gd"
 } ]
 _global_script_class_icons={
-"AutotileRuleset": ""
+"AutotileRuleset": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png"
 }
 
 [application]

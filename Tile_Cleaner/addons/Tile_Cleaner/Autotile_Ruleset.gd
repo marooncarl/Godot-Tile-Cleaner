@@ -3,7 +3,7 @@
 # Data generated using autotile setup
 
 extends Resource
-class_name AutotileRuleset
+class_name AutotileRuleset, "Autotile_Ruleset_Icon.png"
 
 # Each rule is a dictionary with cell position as a key
 # Each value is a dictionary containing data on input and output tiles for that cell position

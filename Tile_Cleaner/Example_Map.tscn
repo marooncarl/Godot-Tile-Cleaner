@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://addons/Tile_Cleaner/Tile_Cleaner.gd" type="Script" id=2]
-[ext_resource path="res://Test_Autotile_Ruleset.tres" type="Resource" id=3]
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Cleaner_Icon.png" type="Texture" id=3]
+[ext_resource path="res://Test_Autotile_Ruleset.tres" type="Resource" id=4]
 
 [node name="Example_Map" type="Node2D"]
 
@@ -14,4 +15,7 @@ tile_data = PoolIntArray( 131073, 0, 8, 131074, 0, 10, 131075, 0, 10, 131076, 0,
 
 [node name="Tile_Cleaner" type="Node" parent="TileMap"]
 script = ExtResource( 2 )
-rulesets = [ ExtResource( 3 ) ]
+__meta__ = {
+"_editor_icon": ExtResource( 3 )
+}
+rulesets = [ ExtResource( 4 ) ]
