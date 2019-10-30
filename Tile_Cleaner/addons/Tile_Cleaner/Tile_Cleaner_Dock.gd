@@ -32,14 +32,29 @@ func on_save_file_selected(path: String):
 		if setup && setup.has_method("create_autotile_rules"):
 			
 			# Actually save the ruleset
-			var ruleset = AutotileRuleset.new()
+			var ruleset
+			if ResourceLoader.exists(path):
+				ruleset = load(path)
+			else:
+				ruleset = AutotileRuleset.new()
+			
+			# Make sure it has the right properties
+			var valid := true
+			for prop in ["rules", "match_flipping", "match_bitmask"]:
+				if !prop in ruleset:
+					valid = false
+					break
+			if !valid:
+				ruleset = AutotileRuleset.new()
+			
 			ruleset.rules = setup.create_autotile_rules()
 			if "match_flipping" in setup:
 				ruleset.match_flipping = setup.match_flipping
 			if "match_bitmask" in setup:
 				ruleset.match_bitmask = setup.match_bitmask
-				
+			
 			ResourceSaver.save(path, ruleset)
+			
 			print("Saved autotile rules")
 			return
 	
