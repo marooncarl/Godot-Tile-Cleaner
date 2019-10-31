@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup_Icon.png" type="Texture" id=2]
+[ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=3]
+
+[node name="Slope_Tips_Autotile_Setup" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+
+[node name="Regions" type="TileMap" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65537, 0, 196609, 65538, 0, 196611, 65540, 0, 196609, 65541, 0, 196611, 65543, 0, 196609, 65544, 0, 196611, 65546, 0, 196609, 65547, 0, 196611, 196609, 0, 196609, 196610, 0, 196611, 196612, 0, 196609, 196613, 0, 196611, 196615, 0, 196609, 196616, 0, 196611, 196618, 0, 196609, 196619, 0, 196611, 327681, 0, 196609, 327682, 0, 196610, 327683, 0, 196611, 327685, 0, 196609, 327686, 0, 196610, 327687, 0, 196611, 327689, 0, 196609, 327690, 0, 196610, 327691, 0, 196611, 327693, 0, 196609, 327694, 0, 196610, 327695, 0, 196611, 458753, 0, 196609, 458754, 0, 196610, 458755, 0, 196611, 458757, 0, 196609, 458758, 0, 196610, 458759, 0, 196611, 458761, 0, 196609, 458762, 0, 196610, 458763, 0, 196611, 458765, 0, 196609, 458766, 0, 196610, 458767, 0, 196611 )
+
+[node name="Input" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65537, 1, 0, 65541, 5, 0, 65543, 9, 0, 65544, 0, 65546, 65546, 0, 65546, 65547, 13, 0, 196609, 4, 0, 196613, 8, 0, 196615, 12, 0, 196616, 0, 65546, 196618, 0, 65546, 196619, 16, 0, 327681, 17, 0, 327686, 18, 0, 327689, 29, 0, 327691, 0, 65546, 327693, 0, 65546, 327694, 30, 0, 458753, 27, 0, 458758, 28, 0, 458761, 39, 0, 458763, 0, 65546, 458765, 0, 65546, 458766, 40, 0 )
+
+[node name="Empty" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65538, 0, 65546, 65540, 0, 65546, 196610, 0, 65546, 196612, 0, 65546, 327683, 0, 65546, 327685, 0, 65546, 458755, 0, 65546, 458757, 0, 65546 )
+
+[node name="Output" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65537, 9, 0, 65541, 13, 0, 65543, 1, 0, 65547, 5, 0, 196609, 12, 0, 196613, 16, 0, 196615, 4, 0, 196619, 8, 0, 327681, 29, 0, 327686, 30, 0, 327689, 17, 0, 327694, 18, 0, 458753, 39, 0, 458758, 40, 0, 458761, 27, 0, 458766, 28, 0 )
