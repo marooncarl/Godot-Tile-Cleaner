@@ -412,3 +412,13 @@
 40/navigation_offset = Vector2( 0, 0 )
 40/shapes = [  ]
 40/z_index = 0
+41/name = "X_Auto"
+41/texture = ExtResource( 1 )
+41/tex_offset = Vector2( 0, 0 )
+41/modulate = Color( 1, 1, 1, 1 )
+41/region = Rect2( 96, 60, 12, 12 )
+41/tile_mode = 0
+41/occluder_offset = Vector2( 0, 0 )
+41/navigation_offset = Vector2( 0, 0 )
+41/shapes = [  ]
+41/z_index = 0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup_Icon.png" type="Texture" id=2]
+[ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=3]
+
+[node name="Slope_Wall_Autotile_Setup" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+
+[node name="Regions" type="TileMap" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 2, 0, 0, 4, 0, 0, 9, 0, 0, 11, 0, 0, 65537, 0, 196609, 65538, 0, 131075, 65540, 0, 131073, 65541, 0, 196611, 65543, 0, 196609, 65544, 0, 196610, 65545, 0, 131075, 65547, 0, 131073, 65548, 0, 196610, 65549, 0, 196611, 196609, 0, 196609, 196610, 0, 3, 196612, 0, 1, 196613, 0, 196611, 196615, 0, 196609, 196616, 0, 196610, 196617, 0, 3, 196619, 0, 1, 196620, 0, 196610, 196621, 0, 196611, 262146, 0, 131072, 262148, 0, 131072, 262153, 0, 131072, 262155, 0, 131072 )
+
+[node name="Input" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 2, 0, 0, 4, 0, 0, 9, 0, 0, 11, 0, 0, 65537, 1, 0, 65538, 0, 131072, 65540, 0, 131072, 65541, 5, 0, 65543, 17, 0, 65545, 0, 131072, 65547, 0, 131072, 65548, 18, 0, 196609, 4, 0, 196610, 0, 0, 196612, 0, 0, 196613, 8, 0, 196615, 27, 0, 196617, 0, 0, 196619, 0, 0, 196620, 28, 0, 262146, 0, 131072, 262148, 0, 131072, 262153, 0, 131072, 262155, 0, 131072 )
+
+[node name="Output" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65538, 2, 0, 65540, 6, 0, 65545, 2, 0, 65547, 6, 0, 196610, 3, 0, 196612, 7, 0, 196617, 3, 0, 196619, 7, 0 )

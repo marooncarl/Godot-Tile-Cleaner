@@ -1,0 +1,469 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Autotile_Ruleset.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+rules = [ {
+Vector2( 1, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 2, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 2,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 10,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 4, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 6,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 14,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 5, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 7, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 8, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 19,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 41,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 10, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 22,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 34,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 11, 1 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 1, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 2, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 3,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 11,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 4, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 7,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 15,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 5, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 7, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 8, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 23,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 35,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 10, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 26,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 38,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 11, 3 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 13, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 17,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 14, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 15, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 41,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 19,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 17, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 17,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 18, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 19, 6 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 10,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 2,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 13, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 27,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 14, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 15, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 35,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 23,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+}, {
+Vector2( 17, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 27,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 18, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": "any",
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+},
+Vector2( 19, 8 ): {
+"input": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 11,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+},
+"output": {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 3,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+}
+}
+} ]
+match_flipping = true
+match_bitmask = false
