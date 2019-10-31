@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/Tile_Cleaner/Bitmask_Edges_Editor.gd" type="Script" id=1]
 [ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Normal.png" type="Texture" id=3]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Pressed.png" type="Texture" id=4]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Hover.png" type="Texture" id=5]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Disabled.png" type="Texture" id=6]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Normal.png" type="Texture" id=7]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Pressed.png" type="Texture" id=8]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Hover.png" type="Texture" id=9]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Disabled.png" type="Texture" id=10]
 
 [node name="Bitmask_Edges_Editor" type="Control"]
 anchor_right = 1.0
@@ -21,3 +29,42 @@ margin_bottom = 20.0
 
 [node name="Tile" type="Sprite" parent="Sprite_Container"]
 region_enabled = true
+
+[node name="ID_Selector" type="Control" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 70.1662
+margin_top = -20.0
+margin_right = 110.166
+margin_bottom = 20.0
+
+[node name="Next_ID_Button" type="TextureButton" parent="ID_Selector"]
+margin_left = 5.0
+margin_top = -30.0
+margin_right = 21.0
+margin_bottom = -14.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 5 )
+
+[node name="Prev_ID_Button" type="TextureButton" parent="ID_Selector"]
+margin_left = 5.0
+margin_top = 30.0
+margin_right = 21.0
+margin_bottom = 46.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 10 )
+texture_focused = ExtResource( 9 )
+
+[node name="ID_Label" type="Label" parent="ID_Selector"]
+margin_left = -7.31506
+margin_top = 2.43835
+margin_right = 32.6849
+margin_bottom = 16.4384
+grow_horizontal = 2
+text = "0"
+align = 1
