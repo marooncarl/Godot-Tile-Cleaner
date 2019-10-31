@@ -9,6 +9,15 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 tileset = ExtResource( 2 )
 
-[node name="Tile" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Sprite_Container" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="Tile" type="Sprite" parent="Sprite_Container"]
+region_enabled = true
