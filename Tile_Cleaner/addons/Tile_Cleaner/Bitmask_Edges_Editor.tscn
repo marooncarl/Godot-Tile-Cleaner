@@ -27,10 +27,10 @@ margin_bottom = 254.041
 region_enabled = true
 
 [node name="ID_Selector" type="Control" parent="."]
-margin_left = 70.8445
-margin_top = 135.66
-margin_right = 110.844
-margin_bottom = 175.66
+margin_left = 105.546
+margin_top = 127.66
+margin_right = 145.546
+margin_bottom = 167.66
 
 [node name="Next_ID_Button" type="TextureButton" parent="ID_Selector"]
 margin_left = 5.0
@@ -55,19 +55,19 @@ texture_disabled = ExtResource( 9 )
 texture_focused = ExtResource( 8 )
 
 [node name="ID_Label" type="Label" parent="ID_Selector"]
-margin_left = -7.31506
-margin_top = 2.43835
-margin_right = 32.6849
-margin_bottom = 16.4384
+margin_left = -6.393
+margin_top = -4.85739
+margin_right = 33.607
+margin_bottom = 9.14266
 grow_horizontal = 2
 text = "0"
 align = 1
 
 [node name="Load_Button" type="Button" parent="."]
-margin_left = 39.1906
-margin_top = 43.7126
-margin_right = 140.191
-margin_bottom = 63.7126
+margin_left = 68.0115
+margin_top = 35.7126
+margin_right = 169.011
+margin_bottom = 55.7126
 text = "Load Tileset..."
 
 [node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
@@ -75,3 +75,66 @@ margin_right = 275.0
 margin_bottom = 130.0
 window_title = "Load TileSet"
 mode = 0
+
+[node name="Grid_Config" type="Control" parent="."]
+margin_left = 98.6541
+margin_top = 206.994
+margin_right = 138.654
+margin_bottom = 246.994
+
+[node name="Grid_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.5
+margin_top = 0.21994
+margin_right = 26.5
+margin_bottom = 14.2199
+text = "Tile Size"
+
+[node name="Grid_X_Entry" type="LineEdit" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -67.705
+margin_top = 38.382
+margin_right = -9.70503
+margin_bottom = 62.382
+text = "64"
+placeholder_text = "X"
+
+[node name="Grid_Y_Entry" type="LineEdit" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 25.8647
+margin_top = 38.382
+margin_right = 83.8647
+margin_bottom = 62.382
+text = "64"
+placeholder_text = "Y"
+
+[node name="X_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -87.2612
+margin_top = 37.6639
+margin_right = -47.2612
+margin_bottom = 51.6639
+text = "X:"
+
+[node name="Y_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 8.11349
+margin_top = 37.6639
+margin_right = 48.1135
+margin_bottom = 51.6639
+text = "Y:"
