@@ -28,7 +28,10 @@ margin_bottom = 327.9
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 2 )
-grid_color = Color( 0.434875, 0.481757, 0.585938, 1 )
+size = Vector2( 64, 64 )
+sub_cells = Vector2( 2, 2 )
+grid_color = Color( 0.737255, 0.819608, 1, 0.25098 )
+sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
 
 [node name="Tile" type="Sprite" parent="Sprite_Container"]
 region_enabled = true
