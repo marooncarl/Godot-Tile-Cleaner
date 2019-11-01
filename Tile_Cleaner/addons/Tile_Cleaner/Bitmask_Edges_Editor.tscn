@@ -138,3 +138,23 @@ margin_top = 37.6639
 margin_right = 48.1135
 margin_bottom = 51.6639
 text = "Y:"
+
+[node name="Bitmask_Mode_Selector" type="OptionButton" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -32.0
+margin_top = 136.175
+margin_right = 32.0
+margin_bottom = 156.175
+text = "2x2"
+items = [ "2x2", null, false, 0, null, "3x3", null, false, 1, null ]
+selected = 0
+
+[node name="Bitmask_Mode_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.0
+margin_top = 104.052
+margin_right = 46.0
+margin_bottom = 118.052
+text = "Bitmask Mode"
