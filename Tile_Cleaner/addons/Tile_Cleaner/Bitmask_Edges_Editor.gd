@@ -10,7 +10,7 @@ var current_id := 0
 
 onready var tile := $Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
-onready var grid := $Sprite_Container/Grid
+onready var grid := $Grid
 
 
 func _ready():
@@ -99,22 +99,26 @@ func on_load_file_selected(path: String):
 
 func on_grid_x_changed(new_text: String):
 	if new_text.is_valid_integer():
-		$Sprite_Container/Grid.size.x = int(new_text)
+		grid.size.x = int(new_text)
 
 func on_grid_y_changed(new_text: String):
 	if new_text.is_valid_integer():
-		$Sprite_Container/Grid.size.y = int(new_text)
+		grid.size.y = int(new_text)
 
 func on_bitmask_mode_selected(ID: int):
 	match ID:
 		0:
-			$Sprite_Container/Grid.sub_cells = Vector2(2, 2)
+			grid.sub_cells = Vector2(2, 2)
 		_:
-			$Sprite_Container/Grid.sub_cells = Vector2(3, 3)
+			grid.sub_cells = Vector2(3, 3)
 
-# Test - draw an outline within the main screen
 func _draw():
 	var bounds := Rect2(get_viewport_rect().position, get_parent().get_rect().size)
+	# pass bounds to grid
+	grid.rect_position = bounds.position
+	grid.rect_size = bounds.size
+	
+	# Test - draw an outline within the main screen
 	var padding := 5
 	draw_line(bounds.position + Vector2.ONE * padding - rect_position, bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, Color.white)
 	draw_line(bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, bounds.position + bounds.size - Vector2.ONE * padding - rect_position, Color.white)
