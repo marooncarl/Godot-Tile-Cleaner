@@ -22,6 +22,8 @@ func _ready():
 	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
 	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
 	$Grid_Config/Bitmask_Mode_Selector.connect("item_selected", self, "on_bitmask_mode_selected")
+	
+	grid.origin = $Sprite_Container.rect_position
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset

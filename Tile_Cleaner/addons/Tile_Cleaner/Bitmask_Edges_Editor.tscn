@@ -28,10 +28,10 @@ sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
 [node name="Sprite_Container" type="Control" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 71.947
-margin_top = 287.9
-margin_right = 111.947
-margin_bottom = 327.9
+margin_left = 70.0
+margin_top = 288.0
+margin_right = 110.0
+margin_bottom = 328.0
 
 [node name="Tile" type="Sprite" parent="Sprite_Container"]
 centered = false
