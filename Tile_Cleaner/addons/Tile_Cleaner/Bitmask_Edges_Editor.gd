@@ -3,6 +3,8 @@
 tool
 extends Control
 
+const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
+
 var tileset
 var current_id := 0
 
@@ -14,6 +16,8 @@ func _ready():
 	# Connect button signals
 	$ID_Selector/Next_ID_Button.connect("pressed", self, "next_id_pressed")
 	$ID_Selector/Prev_ID_Button.connect("pressed", self, "prev_id_pressed")
+	$Load_Button.connect("pressed", self, "on_load_pressed")
+	$Load_Tileset_Dialog.connect("file_selected", self, "on_load_file_selected")
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -77,3 +81,14 @@ func prev_id_pressed():
 	if tileset:
 		set_current_tile(get_prev_id())
 		id_label.text = str(current_id)
+
+func on_load_pressed():
+	var window_size = Vector2(get_tree().root.size.x * LOAD_DIALOG_SCALE.x, get_tree().root.size.y * LOAD_DIALOG_SCALE.y)
+	$Load_Tileset_Dialog.popup_centered(window_size)
+
+func on_load_file_selected(path: String):
+	var file = load(path)
+	if file is TileSet:
+		set_tileset(file)
+	else:
+		print("Loaded file was not a tileset.")

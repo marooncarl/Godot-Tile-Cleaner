@@ -19,18 +19,18 @@ script = ExtResource( 1 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -20.0
-margin_top = 198.967
+margin_top = 214.041
 margin_right = 20.0
-margin_bottom = 238.967
+margin_bottom = 254.041
 
 [node name="Tile" type="Sprite" parent="Sprite_Container"]
 region_enabled = true
 
 [node name="ID_Selector" type="Control" parent="."]
-margin_left = 67.8298
-margin_top = 192.938
-margin_right = 107.83
-margin_bottom = 232.938
+margin_left = 70.8445
+margin_top = 135.66
+margin_right = 110.844
+margin_bottom = 175.66
 
 [node name="Next_ID_Button" type="TextureButton" parent="ID_Selector"]
 margin_left = 5.0
@@ -62,3 +62,16 @@ margin_bottom = 16.4384
 grow_horizontal = 2
 text = "0"
 align = 1
+
+[node name="Load_Button" type="Button" parent="."]
+margin_left = 39.1906
+margin_top = 43.7126
+margin_right = 140.191
+margin_bottom = 63.7126
+text = "Load Tileset..."
+
+[node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
+margin_right = 275.0
+margin_bottom = 130.0
+window_title = "Load TileSet"
+mode = 0
