@@ -3,8 +3,7 @@
 tool
 extends Control
 
-export(TileSet) var tileset
-
+var tileset
 var current_id := 0
 
 onready var tile := $Sprite_Container/Tile
@@ -12,16 +11,18 @@ onready var id_label := $ID_Selector/ID_Label
 
 
 func _ready():
+	# Connect button signals
+	$ID_Selector/Next_ID_Button.connect("pressed", self, "next_id_pressed")
+	$ID_Selector/Prev_ID_Button.connect("pressed", self, "prev_id_pressed")
+
+func set_tileset(new_tileset : TileSet):
+	tileset = new_tileset
 	if tileset:
 		var first_id = tileset.get_tiles_ids()[0]
 		if tileset.tile_get_tile_mode(first_id) != TileSet.SINGLE_TILE:
 			first_id = get_next_id()
 		set_current_tile(first_id)
 		id_label.text = str(first_id)
-	
-	# Connect button signals
-	$ID_Selector/Next_ID_Button.connect("pressed", self, "next_id_pressed")
-	$ID_Selector/Prev_ID_Button.connect("pressed", self, "prev_id_pressed")
 
 func set_current_tile(new_id):
 	assert tileset
