@@ -18,6 +18,9 @@ func _ready():
 	$ID_Selector/Prev_ID_Button.connect("pressed", self, "prev_id_pressed")
 	$Load_Button.connect("pressed", self, "on_load_pressed")
 	$Load_Tileset_Dialog.connect("file_selected", self, "on_load_file_selected")
+	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
+	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
+	$Grid_Config/Bitmask_Mode_Selector.connect("item_selected", self, "on_bitmask_mode_selected")
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -92,3 +95,18 @@ func on_load_file_selected(path: String):
 		set_tileset(file)
 	else:
 		print("Loaded file was not a tileset.")
+
+func on_grid_x_changed(new_text: String):
+	if new_text.is_valid_integer():
+		$Sprite_Container/Grid.size.x = int(new_text)
+
+func on_grid_y_changed(new_text: String):
+	if new_text.is_valid_integer():
+		$Sprite_Container/Grid.size.y = int(new_text)
+
+func on_bitmask_mode_selected(ID: int):
+	match ID:
+		0:
+			$Sprite_Container/Grid.sub_cells = Vector2(2, 2)
+		_:
+			$Sprite_Container/Grid.sub_cells = Vector2(3, 3)
