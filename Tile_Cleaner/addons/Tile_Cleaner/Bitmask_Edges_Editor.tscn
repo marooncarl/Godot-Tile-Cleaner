@@ -34,6 +34,7 @@ grid_color = Color( 0.737255, 0.819608, 1, 0.25098 )
 sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
 
 [node name="Tile" type="Sprite" parent="Sprite_Container"]
+centered = false
 region_enabled = true
 
 [node name="ID_Selector" type="Control" parent="."]
