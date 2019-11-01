@@ -119,10 +119,3 @@ func _draw():
 	# pass bounds to grid
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size
-	
-	# Test - draw an outline within the main screen
-	var padding := 5
-	draw_line(bounds.position + Vector2.ONE * padding - rect_position, bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, Color.white)
-	draw_line(bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, bounds.position + bounds.size - Vector2.ONE * padding - rect_position, Color.white)
-	draw_line(bounds.position + bounds.size - Vector2.ONE * padding - rect_position, bounds.position + Vector2.DOWN * bounds.size.y + Vector2(1, -1) * padding - rect_position, Color.white)
-	draw_line(bounds.position + Vector2.DOWN * bounds.size.y + Vector2(1, -1) * padding - rect_position, bounds.position + Vector2.ONE * padding - rect_position, Color.white)
