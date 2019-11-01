@@ -1,6 +1,6 @@
 # Bitmask Edges Editor
 
-#tool
+tool
 extends Control
 
 export(TileSet) var tileset
