@@ -10,6 +10,7 @@ var current_id := 0
 
 onready var tile := $Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
+onready var grid := $Sprite_Container/Grid
 
 
 func _ready():
@@ -110,3 +111,12 @@ func on_bitmask_mode_selected(ID: int):
 			$Sprite_Container/Grid.sub_cells = Vector2(2, 2)
 		_:
 			$Sprite_Container/Grid.sub_cells = Vector2(3, 3)
+
+# Test - draw an outline within the main screen
+func _draw():
+	var bounds := Rect2(get_viewport_rect().position, get_parent().get_rect().size)
+	var padding := 5
+	draw_line(bounds.position + Vector2.ONE * padding - rect_position, bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, Color.white)
+	draw_line(bounds.position + Vector2.RIGHT * bounds.size.x + Vector2(-1, 1) * padding - rect_position, bounds.position + bounds.size - Vector2.ONE * padding - rect_position, Color.white)
+	draw_line(bounds.position + bounds.size - Vector2.ONE * padding - rect_position, bounds.position + Vector2.DOWN * bounds.size.y + Vector2(1, -1) * padding - rect_position, Color.white)
+	draw_line(bounds.position + Vector2.DOWN * bounds.size.y + Vector2(1, -1) * padding - rect_position, bounds.position + Vector2.ONE * padding - rect_position, Color.white)
