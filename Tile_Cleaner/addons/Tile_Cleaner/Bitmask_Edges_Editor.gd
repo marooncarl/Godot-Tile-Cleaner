@@ -6,6 +6,7 @@ extends Control
 const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
 const ZOOM_STEP = 0.2
 const MIN_ZOOM = 0.2
+const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
 
 var tileset
 var current_id := 0
@@ -29,6 +30,7 @@ func _ready():
 	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
 	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
 	$Grid_Config/Bitmask_Mode_Selector.connect("item_selected", self, "on_bitmask_mode_selected")
+	grid.connect("draw", self, "draw_bits")
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -164,3 +166,7 @@ func _draw():
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size
 	update_grid_origin()
+
+func draw_bits():
+	# test
+	grid.draw_rect(grid.get_subcell_rect(Vector2.ZERO, Vector2.ZERO), HIGHLIGHT_COLOR)

@@ -26,6 +26,21 @@ func origin_set(new_origin: Vector2):
 	origin = new_origin
 	update()
 
+func get_subcell_rect(cell: Vector2, subcell: Vector2) -> Rect2:
+	var sub_cell_x := 0.0
+	var sub_cell_y := 0.0
+	if sub_cells.x > 1.0:
+		sub_cell_x = subcell.x * (size.x / sub_cells.x)
+	if sub_cells.y > 1.0:
+		sub_cell_y = subcell.y * (size.y / sub_cells.y)
+	var pos := Vector2(origin.x + cell.x * size.x + sub_cell_x, origin.y + cell.y * size.y + sub_cell_y)
+	var rect_size := size
+	if sub_cells.x > 1.0:
+		rect_size.x = size.x / sub_cells.x
+	if sub_cells.y > 1.0:
+		rect_size.y = size.y / sub_cells.y
+	return Rect2(pos, rect_size)
+
 func _draw():
 	if size.y > 0:
 		var row_lines := rect_size.y / size.y + 1
