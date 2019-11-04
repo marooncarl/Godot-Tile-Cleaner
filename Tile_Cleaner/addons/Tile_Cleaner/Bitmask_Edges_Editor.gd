@@ -97,11 +97,18 @@ func _input(event):
 					set_zoom(zoom + ZOOM_STEP)
 				elif event.button_index == BUTTON_WHEEL_DOWN:
 					set_zoom(zoom - ZOOM_STEP)
+		
+		elif event is InputEventKey && event.pressed:
+			match event.get_scancode_with_modifiers():
 			
-		# Return to start
-		if event is InputEventKey && event.pressed && event.get_scancode_with_modifiers() == KEY_F:
-			container.rect_position = tile_start_pos
-			update_grid_origin()
+				KEY_F:
+					# Reset panning
+					container.rect_position = tile_start_pos
+					update_grid_origin()
+				
+				KEY_1:
+					# Default zoom
+					set_zoom(1.0)
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
