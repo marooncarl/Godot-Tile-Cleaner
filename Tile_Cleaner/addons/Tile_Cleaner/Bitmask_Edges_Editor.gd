@@ -4,10 +4,13 @@ tool
 extends Control
 
 const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
+const ZOOM_STEP = 0.2
+const MIN_ZOOM = 0.2
 
 var tileset
 var current_id := 0
 var bounds := Rect2()
+var zoom := 1.0
 
 onready var container := $Sprite_Container
 onready var tile := $Sprite_Container/Tile
@@ -80,15 +83,29 @@ func get_prev_id() -> int:
 
 func _input(event):
 	if visible:
-		# Check for panning
-		if event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE) \
-		&& bounds.has_point(event.position - get_global_rect().position):
-			container.rect_position += event.relative
-			grid.origin = container.rect_position
+		# Mouse events only activate when mouses is in the window
+		if event is InputEventMouse && bounds.has_point(event.position - get_global_rect().position):
+			
+			# Check for panning
+			if event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE):
+				container.rect_position += event.relative
+				grid.origin = container.rect_position
+			
+			# Zooming
+			elif event is InputEventMouseButton:
+				if event.button_index == BUTTON_WHEEL_UP:
+					set_zoom(zoom + ZOOM_STEP)
+				elif event.button_index == BUTTON_WHEEL_DOWN:
+					set_zoom(zoom - ZOOM_STEP)
+			
 		# Return to start
 		if event is InputEventKey && event.pressed && event.get_scancode_with_modifiers() == KEY_F:
 			container.rect_position = tile_start_pos
 			grid.origin = container.rect_position
+
+func set_zoom(new_zoom: float):
+	zoom = max(new_zoom, MIN_ZOOM)
+	container.rect_scale = Vector2.ONE * zoom
 
 # Button events
 
