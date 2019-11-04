@@ -14,6 +14,8 @@ onready var tile := $Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 
+onready var tile_start_pos : Vector2 = $Sprite_Container.rect_position
+
 
 func _ready():
 	# Connect button signals
@@ -77,11 +79,16 @@ func get_prev_id() -> int:
 	return ids[id_index]
 
 func _input(event):
-	# Check for panning
-	if visible && event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE) \
-	&& bounds.has_point(event.position - get_global_rect().position):
-		container.rect_position += event.relative
-		grid.origin = container.rect_position
+	if visible:
+		# Check for panning
+		if event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE) \
+		&& bounds.has_point(event.position - get_global_rect().position):
+			container.rect_position += event.relative
+			grid.origin = container.rect_position
+		# Return to start
+		if event is InputEventKey && event.pressed && event.get_scancode_with_modifiers() == KEY_F:
+			container.rect_position = tile_start_pos
+			grid.origin = container.rect_position
 
 # Button events
 
