@@ -19,12 +19,12 @@ var highlighted_subcell := Vector2.ZERO
 
 var selected_bits := []
 
-onready var container := $Sprite_Container
-onready var tile := $Sprite_Container/Tile
+onready var container := $Grid/Sprite_Container
+onready var tile := $Grid/Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 
-onready var tile_start_pos : Vector2 = $Sprite_Container.rect_position
+onready var tile_start_pos : Vector2 = $Grid/Sprite_Container.rect_position
 
 
 func _ready():

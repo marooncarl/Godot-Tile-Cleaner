@@ -26,7 +26,7 @@ sub_cells = Vector2( 2, 2 )
 grid_color = Color( 0.737255, 0.819608, 1, 0.25098 )
 sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
 
-[node name="Sprite_Container" type="Control" parent="."]
+[node name="Sprite_Container" type="Control" parent="Grid"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 70.0
@@ -34,7 +34,7 @@ margin_top = 288.0
 margin_right = 110.0
 margin_bottom = 328.0
 
-[node name="Tile" type="Sprite" parent="Sprite_Container"]
+[node name="Tile" type="Sprite" parent="Grid/Sprite_Container"]
 centered = false
 region_enabled = true
 
