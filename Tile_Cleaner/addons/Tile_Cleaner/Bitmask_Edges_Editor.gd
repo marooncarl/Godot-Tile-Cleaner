@@ -7,6 +7,7 @@ const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
 const ZOOM_STEP = 0.2
 const MIN_ZOOM = 0.2
 const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
+const FILLED_COLOR = Color(1.0, 0.0, 0.0, 0.36)
 
 var tileset
 var current_id := 0
@@ -14,6 +15,8 @@ var bounds := Rect2()
 var zoom := 1.0
 var highlighted_cell := Vector2.ZERO
 var highlighted_subcell := Vector2.ZERO
+
+var selected_bits := []
 
 onready var container := $Sprite_Container
 onready var tile := $Sprite_Container/Tile
@@ -91,18 +94,30 @@ func _input(event):
 		if event is InputEventMouse && bounds.has_point(event.position - get_global_rect().position):
 			
 			if event is InputEventMouseMotion:
-				# Check for panning
-				if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
-					container.rect_position += event.relative
-					update_grid_origin()
+				
 				# Get highlighted cell
 				var cell_subcell = grid.get_subcell_from_pos(event.position - get_global_rect().position)
 				highlighted_cell = cell_subcell[0]
 				highlighted_subcell = cell_subcell[1]
 				grid.update()
+				
+				# Check for panning
+				if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
+					container.rect_position += event.relative
+					update_grid_origin()
+				
+				# Selecting bits
+				elif Input.is_mouse_button_pressed(BUTTON_LEFT):
+					if selected_bits.find(cell_subcell) == -1:
+						selected_bits.append(cell_subcell)
+				
+				elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
+					var index := selected_bits.find(cell_subcell)
+					if index != -1:
+						selected_bits.remove(index)
 			
-			# Zooming
 			elif event is InputEventMouseButton:
+				# Zooming
 				if event.button_index == BUTTON_WHEEL_UP:
 					set_zoom(zoom + ZOOM_STEP)
 				elif event.button_index == BUTTON_WHEEL_DOWN:
@@ -176,5 +191,9 @@ func _draw():
 	update_grid_origin()
 
 func draw_bits():
+	# Draw selected cells
+	for cell_subcell in selected_bits:
+		if !(cell_subcell[0] == highlighted_cell && cell_subcell[1] == highlighted_subcell):
+			grid.draw_rect(grid.get_subcell_rect(cell_subcell[0], cell_subcell[1]), FILLED_COLOR)
 	# Draw highlighted cell
 	grid.draw_rect(grid.get_subcell_rect(highlighted_cell, highlighted_subcell), HIGHLIGHT_COLOR)
