@@ -44,7 +44,9 @@ func get_subcell_rect(cell: Vector2, subcell: Vector2) -> Rect2:
 # Returns an array containing two Vector2s: cell, and subcell.
 # pos - position within the grid's bounds
 func get_subcell_from_pos(pos: Vector2) -> Array:
-	var cell := pos - origin
+	var scaled_pos := Vector2(pos.x / rect_scale.x, pos.y / rect_scale.y)
+	
+	var cell := scaled_pos - origin
 	if size.x > 0:
 		cell.x /= size.x
 	if size.y > 0:
@@ -53,9 +55,9 @@ func get_subcell_from_pos(pos: Vector2) -> Array:
 	
 	var subcell := Vector2.ZERO
 	if sub_cells.x > 1.0 && size.x > 0:
-		subcell.x = floor((pos.x - origin.x - cell.x * size.x) / (size.x / sub_cells.x))
+		subcell.x = floor((scaled_pos.x - origin.x - cell.x * size.x) / (size.x / sub_cells.x))
 	if sub_cells.y > 1.0 && size.y > 0:
-		subcell.y = floor((pos.y - origin.y - cell.y * size.y) / (size.y / sub_cells.y))
+		subcell.y = floor((scaled_pos.y - origin.y - cell.y * size.y) / (size.y / sub_cells.y))
 	
 	return [cell, subcell]
 
