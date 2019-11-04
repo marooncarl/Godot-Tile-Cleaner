@@ -105,7 +105,7 @@ func _input(event):
 				
 				# Check for panning
 				if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
-					container.rect_position += event.relative
+					container.rect_position += event.relative / zoom
 					update_grid_origin()
 				
 				# Selecting bits
