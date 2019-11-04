@@ -91,39 +91,41 @@ func get_prev_id() -> int:
 
 func _input(event):
 	if visible:
-		# Mouse events only activate when mouses is in the window
-		var relative_mouse_pos : Vector2 = event.position - get_global_rect().position - Vector2.RIGHT * CONTROLS_WIDTH
-		if event is InputEventMouse && bounds.has_point(relative_mouse_pos + Vector2.RIGHT * CONTROLS_WIDTH):
+		if event is InputEventMouse:
 			
-			if event is InputEventMouseMotion:
-				
-				# Get highlighted cell
-				var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
-				highlighted_cell = cell_subcell[0]
-				highlighted_subcell = cell_subcell[1]
-				grid.update()
-				
-				# Check for panning
-				if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
-					container.rect_position += event.relative / zoom
-					update_grid_origin()
-				
-				# Selecting bits
-				elif Input.is_mouse_button_pressed(BUTTON_LEFT):
-					if selected_bits.find(cell_subcell) == -1:
-						selected_bits.append(cell_subcell)
-				
-				elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-					var index := selected_bits.find(cell_subcell)
-					if index != -1:
-						selected_bits.remove(index)
+			# Mouse events only activate when mouses is in the window
+			var relative_mouse_pos : Vector2 = event.position - get_global_rect().position - Vector2.RIGHT * CONTROLS_WIDTH
+			if bounds.has_point(relative_mouse_pos + Vector2.RIGHT * CONTROLS_WIDTH):
 			
-			elif event is InputEventMouseButton:
-				# Zooming
-				if event.button_index == BUTTON_WHEEL_UP:
-					set_zoom(zoom + ZOOM_STEP)
-				elif event.button_index == BUTTON_WHEEL_DOWN:
-					set_zoom(zoom - ZOOM_STEP)
+				if event is InputEventMouseMotion:
+					
+					# Get highlighted cell
+					var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
+					highlighted_cell = cell_subcell[0]
+					highlighted_subcell = cell_subcell[1]
+					grid.update()
+					
+					# Check for panning
+					if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
+						container.rect_position += event.relative / zoom
+						update_grid_origin()
+					
+					# Selecting bits
+					elif Input.is_mouse_button_pressed(BUTTON_LEFT):
+						if selected_bits.find(cell_subcell) == -1:
+							selected_bits.append(cell_subcell)
+					
+					elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
+						var index := selected_bits.find(cell_subcell)
+						if index != -1:
+							selected_bits.remove(index)
+			
+				elif event is InputEventMouseButton:
+					# Zooming
+					if event.button_index == BUTTON_WHEEL_UP:
+						set_zoom(zoom + ZOOM_STEP)
+					elif event.button_index == BUTTON_WHEEL_DOWN:
+						set_zoom(zoom - ZOOM_STEP)
 		
 		elif event is InputEventKey && event.pressed:
 			match event.get_scancode_with_modifiers():
