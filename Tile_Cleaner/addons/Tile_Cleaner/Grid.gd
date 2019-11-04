@@ -41,6 +41,24 @@ func get_subcell_rect(cell: Vector2, subcell: Vector2) -> Rect2:
 		rect_size.y = size.y / sub_cells.y
 	return Rect2(pos, rect_size)
 
+# Returns an array containing two Vector2s: cell, and subcell.
+# pos - position within the grid's bounds
+func get_subcell_from_pos(pos: Vector2) -> Array:
+	var cell := pos - origin
+	if size.x > 0:
+		cell.x /= size.x
+	if size.y > 0:
+		cell.y /= size.y
+	cell = Vector2(floor(cell.x), floor(cell.y))
+	
+	var subcell := Vector2.ZERO
+	if sub_cells.x > 1.0 && size.x > 0:
+		subcell.x = floor((pos.x - origin.x - cell.x * size.x) / (size.x / sub_cells.x))
+	if sub_cells.y > 1.0 && size.y > 0:
+		subcell.y = floor((pos.y - origin.y - cell.y * size.y) / (size.y / sub_cells.y))
+	
+	return [cell, subcell]
+
 func _draw():
 	if size.y > 0:
 		var row_lines := rect_size.y / size.y + 1

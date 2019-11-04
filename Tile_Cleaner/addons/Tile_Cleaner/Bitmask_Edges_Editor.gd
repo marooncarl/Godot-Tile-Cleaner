@@ -12,6 +12,8 @@ var tileset
 var current_id := 0
 var bounds := Rect2()
 var zoom := 1.0
+var highlighted_cell := Vector2.ZERO
+var highlighted_subcell := Vector2.ZERO
 
 onready var container := $Sprite_Container
 onready var tile := $Sprite_Container/Tile
@@ -88,10 +90,16 @@ func _input(event):
 		# Mouse events only activate when mouses is in the window
 		if event is InputEventMouse && bounds.has_point(event.position - get_global_rect().position):
 			
-			# Check for panning
-			if event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE):
-				container.rect_position += event.relative
-				update_grid_origin()
+			if event is InputEventMouseMotion:
+				# Check for panning
+				if Input.is_mouse_button_pressed(BUTTON_MIDDLE):
+					container.rect_position += event.relative
+					update_grid_origin()
+				# Get highlighted cell
+				var cell_subcell = grid.get_subcell_from_pos(event.position - get_global_rect().position)
+				highlighted_cell = cell_subcell[0]
+				highlighted_subcell = cell_subcell[1]
+				grid.update()
 			
 			# Zooming
 			elif event is InputEventMouseButton:
@@ -168,5 +176,5 @@ func _draw():
 	update_grid_origin()
 
 func draw_bits():
-	# test
-	grid.draw_rect(grid.get_subcell_rect(Vector2.ZERO, Vector2.ZERO), HIGHLIGHT_COLOR)
+	# Draw highlighted cell
+	grid.draw_rect(grid.get_subcell_rect(highlighted_cell, highlighted_subcell), HIGHLIGHT_COLOR)
