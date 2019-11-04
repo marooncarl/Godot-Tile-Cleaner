@@ -7,7 +7,9 @@ const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
 
 var tileset
 var current_id := 0
+var bounds := Rect2()
 
+onready var container := $Sprite_Container
 onready var tile := $Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
@@ -74,6 +76,13 @@ func get_prev_id() -> int:
 	
 	return ids[id_index]
 
+func _input(event):
+	# Check for panning
+	if visible && event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE) \
+	&& bounds.has_point(event.position - get_global_rect().position):
+		container.rect_position += event.relative
+		grid.origin = container.rect_position
+
 # Button events
 
 func next_id_pressed():
@@ -113,8 +122,8 @@ func on_bitmask_mode_selected(ID: int):
 			grid.sub_cells = Vector2(3, 3)
 
 func _draw():
-	var bounds := Rect2(get_viewport_rect().position, get_parent().get_rect().size)
+	bounds = Rect2(get_viewport_rect().position, get_parent().get_rect().size)
 	# pass bounds to grid
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size
-	grid.origin = $Sprite_Container.rect_position
+	grid.origin = container.rect_position
