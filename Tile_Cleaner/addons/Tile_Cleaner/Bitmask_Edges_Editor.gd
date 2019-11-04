@@ -8,6 +8,7 @@ const ZOOM_STEP = 0.2
 const MIN_ZOOM = 0.2
 const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
 const FILLED_COLOR = Color(1.0, 0.0, 0.0, 0.36)
+const CONTROLS_WIDTH = 240
 
 var tileset
 var current_id := 0
@@ -91,12 +92,13 @@ func get_prev_id() -> int:
 func _input(event):
 	if visible:
 		# Mouse events only activate when mouses is in the window
-		if event is InputEventMouse && bounds.has_point(event.position - get_global_rect().position):
+		var relative_mouse_pos : Vector2 = event.position - get_global_rect().position - Vector2.RIGHT * CONTROLS_WIDTH
+		if event is InputEventMouse && bounds.has_point(relative_mouse_pos + Vector2.RIGHT * CONTROLS_WIDTH):
 			
 			if event is InputEventMouseMotion:
 				
 				# Get highlighted cell
-				var cell_subcell = grid.get_subcell_from_pos(event.position - get_global_rect().position)
+				var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
 				highlighted_cell = cell_subcell[0]
 				highlighted_subcell = cell_subcell[1]
 				grid.update()
@@ -184,7 +186,7 @@ func on_bitmask_mode_selected(ID: int):
 			grid.sub_cells = Vector2(3, 3)
 
 func _draw():
-	bounds = Rect2(get_viewport_rect().position, get_parent().get_rect().size)
+	bounds = Rect2(get_viewport_rect().position + Vector2.RIGHT * CONTROLS_WIDTH, get_parent().get_rect().size - Vector2.RIGHT * CONTROLS_WIDTH)
 	# pass bounds to grid
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size
