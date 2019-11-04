@@ -139,7 +139,6 @@ func _input(event):
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
-	container.rect_scale = Vector2.ONE * zoom
 	grid.rect_scale = Vector2.ONE * zoom
 	update_grid_origin()
 
