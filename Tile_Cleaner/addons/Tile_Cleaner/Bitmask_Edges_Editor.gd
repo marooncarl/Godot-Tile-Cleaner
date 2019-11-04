@@ -89,7 +89,7 @@ func _input(event):
 			# Check for panning
 			if event is InputEventMouseMotion && Input.is_mouse_button_pressed(BUTTON_MIDDLE):
 				container.rect_position += event.relative
-				grid.origin = container.rect_position
+				update_grid_origin()
 			
 			# Zooming
 			elif event is InputEventMouseButton:
@@ -101,11 +101,17 @@ func _input(event):
 		# Return to start
 		if event is InputEventKey && event.pressed && event.get_scancode_with_modifiers() == KEY_F:
 			container.rect_position = tile_start_pos
-			grid.origin = container.rect_position
+			update_grid_origin()
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
 	container.rect_scale = Vector2.ONE * zoom
+	grid.rect_scale = Vector2.ONE * zoom
+	update_grid_origin()
+
+func update_grid_origin():
+	grid.origin = Vector2(container.rect_position.x / max(container.rect_scale.x, 0.01), \
+			container.rect_position.y / max(container.rect_scale.y, 0.01))
 
 # Button events
 
@@ -150,4 +156,4 @@ func _draw():
 	# pass bounds to grid
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size
-	grid.origin = container.rect_position
+	update_grid_origin()
