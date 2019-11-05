@@ -1,4 +1,6 @@
 # Bitmask Edges Editor
+#
+# Allows drawing bits around tiles that should be filled on adjacent autotiles.
 
 tool
 extends Control
@@ -17,7 +19,7 @@ var zoom := 1.0
 var highlighted_cell := Vector2.ZERO
 var highlighted_subcell := Vector2.ZERO
 
-var selected_bits := []
+var selected_bits := {}
 
 onready var container := $Grid/Sprite_Container
 onready var tile := $Grid/Sprite_Container/Tile
@@ -52,6 +54,8 @@ func set_current_tile(new_id):
 	current_id = new_id
 	tile.texture = tileset.tile_get_texture(current_id)
 	tile.region_rect = tileset.tile_get_region(current_id)
+	# Need to show selected bits for the new tile
+	grid.update()
 
 # Returns next non-autotile id.
 # If it loops around the whole list, returns the same id as current.
@@ -112,13 +116,17 @@ func _input(event):
 					
 					# Selecting bits
 					elif Input.is_mouse_button_pressed(BUTTON_LEFT):
-						if selected_bits.find(cell_subcell) == -1:
-							selected_bits.append(cell_subcell)
+						if !selected_bits.has(current_id):
+							selected_bits[current_id] = []
+						if selected_bits[current_id].find(cell_subcell) == -1:
+							selected_bits[current_id].append(cell_subcell)
 					
 					elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-						var index := selected_bits.find(cell_subcell)
+						if !selected_bits.has(current_id):
+							selected_bits[current_id] = []
+						var index : int = selected_bits[current_id].find(cell_subcell)
 						if index != -1:
-							selected_bits.remove(index)
+							selected_bits[current_id].remove(index)
 			
 				elif event is InputEventMouseButton:
 					# Zooming
@@ -195,7 +203,7 @@ func _draw():
 
 func draw_bits():
 	# Draw selected cells
-	for cell_subcell in selected_bits:
+	for cell_subcell in selected_bits[current_id]:
 		if !(cell_subcell[0] == highlighted_cell && cell_subcell[1] == highlighted_subcell):
 			grid.draw_rect(grid.get_subcell_rect(cell_subcell[0], cell_subcell[1]), FILLED_COLOR)
 	# Draw highlighted cell
