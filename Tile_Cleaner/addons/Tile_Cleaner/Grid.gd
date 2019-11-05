@@ -61,31 +61,29 @@ func get_subcell_from_pos(pos: Vector2) -> Array:
 	
 	return [cell, subcell]
 
-func _draw():
-	var scaled_size := Vector2(rect_size.x / rect_scale.x, rect_size.y / rect_scale.y)
-	
+func _draw():	
 	if size.y > 0:
-		var row_lines := scaled_size.y / size.y + 1
+		var row_lines := rect_size.y / size.y + 1
 		var start_y = fmod(origin.y, size.y)
 		for row in range(-1, row_lines):
 			var line_y = start_y + row * size.y
-			if line_y < scaled_size.y:
-				draw_line(Vector2(0, line_y), Vector2(scaled_size.x, line_y), grid_color)
+			if line_y < rect_size.y:
+				draw_line(Vector2(0, line_y), Vector2(rect_size.x, line_y), grid_color)
 			if sub_cells.y > 1.0:
 				for sub_cell in range(1, sub_cells.y + 1.0):
 					line_y = start_y + row * size.y + sub_cell * (size.y / sub_cells.y)
-					if line_y < scaled_size.y:
-						draw_line(Vector2(0, line_y), Vector2(scaled_size.x, line_y), sub_cell_color)
+					if line_y < rect_size.y:
+						draw_line(Vector2(0, line_y), Vector2(rect_size.x, line_y), sub_cell_color)
 	
 	if size.x > 0:
-		var column_lines := scaled_size.x / size.x + 1
+		var column_lines := rect_size.x / size.x + 1
 		var start_x = fmod(origin.x, size.x)
 		for column in range(-1, column_lines):
 			var line_x = start_x + column * size.x
-			if line_x < scaled_size.x:
-				draw_line(Vector2(line_x, 0), Vector2(line_x, scaled_size.y), grid_color)
+			if line_x < rect_size.x:
+				draw_line(Vector2(line_x, 0), Vector2(line_x, rect_size.y), grid_color)
 			if sub_cells.x > 1.0:
 				for sub_cell in range(1, sub_cells.x + 1.0):
 					line_x = start_x + column * size.x + sub_cell * (size.x / sub_cells.x)
-					if line_x < scaled_size.x:
-						draw_line(Vector2(line_x, 0), Vector2(line_x, scaled_size.y), sub_cell_color)
+					if line_x < rect_size.x:
+						draw_line(Vector2(line_x, 0), Vector2(line_x, rect_size.y), sub_cell_color)

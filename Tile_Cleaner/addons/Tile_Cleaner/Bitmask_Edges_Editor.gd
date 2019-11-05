@@ -176,7 +176,14 @@ func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
 	grid.rect_scale = Vector2.ONE * zoom
+	update_bounds()
 	update_grid_origin()
+
+func update_bounds():
+	bounds = Rect2(get_viewport_rect().position + Vector2.RIGHT * CONTROLS_WIDTH, get_parent().get_rect().size - Vector2.RIGHT * CONTROLS_WIDTH)
+	# pass bounds to grid
+	grid.rect_position = bounds.position
+	grid.rect_size = bounds.size / zoom
 
 func update_grid_origin():
 	grid.origin = Vector2(container.rect_position.x / max(container.rect_scale.x, 0.01), \
@@ -233,10 +240,7 @@ func on_bitmask_mode_selected(ID: int):
 			grid.sub_cells = Vector2(3, 3)
 
 func _draw():
-	bounds = Rect2(get_viewport_rect().position + Vector2.RIGHT * CONTROLS_WIDTH, get_parent().get_rect().size - Vector2.RIGHT * CONTROLS_WIDTH)
-	# pass bounds to grid
-	grid.rect_position = bounds.position
-	grid.rect_size = bounds.size
+	update_bounds()
 	update_grid_origin()
 
 func draw_bits():

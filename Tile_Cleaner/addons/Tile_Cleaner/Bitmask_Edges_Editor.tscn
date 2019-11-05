@@ -26,6 +26,7 @@ size = Vector2( 64, 64 )
 sub_cells = Vector2( 2, 2 )
 grid_color = Color( 0.737255, 0.819608, 1, 0.25098 )
 sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
+origin = Vector2( 582, 288 )
 
 [node name="Sprite_Container" type="Control" parent="Grid"]
 anchor_left = 0.5
