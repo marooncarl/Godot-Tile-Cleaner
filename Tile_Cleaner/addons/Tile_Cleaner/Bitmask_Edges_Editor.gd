@@ -125,11 +125,10 @@ func _input(event):
 			
 				elif event is InputEventMouseButton:
 					# Zooming
-					if event.button_index == BUTTON_WHEEL_UP:
-						set_zoom(zoom + ZOOM_STEP)
-						grid.grab_focus()
-					elif event.button_index == BUTTON_WHEEL_DOWN:
-						set_zoom(zoom - ZOOM_STEP)
+					if event.button_index == BUTTON_WHEEL_UP || event.button_index == BUTTON_WHEEL_DOWN:
+						set_zoom(zoom + ZOOM_STEP * (1 if event.button_index == BUTTON_WHEEL_UP else -1))
+						container.rect_position = relative_mouse_pos / zoom
+						update_grid_origin()
 						grid.grab_focus()
 					
 					# Pressing left/right mouse button instead of dragging
