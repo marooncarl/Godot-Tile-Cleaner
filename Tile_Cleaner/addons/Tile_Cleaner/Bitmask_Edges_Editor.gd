@@ -19,6 +19,8 @@ var zoom := 1.0
 var highlighted_cell := Vector2.ZERO
 var highlighted_subcell := Vector2.ZERO
 
+# Contains a dictionary mapping tile id to another dictionary,
+# which maps cell to a list of subcells
 var selected_bits := {}
 
 onready var container := $Grid/Sprite_Container
@@ -116,19 +118,10 @@ func _input(event):
 					# Selecting bits
 					if can_select_subcell(cell_subcell[0], cell_subcell[1]):
 						if Input.is_mouse_button_pressed(BUTTON_LEFT):
-							if !selected_bits.has(current_id):
-								selected_bits[current_id] = []
-							if selected_bits[current_id].find(cell_subcell) == -1:
-								selected_bits[current_id].append(cell_subcell)
-							grid.grab_focus()
+							draw_bit(cell_subcell[0], cell_subcell[1], false)
 						
 						elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-							if !selected_bits.has(current_id):
-								selected_bits[current_id] = []
-							var index : int = selected_bits[current_id].find(cell_subcell)
-							if index != -1:
-								selected_bits[current_id].remove(index)
-							grid.grab_focus()
+							draw_bit(cell_subcell[0], cell_subcell[1], true)
 			
 				elif event is InputEventMouseButton:
 					# Zooming
@@ -138,6 +131,12 @@ func _input(event):
 					elif event.button_index == BUTTON_WHEEL_DOWN:
 						set_zoom(zoom - ZOOM_STEP)
 						grid.grab_focus()
+					
+					# Pressing left/right mouse button instead of dragging
+					elif event.button_index == BUTTON_LEFT || event.button_index == BUTTON_RIGHT:
+						var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
+						if can_select_subcell(cell_subcell[0], cell_subcell[1]):
+							draw_bit(cell_subcell[0], cell_subcell[1], false if event.button_index == BUTTON_LEFT else true)
 		
 		elif event is InputEventKey && event.pressed && grid.has_focus():
 			match event.get_scancode_with_modifiers():
@@ -150,6 +149,26 @@ func _input(event):
 				KEY_1:
 					# Default zoom
 					set_zoom(1.0)
+
+# Draws or erases a bit on the grid.
+# cell: cell that bit is in
+# subcell: subcell within the cell, which correlates to a bit in the bitmask
+# erase: true - draws a bit if not already there, false - erases a bit
+func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
+	if !selected_bits.has(current_id):
+		selected_bits[current_id] = {}
+	if !selected_bits[current_id].has(cell):
+		selected_bits[current_id][cell] = []
+	
+	if !erase:
+		if selected_bits[current_id][cell].find(subcell) == -1:
+			selected_bits[current_id][cell].append(subcell)
+	else:
+		var index : int = selected_bits[current_id][cell].find(subcell)
+		if index != -1:
+			selected_bits[current_id][cell].remove(index)
+	
+	grid.grab_focus()
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
@@ -214,8 +233,9 @@ func _draw():
 func draw_bits():
 	if selected_bits.has(current_id):
 		# Draw selected cells
-		for cell_subcell in selected_bits[current_id]:
-			if !(cell_subcell[0] == highlighted_cell && cell_subcell[1] == highlighted_subcell):
-				grid.draw_rect(grid.get_subcell_rect(cell_subcell[0], cell_subcell[1]), FILLED_COLOR)
+		for cell in selected_bits[current_id].keys():
+			for subcell in selected_bits[current_id][cell]:
+				grid.draw_rect(grid.get_subcell_rect(cell, subcell), FILLED_COLOR)
+	
 	# Draw highlighted cell
 	grid.draw_rect(grid.get_subcell_rect(highlighted_cell, highlighted_subcell), HIGHLIGHT_COLOR)
