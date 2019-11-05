@@ -26,8 +26,6 @@ onready var tile := $Grid/Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 
-onready var tile_start_pos : Vector2 = $Grid/Sprite_Container.rect_position
-
 
 func _ready():
 	# Connect button signals
@@ -141,7 +139,7 @@ func _input(event):
 			
 				KEY_F:
 					# Reset panning
-					container.rect_position = tile_start_pos
+					container.rect_position = bounds.size / 2.0 / zoom
 					update_grid_origin()
 				
 				KEY_1:
