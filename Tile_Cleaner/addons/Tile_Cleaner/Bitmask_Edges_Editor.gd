@@ -115,18 +115,19 @@ func _input(event):
 						update_grid_origin()
 					
 					# Selecting bits
-					elif Input.is_mouse_button_pressed(BUTTON_LEFT):
-						if !selected_bits.has(current_id):
-							selected_bits[current_id] = []
-						if selected_bits[current_id].find(cell_subcell) == -1:
-							selected_bits[current_id].append(cell_subcell)
-					
-					elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-						if !selected_bits.has(current_id):
-							selected_bits[current_id] = []
-						var index : int = selected_bits[current_id].find(cell_subcell)
-						if index != -1:
-							selected_bits[current_id].remove(index)
+					if can_select_subcell(cell_subcell[0], cell_subcell[1]):
+						if Input.is_mouse_button_pressed(BUTTON_LEFT):
+							if !selected_bits.has(current_id):
+								selected_bits[current_id] = []
+							if selected_bits[current_id].find(cell_subcell) == -1:
+								selected_bits[current_id].append(cell_subcell)
+						
+						elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
+							if !selected_bits.has(current_id):
+								selected_bits[current_id] = []
+							var index : int = selected_bits[current_id].find(cell_subcell)
+							if index != -1:
+								selected_bits[current_id].remove(index)
 			
 				elif event is InputEventMouseButton:
 					# Zooming
@@ -155,6 +156,12 @@ func set_zoom(new_zoom: float):
 func update_grid_origin():
 	grid.origin = Vector2(container.rect_position.x / max(container.rect_scale.x, 0.01), \
 			container.rect_position.y / max(container.rect_scale.y, 0.01))
+
+func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
+	if !tileset:
+		return false
+	
+	return true
 
 # Button events
 
@@ -202,9 +209,10 @@ func _draw():
 	update_grid_origin()
 
 func draw_bits():
-	# Draw selected cells
-	for cell_subcell in selected_bits[current_id]:
-		if !(cell_subcell[0] == highlighted_cell && cell_subcell[1] == highlighted_subcell):
-			grid.draw_rect(grid.get_subcell_rect(cell_subcell[0], cell_subcell[1]), FILLED_COLOR)
+	if selected_bits.has(current_id):
+		# Draw selected cells
+		for cell_subcell in selected_bits[current_id]:
+			if !(cell_subcell[0] == highlighted_cell && cell_subcell[1] == highlighted_subcell):
+				grid.draw_rect(grid.get_subcell_rect(cell_subcell[0], cell_subcell[1]), FILLED_COLOR)
 	# Draw highlighted cell
 	grid.draw_rect(grid.get_subcell_rect(highlighted_cell, highlighted_subcell), HIGHLIGHT_COLOR)
