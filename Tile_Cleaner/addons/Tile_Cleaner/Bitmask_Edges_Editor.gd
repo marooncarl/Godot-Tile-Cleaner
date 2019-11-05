@@ -139,7 +139,7 @@ func _input(event):
 						set_zoom(zoom - ZOOM_STEP)
 						grid.grab_focus()
 		
-		elif event is InputEventKey && event.pressed:
+		elif event is InputEventKey && event.pressed && grid.has_focus():
 			match event.get_scancode_with_modifiers():
 			
 				KEY_F:
