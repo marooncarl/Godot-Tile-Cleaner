@@ -149,6 +149,10 @@ func _input(event):
 				KEY_1:
 					# Default zoom
 					set_zoom(1.0)
+				
+				KEY_DELETE:
+					# Clear bits (only for the current tile
+					delete_bits_for_tile(current_id)
 
 # Draws or erases a bit on the grid.
 # cell: cell that bit is in
@@ -184,6 +188,12 @@ func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
 		return false
 	
 	return true
+
+# Clears all bits for the given tile
+func delete_bits_for_tile(tile_id: int):
+	if selected_bits.has(tile_id):
+		selected_bits[tile_id] = {}
+		grid.update()
 
 # Button events
 
