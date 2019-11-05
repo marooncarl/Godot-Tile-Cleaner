@@ -67,7 +67,7 @@ func _draw():
 	if size.y > 0:
 		var row_lines := scaled_size.y / size.y + 1
 		var start_y = fmod(origin.y, size.y)
-		for row in range(0, row_lines):
+		for row in range(-1, row_lines):
 			var line_y = start_y + row * size.y
 			if line_y < scaled_size.y:
 				draw_line(Vector2(0, line_y), Vector2(scaled_size.x, line_y), grid_color)
@@ -80,7 +80,7 @@ func _draw():
 	if size.x > 0:
 		var column_lines := scaled_size.x / size.x + 1
 		var start_x = fmod(origin.x, size.x)
-		for column in range(0, column_lines):
+		for column in range(-1, column_lines):
 			var line_x = start_x + column * size.x
 			if line_x < scaled_size.x:
 				draw_line(Vector2(line_x, 0), Vector2(line_x, scaled_size.y), grid_color)
