@@ -271,6 +271,8 @@ func on_load_bitmask_file_selected(path: String):
 		print("Invalid bitmask data!")
 	else:
 		selected_bits = BitmaskEdgesData.create_working_data(bitmask_data.bitmask_data)
+		# Update grid and bitmask mode
+		set_current_tile(current_id)
 		print("Loaded bitmask data")
 
 func on_grid_x_changed(new_text: String):
