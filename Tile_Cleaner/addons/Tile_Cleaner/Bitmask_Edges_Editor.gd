@@ -42,6 +42,8 @@ func _ready():
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
 	$Save_Button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
+	$Load_Bitmask_Button.connect("pressed", self, "on_load_bitmask_pressed")
+	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
 	grid.connect("draw", self, "draw_bits")
 
 func set_tileset(new_tileset : TileSet):
@@ -254,6 +256,13 @@ func on_save_file_selected(path: String):
 	save_data.set_data(selected_bits)
 	ResourceSaver.save(path, save_data)
 	print("Saved bitmask edges data")
+
+func on_load_bitmask_pressed():
+	$Load_Bitmask_Dialog.popup_centered(get_file_window_size())
+
+func on_load_bitmask_file_selected(path: String):
+	# todo
+	pass
 
 func on_grid_x_changed(new_text: String):
 	if new_text.is_valid_integer():

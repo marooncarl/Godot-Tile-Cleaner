@@ -84,6 +84,13 @@ margin_right = 169.011
 margin_bottom = 55.7126
 text = "Load Tileset..."
 
+[node name="Load_Bitmask_Button" type="Button" parent="."]
+margin_left = 47.7598
+margin_top = 75.5176
+margin_right = 190.76
+margin_bottom = 95.5176
+text = "Load Bitmask Data..."
+
 [node name="Save_Button" type="Button" parent="."]
 margin_left = 53.7916
 margin_top = 117.977
@@ -94,7 +101,13 @@ text = "Save Bitmask Data"
 [node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
-window_title = "Open a File"
+window_title = "Open a Tileset"
+mode = 0
+
+[node name="Load_Bitmask_Dialog" type="FileDialog" parent="."]
+margin_right = 275.0
+margin_bottom = 130.0
+window_title = "Open Bitmask Edges Data"
 mode = 0
 
 [node name="Save_Dialog" type="FileDialog" parent="."]
