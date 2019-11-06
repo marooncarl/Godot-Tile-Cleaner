@@ -232,8 +232,17 @@ func on_save_pressed():
 	$Save_Dialog.popup_centered(get_file_window_size())
 
 func on_save_file_selected(path: String):
-	# todo
-	pass
+	var save_data : BitmaskEdgesData
+	if ResourceLoader.exists(path):
+		save_data = load(path)
+		if !"bitmask_data" in save_data:
+			save_data = BitmaskEdgesData.new()
+	else:
+		save_data = BitmaskEdgesData.new()
+	
+	save_data.set_data(selected_bits)
+	ResourceSaver.save(path, save_data)
+	print("Saved bitmask edges data")
 
 func on_grid_x_changed(new_text: String):
 	if new_text.is_valid_integer():
