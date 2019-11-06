@@ -48,4 +48,4 @@ func get_plugin_name():
 	return "BitmaskEdges"
 
 func get_plugin_icon():
-	return load("res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png")
+	return preload("Bitmask_Edges_Icon.png")
