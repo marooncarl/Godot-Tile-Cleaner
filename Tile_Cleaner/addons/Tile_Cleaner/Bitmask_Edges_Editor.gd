@@ -1,6 +1,9 @@
 # Bitmask Edges Editor
 #
 # Allows drawing bits around tiles that should be filled on adjacent autotiles.
+# To use, load a tileset, and if editing existing bitmask data, load that as well.
+# Configure the grid and bitmask mode to match the tileset.
+# When finished, press the save button to save bitmask edges data.
 
 tool
 extends Control
@@ -253,7 +256,7 @@ func on_save_file_selected(path: String):
 	else:
 		save_data = BitmaskEdgesData.new()
 	
-	save_data.set_data(selected_bits)
+	save_data.bitmask_data = BitmaskEdgesData.create_bitmask_save_data(selected_bits)
 	ResourceSaver.save(path, save_data)
 	print("Saved bitmask edges data")
 
@@ -261,8 +264,14 @@ func on_load_bitmask_pressed():
 	$Load_Bitmask_Dialog.popup_centered(get_file_window_size())
 
 func on_load_bitmask_file_selected(path: String):
-	# todo
-	pass
+	var bitmask_data : BitmaskEdgesData = load(path)
+	if !bitmask_data:
+		print("Failed to load bitmask data!")
+	elif !"bitmask_data" in bitmask_data:
+		print("Invalid bitmask data!")
+	else:
+		selected_bits = BitmaskEdgesData.create_working_data(bitmask_data.bitmask_data)
+		print("Loaded bitmask data")
 
 func on_grid_x_changed(new_text: String):
 	if new_text.is_valid_integer():

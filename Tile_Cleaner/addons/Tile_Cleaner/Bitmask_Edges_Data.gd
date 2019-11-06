@@ -8,26 +8,55 @@ class_name BitmaskEdgesData, "Bitmask_Edges_Icon.png"
 
 export(Dictionary) var bitmask_data := {}
 
-# Sets data from the bitmask editor.
-# in_data contains arrays of subcells that need to be converted to bitmasks.
-func set_data(in_data: Dictionary):
-	bitmask_data = {}
-	for tile_id in in_data.keys():
-		bitmask_data[tile_id] = {}
+# Takes working data used by the editor and returns bitmask data for saving.
+# working_data contains arrays of subcells that need to be converted to bitmasks.
+static func create_bitmask_save_data(working_data: Dictionary) -> Dictionary:
+	var save_data = {}
+	for tile_id in working_data.keys():
+		save_data[tile_id] = {}
 		# Bitmask is determined differently based on bitmask mode
 		var bitmask_mode = 2
-		if in_data[tile_id].has("bitmask_mode"):
-			bitmask_mode = in_data[tile_id]["bitmask_mode"]
+		if working_data[tile_id].has("bitmask_mode"):
+			bitmask_mode = working_data[tile_id]["bitmask_mode"]
 		
-		bitmask_data[tile_id]["bitmask_mode"] = bitmask_mode
+		save_data[tile_id]["bitmask_mode"] = bitmask_mode
 		
-		for cell in in_data[tile_id].keys():
+		for cell in working_data[tile_id].keys():
 			if cell is String:
 				continue
 			
 			var bitmask := 0
-			for subcell in in_data[tile_id][cell]:
+			for subcell in working_data[tile_id][cell]:
 				var power : int = subcell.x + bitmask_mode * subcell.y
 				bitmask += int(pow(2, power))
 			
-			bitmask_data[tile_id][cell] = bitmask
+			save_data[tile_id][cell] = bitmask
+	
+	return save_data
+
+# Returns a version of the bitmask data that the editor can use
+# Converts bitmasks to arrays of subcells in the grid
+static func create_working_data(save_data: Dictionary) -> Dictionary:
+	var working_data := {}
+	for tile_id in save_data.keys():
+		working_data[tile_id] = {}
+		
+		var bitmask_mode = 2
+		if save_data[tile_id].has("bitmask_mode"):
+			bitmask_mode = save_data[tile_id]["bitmask_mode"]
+			working_data[tile_id]["bitmask_mode"] = bitmask_mode
+		
+		for cell in save_data[tile_id].keys():
+			if cell is String:
+				continue
+			
+			working_data[tile_id][cell] = []
+			
+			var left : int = save_data[tile_id][cell]
+			for power in range(pow(bitmask_mode, 2) - 1, -1, -1):
+				var bit := int(pow(2, power))
+				if left >= bit:
+					left -= bit
+					working_data[tile_id][cell].append(Vector2(power % bitmask_mode, int(power / bitmask_mode)))
+	
+	return working_data
