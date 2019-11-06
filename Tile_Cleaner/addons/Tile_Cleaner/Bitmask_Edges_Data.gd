@@ -6,7 +6,7 @@
 extends Resource
 class_name BitmaskEdgesData
 
-var bitmask_data : Dictionary = {}
+export(Dictionary) var bitmask_data := {}
 
 # Sets data from the bitmask editor.
 # in_data contains arrays of subcells that need to be converted to bitmasks.
@@ -22,7 +22,7 @@ func set_data(in_data: Dictionary):
 		bitmask_data[tile_id]["bitmask_mode"] = bitmask_mode
 		
 		for cell in in_data[tile_id].keys():
-			if cell == "bitmask_mode":
+			if cell is String:
 				continue
 			
 			var bitmask := 0

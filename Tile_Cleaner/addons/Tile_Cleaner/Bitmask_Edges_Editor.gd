@@ -21,12 +21,14 @@ var highlighted_subcell := Vector2.ZERO
 
 # Contains a dictionary mapping tile id to another dictionary,
 # which maps cell to a list of subcells
+# Also, each tile id should have a key "bitmask_mode", which is either 2 or 3 for 2x2 and 3x3 bitmask modes.
 var selected_bits := {}
 
 onready var container := $Grid/Sprite_Container
 onready var tile := $Grid/Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
+onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
 
 
 func _ready():
@@ -37,7 +39,7 @@ func _ready():
 	$Load_Tileset_Dialog.connect("file_selected", self, "on_load_file_selected")
 	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
 	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
-	$Grid_Config/Bitmask_Mode_Selector.connect("item_selected", self, "on_bitmask_mode_selected")
+	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
 	$Save_Button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
 	grid.connect("draw", self, "draw_bits")
@@ -56,6 +58,12 @@ func set_current_tile(new_id):
 	current_id = new_id
 	tile.texture = tileset.tile_get_texture(current_id)
 	tile.region_rect = tileset.tile_get_region(current_id)
+	
+	# If the tile has a bitmask mode set, update to that
+	if selected_bits.has(new_id) && selected_bits[new_id].has("bitmask_mode"):
+		bitmask_selector.select(0 if selected_bits[new_id]["bitmask_mode"] == 2 else 1)
+		on_bitmask_mode_selected(bitmask_selector.selected)
+	
 	# Need to show selected bits for the new tile
 	grid.update()
 
@@ -174,6 +182,9 @@ func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
 			selected_bits[current_id][cell].remove(index)
 	
 	grid.grab_focus()
+	
+	# Make sure the current tile has a bitmask mode set
+	selected_bits[current_id]["bitmask_mode"] = (2 if bitmask_selector.selected == 0 else 3)
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
@@ -267,6 +278,9 @@ func draw_bits():
 	if selected_bits.has(current_id):
 		# Draw selected cells
 		for cell in selected_bits[current_id].keys():
+			if cell is String:
+				continue
+			
 			for subcell in selected_bits[current_id][cell]:
 				grid.draw_rect(grid.get_subcell_rect(cell, subcell), FILLED_COLOR)
 	
