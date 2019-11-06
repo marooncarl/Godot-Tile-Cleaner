@@ -7,6 +7,8 @@ extends Resource
 class_name BitmaskEdgesData, "Bitmask_Edges_Icon.png"
 
 export(Dictionary) var bitmask_data := {}
+# For editing convenience; used to set the grid size when loading
+export(Vector2) var grid_size := Vector2(64, 64)
 
 # Takes working data used by the editor and returns bitmask data for saving.
 # working_data contains arrays of subcells that need to be converted to bitmasks.

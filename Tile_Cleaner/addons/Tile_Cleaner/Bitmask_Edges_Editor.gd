@@ -257,6 +257,7 @@ func on_save_file_selected(path: String):
 		save_data = BitmaskEdgesData.new()
 	
 	save_data.bitmask_data = BitmaskEdgesData.create_bitmask_save_data(selected_bits)
+	save_data.grid_size = grid.size
 	ResourceSaver.save(path, save_data)
 	print("Saved bitmask edges data")
 
@@ -271,6 +272,9 @@ func on_load_bitmask_file_selected(path: String):
 		print("Invalid bitmask data!")
 	else:
 		selected_bits = BitmaskEdgesData.create_working_data(bitmask_data.bitmask_data)
+		grid.size = bitmask_data.grid_size
+		$Grid_Config/Grid_X_Entry.text = str(grid.size.x)
+		$Grid_Config/Grid_Y_Entry.text = str(grid.size.y)
 		# Update grid and bitmask mode
 		set_current_tile(current_id)
 		print("Loaded bitmask data")
