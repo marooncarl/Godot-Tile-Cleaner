@@ -4,7 +4,7 @@
 # Contains bitmasks for tiles surrounding a non-autotile tile.
 
 extends Resource
-class_name BitmaskEdgesData
+class_name BitmaskEdgesData, "Bitmask_Edges_Icon.png"
 
 export(Dictionary) var bitmask_data := {}
 

@@ -21,7 +21,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "AutotileRuleset": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png",
-"BitmaskEdgesData": ""
+"BitmaskEdgesData": "res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png"
 }
 
 [application]
