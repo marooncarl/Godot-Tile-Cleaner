@@ -5,7 +5,7 @@
 tool
 extends Control
 
-const LOAD_DIALOG_SCALE = Vector2(0.66, 0.66)
+const FILE_DIALOG_SCALE = Vector2(0.66, 0.66)
 const ZOOM_STEP = 0.2
 const MIN_ZOOM = 0.2
 const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
@@ -38,6 +38,8 @@ func _ready():
 	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
 	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
 	$Grid_Config/Bitmask_Mode_Selector.connect("item_selected", self, "on_bitmask_mode_selected")
+	$Save_Button.connect("pressed", self, "on_save_pressed")
+	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
 	grid.connect("draw", self, "draw_bits")
 
 func set_tileset(new_tileset : TileSet):
@@ -201,6 +203,9 @@ func delete_bits_for_tile(tile_id: int):
 		selected_bits[tile_id] = {}
 		grid.update()
 
+func get_file_window_size() -> Vector2:
+	return Vector2(get_tree().root.size.x * FILE_DIALOG_SCALE.x, get_tree().root.size.y * FILE_DIALOG_SCALE.y)
+
 # Button events
 
 func next_id_pressed():
@@ -214,8 +219,7 @@ func prev_id_pressed():
 		id_label.text = str(current_id)
 
 func on_load_pressed():
-	var window_size = Vector2(get_tree().root.size.x * LOAD_DIALOG_SCALE.x, get_tree().root.size.y * LOAD_DIALOG_SCALE.y)
-	$Load_Tileset_Dialog.popup_centered(window_size)
+	$Load_Tileset_Dialog.popup_centered(get_file_window_size())
 
 func on_load_file_selected(path: String):
 	var file = load(path)
@@ -223,6 +227,13 @@ func on_load_file_selected(path: String):
 		set_tileset(file)
 	else:
 		print("Loaded file was not a tileset.")
+
+func on_save_pressed():
+	$Save_Dialog.popup_centered(get_file_window_size())
+
+func on_save_file_selected(path: String):
+	# todo
+	pass
 
 func on_grid_x_changed(new_text: String):
 	if new_text.is_valid_integer():
