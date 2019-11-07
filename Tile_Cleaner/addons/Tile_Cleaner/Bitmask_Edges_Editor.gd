@@ -75,6 +75,7 @@ func set_tileset(new_tileset : TileSet):
 		id_label.text = str(first_id)
 		
 		load_bitmask_button.disabled = false
+		reset_panning()
 	else:
 		clear_button.disabled = true
 		load_bitmask_button.disabled = true
@@ -182,9 +183,7 @@ func _input(event):
 			match event.get_scancode_with_modifiers():
 			
 				KEY_F:
-					# Reset panning
-					container.rect_position = bounds.size / 2.0 / zoom
-					update_grid_origin()
+					reset_panning()
 				
 				KEY_1:
 					# Default zoom
@@ -274,6 +273,10 @@ func is_tile_clear(tile_id: int):
 
 func on_needs_saving():
 	save_button.disabled = false
+
+func reset_panning():
+	container.rect_position = bounds.size / 2.0 / zoom
+	update_grid_origin()
 
 # Button events
 
