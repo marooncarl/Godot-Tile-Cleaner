@@ -33,6 +33,7 @@ onready var tile := $Grid/Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
+onready var clear_button := $Clear_Button
 
 
 func _ready():
@@ -52,6 +53,9 @@ func _ready():
 	grid.connect("draw", self, "draw_bits")
 	grid.connect("focus_entered", self, "on_grid_focus")
 	grid.connect("focus_exited", self, "on_grid_lose_focus")
+	
+	# Buttons disabled by default
+	clear_button.disabled = true
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -61,6 +65,8 @@ func set_tileset(new_tileset : TileSet):
 			first_id = get_next_id()
 		set_current_tile(first_id)
 		id_label.text = str(first_id)
+	else:
+		clear_button.disabled = true
 
 func set_current_tile(new_id):
 	assert tileset
@@ -75,6 +81,8 @@ func set_current_tile(new_id):
 	
 	# Need to show selected bits for the new tile
 	grid.update()
+	
+	clear_button.disabled = is_tile_clear(current_id)
 
 # Returns next non-autotile id.
 # If it loops around the whole list, returns the same id as current.
@@ -193,6 +201,8 @@ func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
 	
 	# Make sure the current tile has a bitmask mode set
 	selected_bits[current_id]["bitmask_mode"] = (2 if bitmask_selector.selected == 0 else 3)
+	
+	clear_button.disabled = is_tile_clear(current_id)
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
@@ -218,6 +228,7 @@ func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
 
 func clear_tile():
 	delete_bits_for_tile(current_id)
+	clear_button.disabled = true
 
 # Clears all bits for the given tile
 func delete_bits_for_tile(tile_id: int):
@@ -233,6 +244,18 @@ func on_grid_focus():
 
 func on_grid_lose_focus():
 	update()
+
+func is_tile_clear(tile_id: int):
+	if !selected_bits.has(tile_id):
+		return true
+	if selected_bits[tile_id].keys().size() == 0:
+		return true
+	for cell in selected_bits[tile_id].keys():
+		if cell is String:
+			continue
+		if selected_bits[tile_id][cell].size() > 0:
+			return false
+	return true
 
 # Button events
 
