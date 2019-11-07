@@ -10,6 +10,7 @@ const ADJACENT_POSITIONS = preload("Autotile_Setup.gd").ADJACENT_POSITIONS
 
 export(Array, Resource) var rulesets := []
 export(bool) var update_bitmasks := true
+export(Resource) var bitmask_edges_data
 
 
 func clean_tiles(undoredo : UndoRedo):
@@ -46,9 +47,13 @@ func clean_tiles(undoredo : UndoRedo):
 							"autotile_coord": t.get_cell_autotile_coord(x, y),
 						}
 		
+		var bitmask_data := {}
+		if bitmask_edges_data && "bitmask_data" in bitmask_edges_data:
+			bitmask_data = bitmask_edges_data.bitmask_data
+		
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
-		undoredo.add_do_method(self, "change_tilemap", t, changes, update_bitmasks)
+		undoredo.add_do_method(self, "change_tilemap", t, changes, update_bitmasks, bitmask_data)
 		undoredo.add_undo_method(self, "change_tilemap", t, before, false)
 		undoredo.commit_action()
 	else:
@@ -137,7 +142,7 @@ func does_tile_match_input(input_tile : Dictionary, map : TileMap, changes: Dict
 			(!check_autotile || input_tile["autotile_coord"] == compare["autotile_coord"])
 
 # Used with undo/redo to actually change the tilemap
-func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = false):
+func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = false, bitmask_data : Dictionary = {}):
 	if t:
 		for cell in changes.keys():
 			var id = t.get_cell(cell.x, cell.y) if !"id" in changes[cell] else changes[cell]["id"]
@@ -148,3 +153,100 @@ func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = 
 			t.set_cell(cell.x, cell.y, id, flip_x, flip_y, transpose, autotile_coord)
 			if update_bitmasks:
 				t.update_bitmask_area(cell)
+		if bitmask_data.keys().size() > 0:
+			fix_bitmask_edges(t, bitmask_data)
+
+# Changes the bitmasks of autotiles next to non-autotiles that have bitmask edges data
+func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
+	var autotile_regions := {}
+	for tile_id in bitmask_data.keys():
+		for cell in t.get_used_cells_by_id(tile_id):
+			for adj_cell in bitmask_data[tile_id].keys():
+				if adj_cell is String:
+					continue
+				
+				var x := int((cell + adj_cell).x)
+				var y := int((cell + adj_cell).y)
+				var changed_id : int = t.get_cell(x, y)
+				# Make sure the tile we're changing is an autotile
+				if changed_id != TileMap.INVALID_CELL && t.tile_set.tile_get_tile_mode(changed_id) == TileSet.AUTO_TILE:
+					var autotile_coord := t.get_cell_autotile_coord(x, y)
+					var original_bitmask := t.tile_set.autotile_get_bitmask(changed_id, autotile_coord)
+					var combined_bitmask : int = bitmask_data[tile_id][adj_cell] | original_bitmask
+					
+					# Determine autotile region size once for each tile id
+					if !autotile_regions.has(changed_id):
+						autotile_regions[changed_id] = get_autotile_region_size(t.tile_set, changed_id)
+					var region_size : Vector2 = autotile_regions[changed_id]
+					
+					# Find a bitmask matching the combined one, or at least a bitmask that contains it
+					var new_mask := 0
+					var new_coord := Vector2()
+					var considered_masks := []
+					var considered_coords := []
+					
+					for coord_x in range(0, region_size.x):
+						for coord_y in range(0, region_size.y):
+							var mask := t.tile_set.autotile_get_bitmask(changed_id, Vector2(coord_x, coord_y))
+							if mask == combined_bitmask:
+								# Found a match!
+								new_mask = mask
+								new_coord = Vector2(coord_x, coord_y)
+								break
+							elif mask != 0 && bitmask_contains(mask, combined_bitmask):
+								# Consider this mask if we don't find a match
+								considered_masks.append(mask)
+								considered_coords.append(Vector2(coord_x, coord_y))
+						
+						if new_mask != 0:
+							# Found a match, so break here as well
+							break
+					
+					# If didn't find an exact match, pick the bitmask that has the fewest bits 
+					# but still contains combined mask
+					if new_mask == 0:
+						new_mask = get_smallest_bitmask(considered_masks)
+						new_coord = considered_coords[considered_masks.find(new_mask)]
+					if new_mask != 0:
+						# Change the tile
+						t.set_cell(x, y, changed_id, t.is_cell_x_flipped(x, y), t.is_cell_y_flipped(x, y), \
+								t.is_cell_transposed(x, y), new_coord)
+
+# Returns true if mask1 contains every bit in mask2
+func bitmask_contains(mask1 : int, mask2 : int):
+	return (mask1 & mask2) == mask2
+
+# Returns the bitmask with the least 1 bits in an array of bitmasks
+# Returns 0 if the array is empty
+func get_smallest_bitmask(bitmasks : Array):
+	var smallest := 0
+	var least_bits := 0
+	for bitmask in bitmasks:
+		var num_bits := 0
+		for i in range(9):
+			num_bits += 1 if (bitmask & (1 << i)) != 0 else 0
+		if smallest == 0 || num_bits < least_bits:
+			smallest = bitmask
+			least_bits = num_bits
+	return smallest
+
+func get_autotile_region_size(tile_set : TileSet, tile_id : int):
+	var autotile_region_size := Vector2()
+	var test_coord := Vector2(0, 0)
+	var is_row_empty := false
+	var rows_scanned := 0
+	while !is_row_empty || rows_scanned < 2:
+		# scan single row
+		is_row_empty = true
+		var bitmask := -1
+		while bitmask != 0 || test_coord.x < autotile_region_size.x:
+			bitmask = tile_set.autotile_get_bitmask(tile_id, test_coord)
+			if bitmask != 0:
+				is_row_empty = false
+			test_coord.x += 1
+		autotile_region_size.x = max(autotile_region_size.x, test_coord.x - 1)
+		test_coord = Vector2(0, test_coord.y + 1)
+		rows_scanned += 1
+	
+	autotile_region_size.y = test_coord.y - 1
+	return autotile_region_size
