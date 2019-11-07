@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Bitmask_Edges_Data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+bitmask_data = {
+2: {
+"bitmask_mode": 3,
+Vector2( -1, 0 ): 288,
+Vector2( -1, 1 ): 4,
+Vector2( 0, -1 ): 384,
+Vector2( 0, 1 ): 7,
+Vector2( 1, -1 ): 64,
+Vector2( 1, 0 ): 73,
+Vector2( 1, 1 ): 1
+}
+}
+grid_size = Vector2( 12, 12 )
