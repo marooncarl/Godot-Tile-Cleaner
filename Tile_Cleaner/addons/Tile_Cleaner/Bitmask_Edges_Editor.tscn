@@ -42,9 +42,9 @@ region_enabled = true
 
 [node name="ID_Selector" type="Control" parent="."]
 margin_left = 105.546
-margin_top = 223.218
+margin_top = 158.971
 margin_right = 145.546
-margin_bottom = 263.218
+margin_bottom = 198.971
 
 [node name="Next_ID_Button" type="TextureButton" parent="ID_Selector"]
 margin_left = 5.0
@@ -93,10 +93,17 @@ text = "Load Bitmask Data..."
 
 [node name="Save_Button" type="Button" parent="."]
 margin_left = 53.7916
-margin_top = 117.977
+margin_top = 502.759
 margin_right = 183.792
-margin_bottom = 137.977
+margin_bottom = 522.759
 text = "Save Bitmask Data"
+
+[node name="Clear_Button" type="Button" parent="."]
+margin_left = 77.7433
+margin_top = 253.045
+margin_right = 155.743
+margin_bottom = 273.045
+text = "Clear Tile"
 
 [node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0

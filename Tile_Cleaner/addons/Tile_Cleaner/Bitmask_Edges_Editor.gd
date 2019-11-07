@@ -48,6 +48,7 @@ func _ready():
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
 	$Load_Bitmask_Button.connect("pressed", self, "on_load_bitmask_pressed")
 	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
+	$Clear_Button.connect("pressed", self, "clear_tile")
 	grid.connect("draw", self, "draw_bits")
 	grid.connect("focus_entered", self, "on_grid_focus")
 	grid.connect("focus_exited", self, "on_grid_lose_focus")
@@ -169,10 +170,6 @@ func _input(event):
 				KEY_1:
 					# Default zoom
 					set_zoom(1.0)
-				
-				KEY_DELETE:
-					# Clear bits (only for the current tile
-					delete_bits_for_tile(current_id)
 
 # Draws or erases a bit on the grid.
 # cell: cell that bit is in
@@ -218,6 +215,9 @@ func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
 		return false
 	
 	return true
+
+func clear_tile():
+	delete_bits_for_tile(current_id)
 
 # Clears all bits for the given tile
 func delete_bits_for_tile(tile_id: int):
