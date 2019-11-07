@@ -13,6 +13,7 @@ const ZOOM_STEP = 0.2
 const MIN_ZOOM = 0.2
 const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
 const FILLED_COLOR = Color(1.0, 0.0, 0.0, 0.36)
+const BORDER_COLOR = Color("#c5c9d4")
 const CONTROLS_WIDTH = 240
 
 var tileset
@@ -48,6 +49,8 @@ func _ready():
 	$Load_Bitmask_Button.connect("pressed", self, "on_load_bitmask_pressed")
 	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
 	grid.connect("draw", self, "draw_bits")
+	grid.connect("focus_entered", self, "on_grid_focus")
+	grid.connect("focus_exited", self, "on_grid_lose_focus")
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -222,6 +225,12 @@ func delete_bits_for_tile(tile_id: int):
 func get_file_window_size() -> Vector2:
 	return Vector2(get_tree().root.size.x * FILE_DIALOG_SCALE.x, get_tree().root.size.y * FILE_DIALOG_SCALE.y)
 
+func on_grid_focus():
+	update()
+
+func on_grid_lose_focus():
+	update()
+
 # Button events
 
 func next_id_pressed():
@@ -297,6 +306,9 @@ func on_bitmask_mode_selected(ID: int):
 func _draw():
 	update_bounds()
 	update_grid_origin()
+	if grid.has_focus():
+		# Draw bounds
+		draw_rect(bounds, BORDER_COLOR, false)
 
 func draw_bits():
 	if selected_bits.has(current_id):
