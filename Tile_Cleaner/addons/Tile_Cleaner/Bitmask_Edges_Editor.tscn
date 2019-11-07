@@ -89,6 +89,7 @@ margin_left = 47.7598
 margin_top = 75.5176
 margin_right = 190.76
 margin_bottom = 95.5176
+disabled = true
 text = "Load Bitmask Data..."
 
 [node name="Save_Button" type="Button" parent="."]
@@ -96,6 +97,7 @@ margin_left = 53.7916
 margin_top = 502.759
 margin_right = 183.792
 margin_bottom = 522.759
+disabled = true
 text = "Save Bitmask Data"
 
 [node name="Clear_Button" type="Button" parent="."]
@@ -103,6 +105,7 @@ margin_left = 77.7433
 margin_top = 253.045
 margin_right = 155.743
 margin_bottom = 273.045
+disabled = true
 text = "Clear Tile"
 
 [node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
@@ -111,6 +114,7 @@ margin_bottom = 130.0
 window_title = "Load Tileset"
 mode_overrides_title = false
 mode = 0
+filters = PoolStringArray( "*.tres ; Resource Files" )
 
 [node name="Load_Bitmask_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
@@ -118,11 +122,13 @@ margin_bottom = 130.0
 window_title = "Load Bitmask Data"
 mode_overrides_title = false
 mode = 0
+filters = PoolStringArray( "*.tres ; Resource Files" )
 
 [node name="Save_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
 window_title = "Save Bitmask Data"
+filters = PoolStringArray( "*.tres ; Resource Files" )
 
 [node name="Grid_Config" type="Control" parent="."]
 margin_left = 98.6541
