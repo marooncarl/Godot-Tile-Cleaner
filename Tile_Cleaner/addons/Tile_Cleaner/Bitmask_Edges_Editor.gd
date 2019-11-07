@@ -135,11 +135,11 @@ func _input(event):
 					
 					# Selecting bits
 					if can_select_subcell(cell_subcell[0], cell_subcell[1]):
-						if Input.is_mouse_button_pressed(BUTTON_LEFT):
-							draw_bit(cell_subcell[0], cell_subcell[1], false)
-						
-						elif Input.is_mouse_button_pressed(BUTTON_RIGHT):
-							draw_bit(cell_subcell[0], cell_subcell[1], true)
+						if Input.is_mouse_button_pressed(BUTTON_LEFT) || Input.is_mouse_button_pressed(BUTTON_RIGHT):
+							if grid.has_focus():
+								draw_bit(cell_subcell[0], cell_subcell[1], false if Input.is_mouse_button_pressed(BUTTON_LEFT) else true)
+							else:
+								grid.grab_focus()
 			
 				elif event is InputEventMouseButton:
 					# Zooming
@@ -153,7 +153,10 @@ func _input(event):
 					elif event.button_index == BUTTON_LEFT || event.button_index == BUTTON_RIGHT:
 						var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
 						if can_select_subcell(cell_subcell[0], cell_subcell[1]):
-							draw_bit(cell_subcell[0], cell_subcell[1], false if event.button_index == BUTTON_LEFT else true)
+							if grid.has_focus():
+								draw_bit(cell_subcell[0], cell_subcell[1], false if event.button_index == BUTTON_LEFT else true)
+							else:
+								grid.grab_focus()
 		
 		elif event is InputEventKey && event.pressed && grid.has_focus():
 			match event.get_scancode_with_modifiers():
