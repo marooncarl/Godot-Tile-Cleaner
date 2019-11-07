@@ -15,6 +15,7 @@ const HIGHLIGHT_COLOR = Color(1.0, 0.0, 0.0, 0.12)
 const FILLED_COLOR = Color(1.0, 0.0, 0.0, 0.36)
 const BORDER_COLOR = Color("#c5c9d4")
 const CONTROLS_WIDTH = 240
+const GRID_BORDER = 12
 
 signal needs_saving
 
@@ -222,7 +223,8 @@ func set_zoom(new_zoom: float):
 	update_grid_origin()
 
 func update_bounds():
-	bounds = Rect2(get_viewport_rect().position + Vector2.RIGHT * CONTROLS_WIDTH, get_parent().get_rect().size - Vector2.RIGHT * CONTROLS_WIDTH)
+	bounds = Rect2(get_viewport_rect().position + Vector2(CONTROLS_WIDTH, GRID_BORDER), \
+			get_parent().get_rect().size - Vector2(CONTROLS_WIDTH + GRID_BORDER, GRID_BORDER * 2))
 	# pass bounds to grid
 	grid.rect_position = bounds.position
 	grid.rect_size = bounds.size / zoom
