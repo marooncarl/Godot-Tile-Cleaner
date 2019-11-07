@@ -101,13 +101,15 @@ text = "Save Bitmask Data"
 [node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
-window_title = "Open a Tileset"
+window_title = "Load Tileset"
+mode_overrides_title = false
 mode = 0
 
 [node name="Load_Bitmask_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
-window_title = "Open Bitmask Edges Data"
+window_title = "Load Bitmask Data"
+mode_overrides_title = false
 mode = 0
 
 [node name="Save_Dialog" type="FileDialog" parent="."]
