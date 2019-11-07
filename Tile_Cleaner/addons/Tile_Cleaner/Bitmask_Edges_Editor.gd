@@ -16,6 +16,8 @@ const FILLED_COLOR = Color(1.0, 0.0, 0.0, 0.36)
 const BORDER_COLOR = Color("#c5c9d4")
 const CONTROLS_WIDTH = 240
 
+signal needs_saving
+
 var tileset
 var current_id := 0
 var bounds := Rect2()
@@ -34,6 +36,7 @@ onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
 onready var clear_button := $Clear_Button
+onready var save_button := $Save_Button
 
 
 func _ready():
@@ -45,17 +48,19 @@ func _ready():
 	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
 	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
-	$Save_Button.connect("pressed", self, "on_save_pressed")
+	save_button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
 	$Load_Bitmask_Button.connect("pressed", self, "on_load_bitmask_pressed")
 	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
-	$Clear_Button.connect("pressed", self, "clear_tile")
+	clear_button.connect("pressed", self, "clear_tile")
 	grid.connect("draw", self, "draw_bits")
 	grid.connect("focus_entered", self, "on_grid_focus")
 	grid.connect("focus_exited", self, "on_grid_lose_focus")
+	connect("needs_saving", self, "on_needs_saving")
 	
 	# Buttons disabled by default
 	clear_button.disabled = true
+	save_button.disabled = true
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -203,6 +208,7 @@ func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
 	selected_bits[current_id]["bitmask_mode"] = (2 if bitmask_selector.selected == 0 else 3)
 	
 	clear_button.disabled = is_tile_clear(current_id)
+	emit_signal("needs_saving")
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
@@ -227,7 +233,9 @@ func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
 	return true
 
 func clear_tile():
-	delete_bits_for_tile(current_id)
+	if !is_tile_clear(current_id):
+		delete_bits_for_tile(current_id)
+		emit_signal("needs_saving")
 	clear_button.disabled = true
 
 # Clears all bits for the given tile
@@ -256,6 +264,9 @@ func is_tile_clear(tile_id: int):
 		if selected_bits[tile_id][cell].size() > 0:
 			return false
 	return true
+
+func on_needs_saving():
+	save_button.disabled = false
 
 # Button events
 
@@ -294,6 +305,7 @@ func on_save_file_selected(path: String):
 	save_data.bitmask_data = BitmaskEdgesData.create_bitmask_save_data(selected_bits)
 	save_data.grid_size = grid.size
 	ResourceSaver.save(path, save_data)
+	save_button.disabled = true
 	print("Saved bitmask edges data")
 
 func on_load_bitmask_pressed():
@@ -315,12 +327,16 @@ func on_load_bitmask_file_selected(path: String):
 		print("Loaded bitmask data")
 
 func on_grid_x_changed(new_text: String):
-	if new_text.is_valid_integer():
+	if new_text.is_valid_integer() && grid.size.x != int(new_text):
 		grid.size.x = int(new_text)
+		if tileset:
+			emit_signal("needs_saving")
 
 func on_grid_y_changed(new_text: String):
-	if new_text.is_valid_integer():
+	if new_text.is_valid_integer() && grid.size.y != int(new_text):
 		grid.size.y = int(new_text)
+		if tileset:
+			emit_signal("needs_saving")
 
 func on_bitmask_mode_selected(ID: int):
 	match ID:
