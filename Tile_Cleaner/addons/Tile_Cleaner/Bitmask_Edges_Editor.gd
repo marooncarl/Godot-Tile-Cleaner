@@ -37,6 +37,7 @@ onready var grid := $Grid
 onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
 onready var clear_button := $Clear_Button
 onready var save_button := $Save_Button
+onready var load_bitmask_button := $Load_Bitmask_Button
 
 
 func _ready():
@@ -50,7 +51,7 @@ func _ready():
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
 	save_button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
-	$Load_Bitmask_Button.connect("pressed", self, "on_load_bitmask_pressed")
+	load_bitmask_button.connect("pressed", self, "on_load_bitmask_pressed")
 	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
 	clear_button.connect("pressed", self, "clear_tile")
 	grid.connect("draw", self, "draw_bits")
@@ -61,6 +62,7 @@ func _ready():
 	# Buttons disabled by default
 	clear_button.disabled = true
 	save_button.disabled = true
+	load_bitmask_button.disabled = true
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -70,8 +72,11 @@ func set_tileset(new_tileset : TileSet):
 			first_id = get_next_id()
 		set_current_tile(first_id)
 		id_label.text = str(first_id)
+		
+		load_bitmask_button.disabled = false
 	else:
 		clear_button.disabled = true
+		load_bitmask_button.disabled = true
 
 func set_current_tile(new_id):
 	assert tileset
