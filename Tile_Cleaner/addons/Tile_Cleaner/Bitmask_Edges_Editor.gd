@@ -33,6 +33,11 @@ var undo_redo : UndoRedo
 # Also, each tile id should have a key "bitmask_mode", which is either 2 or 3 for 2x2 and 3x3 bitmask modes.
 var selected_bits := {}
 
+# For bit drawing undo / redo
+# Each is a dictionary that maps cell to a dictionary that maps subcells to a true/false value
+var undo_changes := {}
+var redo_changes := {}
+
 onready var container := $Grid/Sprite_Container
 onready var tile := $Grid/Sprite_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
@@ -176,12 +181,23 @@ func _input(event):
 					
 					# Pressing left/right mouse button instead of dragging
 					elif event.button_index == BUTTON_LEFT || event.button_index == BUTTON_RIGHT:
-						var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
-						if can_select_subcell(cell_subcell[0], cell_subcell[1]):
-							if grid.has_focus():
-								draw_bit(cell_subcell[0], cell_subcell[1], false if event.button_index == BUTTON_LEFT else true)
-							else:
-								grid.grab_focus()
+						if event.pressed:
+							# Draw or erase bit
+							var cell_subcell = grid.get_subcell_from_pos(relative_mouse_pos)
+							if can_select_subcell(cell_subcell[0], cell_subcell[1]):
+								if grid.has_focus():
+									draw_bit(cell_subcell[0], cell_subcell[1], false if event.button_index == BUTTON_LEFT else true)
+								else:
+									grid.grab_focus()
+						else:
+							# Finish undo/redo action
+							if redo_changes.keys().size() > 0:
+								undo_redo.create_action("Draw bits")
+								undo_redo.add_do_method(self, "apply_bit_changes", current_id, redo_changes)
+								undo_redo.add_undo_method(self, "apply_bit_changes", current_id, undo_changes)
+								undo_redo.commit_action()
+								redo_changes = {}
+								undo_changes = {}
 		
 		elif event is InputEventKey && event.pressed && grid.has_focus():
 			match event.get_scancode_with_modifiers():
@@ -198,19 +214,10 @@ func _input(event):
 # subcell: subcell within the cell, which correlates to a bit in the bitmask
 # erase: true - draws a bit if not already there, false - erases a bit
 func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
-	if !selected_bits.has(current_id):
-		selected_bits[current_id] = {}
-	if !selected_bits[current_id].has(cell):
-		selected_bits[current_id][cell] = []
-	
-	if !erase:
-		if selected_bits[current_id][cell].find(subcell) == -1:
-			selected_bits[current_id][cell].append(subcell)
-	else:
-		var index : int = selected_bits[current_id][cell].find(subcell)
-		if index != -1:
-			selected_bits[current_id][cell].remove(index)
-	
+	var old_value : bool = selected_bits.has(current_id) \
+			&& selected_bits[current_id].has(cell) \
+			&& selected_bits[current_id][cell].has(subcell)
+	set_bit(current_id, cell, subcell, !erase)
 	grid.grab_focus()
 	
 	# Make sure the current tile has a bitmask mode set
@@ -218,6 +225,39 @@ func draw_bit(cell: Vector2, subcell: Vector2, erase : bool = false):
 	
 	clear_button.disabled = is_tile_clear(current_id)
 	emit_signal("needs_saving")
+	
+	# Add to changes, but make sure undo changes does not overwrite values
+	if old_value == erase:
+		if !redo_changes.has(cell):
+			undo_changes[cell] = {}
+			redo_changes[cell] = {}
+		
+		if !redo_changes[cell].has(subcell):
+			undo_changes[cell][subcell] = old_value
+			redo_changes[cell][subcell] = !erase
+
+func apply_bit_changes(tile_id: int, changes: Dictionary):
+	for cell in changes.keys():
+		for subcell in changes[cell].keys():
+			set_bit(tile_id, cell, subcell, changes[cell][subcell])
+	
+	grid.update()
+
+# Sets bit for cell / subcell to on or off using value
+# (Actually removes or adds the subcell to the working data)
+func set_bit(tile_id: int, cell: Vector2, subcell: Vector2, value: bool):
+	if value:
+		# Adding
+		if !selected_bits.has(tile_id):
+			selected_bits[tile_id] = {}
+		if !selected_bits[tile_id].has(cell):
+			selected_bits[tile_id][cell] = []
+		if !selected_bits[tile_id][cell].has(subcell):
+			selected_bits[tile_id][cell].append(subcell)
+	else:
+		# Removing
+		if selected_bits.has(tile_id) && selected_bits[tile_id].has(cell) && selected_bits[tile_id][cell].has(subcell):
+			selected_bits[tile_id][cell].remove(selected_bits[tile_id][cell].find(subcell))
 
 func set_zoom(new_zoom: float):
 	zoom = max(new_zoom, MIN_ZOOM)
