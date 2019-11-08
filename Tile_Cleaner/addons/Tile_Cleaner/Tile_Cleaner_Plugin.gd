@@ -21,6 +21,7 @@ func _enter_tree():
 	
 	# Add bitmask edges editor screen
 	bitmask_editor = bitmask_editor_scene.instance()
+	bitmask_editor.undo_redo = get_undo_redo()
 	get_editor_interface().get_editor_viewport().add_child(bitmask_editor)
 	make_visible(false)
 	

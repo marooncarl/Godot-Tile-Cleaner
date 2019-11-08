@@ -26,6 +26,8 @@ var zoom := 1.0
 var highlighted_cell := Vector2.ZERO
 var highlighted_subcell := Vector2.ZERO
 
+var undo_redo : UndoRedo
+
 # Contains a dictionary mapping tile id to another dictionary,
 # which maps cell to a list of subcells
 # Also, each tile id should have a key "bitmask_mode", which is either 2 or 3 for 2x2 and 3x3 bitmask modes.
@@ -349,11 +351,23 @@ func on_grid_y_changed(new_text: String):
 			emit_signal("needs_saving")
 
 func on_bitmask_mode_selected(ID: int):
+	var old_sub_cells = grid.sub_cells
+	var new_sub_cells := Vector2()
 	match ID:
 		0:
-			grid.sub_cells = Vector2(2, 2)
+			new_sub_cells = Vector2(2, 2)
 		_:
-			grid.sub_cells = Vector2(3, 3)
+			new_sub_cells = Vector2(3, 3)
+	
+	if new_sub_cells != old_sub_cells:
+		undo_redo.create_action("Change bitmask mode")
+		undo_redo.add_do_method(self, "set_bitmask_mode", 0 if new_sub_cells == Vector2(2, 2) else 1)
+		undo_redo.add_undo_method(self, "set_bitmask_mode", 0 if old_sub_cells == Vector2(2, 2) else 1)
+		undo_redo.commit_action()
+
+func set_bitmask_mode(ID: int):
+	grid.sub_cells = Vector2(2, 2) if ID == 0 else Vector2(3, 3)
+	bitmask_selector.selected = ID
 
 func _draw():
 	update_bounds()
