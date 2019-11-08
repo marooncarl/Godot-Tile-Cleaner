@@ -49,8 +49,8 @@ func _ready():
 	$ID_Selector/Prev_ID_Button.connect("pressed", self, "prev_id_pressed")
 	$Load_Button.connect("pressed", self, "on_load_pressed")
 	$Load_Tileset_Dialog.connect("file_selected", self, "on_load_file_selected")
-	$Grid_Config/Grid_X_Entry.connect("text_changed", self, "on_grid_x_changed")
-	$Grid_Config/Grid_Y_Entry.connect("text_changed", self, "on_grid_y_changed")
+	$Grid_Config/Grid_X_Entry.connect("text_entered", self, "on_grid_x_entered")
+	$Grid_Config/Grid_Y_Entry.connect("text_entered", self, "on_grid_y_entered")
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
 	save_button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
@@ -338,15 +338,27 @@ func on_load_bitmask_file_selected(path: String):
 		set_current_tile(current_id)
 		print("Loaded bitmask data")
 
-func on_grid_x_changed(new_text: String):
+func on_grid_x_entered(new_text: String):
 	if new_text.is_valid_integer() && grid.size.x != int(new_text):
-		grid.size.x = int(new_text)
+		undo_redo.create_action("Change tile x size")
+		undo_redo.add_do_property(grid, "size", Vector2(int(new_text), grid.size.y))
+		undo_redo.add_do_property($Grid_Config/Grid_X_Entry, "text", new_text)
+		undo_redo.add_undo_property(grid, "size", grid.size)
+		undo_redo.add_undo_property($Grid_Config/Grid_X_Entry, "text", str(grid.size.x))
+		undo_redo.commit_action()
+		
 		if tileset:
 			emit_signal("needs_saving")
 
-func on_grid_y_changed(new_text: String):
+func on_grid_y_entered(new_text: String):
 	if new_text.is_valid_integer() && grid.size.y != int(new_text):
-		grid.size.y = int(new_text)
+		undo_redo.create_action("Change tile y size")
+		undo_redo.add_do_property(grid, "size", Vector2(grid.size.x, int(new_text)))
+		undo_redo.add_do_property($Grid_Config/Grid_Y_Entry, "text", new_text)
+		undo_redo.add_undo_property(grid, "size", grid.size)
+		undo_redo.add_undo_property($Grid_Config/Grid_Y_Entry, "text", str(grid.size.y))
+		undo_redo.commit_action()
+		
 		if tileset:
 			emit_signal("needs_saving")
 
