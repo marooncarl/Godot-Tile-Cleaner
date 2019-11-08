@@ -50,7 +50,9 @@ func _ready():
 	$Load_Button.connect("pressed", self, "on_load_pressed")
 	$Load_Tileset_Dialog.connect("file_selected", self, "on_load_file_selected")
 	$Grid_Config/Grid_X_Entry.connect("text_entered", self, "on_grid_x_entered")
+	$Grid_Config/Grid_X_Entry.connect("focus_exited", self, "on_grid_x_exit_focus")
 	$Grid_Config/Grid_Y_Entry.connect("text_entered", self, "on_grid_y_entered")
+	$Grid_Config/Grid_Y_Entry.connect("focus_exited", self, "on_grid_y_exit_focus")
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
 	save_button.connect("pressed", self, "on_save_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
@@ -337,6 +339,12 @@ func on_load_bitmask_file_selected(path: String):
 		# Update grid and bitmask mode
 		set_current_tile(current_id)
 		print("Loaded bitmask data")
+
+func on_grid_x_exit_focus():
+	on_grid_x_entered($Grid_Config/Grid_X_Entry.text)
+
+func on_grid_y_exit_focus():
+	on_grid_y_entered($Grid_Config/Grid_Y_Entry.text)
 
 func on_grid_x_entered(new_text: String):
 	if new_text.is_valid_integer() && grid.size.x != int(new_text):
