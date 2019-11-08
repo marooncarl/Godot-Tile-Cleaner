@@ -286,15 +286,29 @@ func can_select_subcell(cell: Vector2, subcell: Vector2) -> bool:
 
 func clear_tile():
 	if !is_tile_clear(current_id):
-		delete_bits_for_tile(current_id)
+		undo_changes = {}
+		redo_changes = {}
+		for cell in selected_bits[current_id]:
+			if cell is String:
+				continue
+			
+			for changes in [undo_changes, redo_changes]:
+				changes[cell] = {}
+			
+			for subcell in selected_bits[current_id][cell]:
+				undo_changes[cell][subcell] = true
+				redo_changes[cell][subcell] = false
+		
+		undo_redo.create_action("Clear tile")
+		undo_redo.add_do_method(self, "apply_bit_changes", current_id, redo_changes)
+		undo_redo.add_undo_method(self, "apply_bit_changes", current_id, undo_changes)
+		undo_redo.commit_action()
+		undo_changes = {}
+		redo_changes = {}
+		
+		grid.update()
 		emit_signal("needs_saving")
 	clear_button.disabled = true
-
-# Clears all bits for the given tile
-func delete_bits_for_tile(tile_id: int):
-	if selected_bits.has(tile_id):
-		selected_bits[tile_id] = {}
-		grid.update()
 
 func get_file_window_size() -> Vector2:
 	return Vector2(get_tree().root.size.x * FILE_DIALOG_SCALE.x, get_tree().root.size.y * FILE_DIALOG_SCALE.y)
