@@ -28,6 +28,8 @@ var highlighted_subcell := Vector2.ZERO
 
 var undo_redo : UndoRedo
 
+var save_path := ""
+
 # Contains a dictionary mapping tile id to another dictionary,
 # which maps cell to a list of subcells
 # Also, each tile id should have a key "bitmask_mode", which is either 2 or 3 for 2x2 and 3x3 bitmask modes.
@@ -213,7 +215,12 @@ func _input(event):
 			if event.control && event.scancode == KEY_S:
 				# Save
 				if is_saving_needed():
-					$Save_Dialog.popup_centered(get_file_window_size())
+					if save_path != "":
+						# Save with cached path
+						on_save_file_selected(save_path)
+					else:
+						# Ask the user for a save path
+						$Save_Dialog.popup_centered(get_file_window_size())
 
 # Draws or erases a bit on the grid.
 # cell: cell that bit is in
@@ -385,6 +392,7 @@ func on_save_file_selected(path: String):
 	save_data.grid_size = grid.size
 	ResourceSaver.save(path, save_data)
 	save_button.disabled = true
+	save_path = path
 	print("Saved bitmask edges data")
 
 func on_load_bitmask_pressed():
@@ -403,6 +411,7 @@ func on_load_bitmask_file_selected(path: String):
 		$Grid_Config/Grid_Y_Entry.text = str(grid.size.y)
 		# Update grid and bitmask mode
 		set_current_tile(current_id)
+		save_path = path
 		print("Loaded bitmask data")
 
 func on_grid_x_exit_focus():
