@@ -199,15 +199,21 @@ func _input(event):
 								redo_changes = {}
 								undo_changes = {}
 		
-		elif event is InputEventKey && event.pressed && grid.has_focus():
-			match event.get_scancode_with_modifiers():
-			
-				KEY_F:
-					reset_panning()
+		elif event is InputEventKey && event.pressed:
+			if grid.has_focus():
+				match event.get_scancode_with_modifiers():
 				
-				KEY_1:
-					# Default zoom
-					set_zoom(1.0)
+					KEY_F:
+						reset_panning()
+					
+					KEY_1:
+						# Default zoom
+						set_zoom(1.0)
+		
+			if event.control && event.scancode == KEY_S:
+				# Save
+				if is_saving_needed():
+					$Save_Dialog.popup_centered(get_file_window_size())
 
 # Draws or erases a bit on the grid.
 # cell: cell that bit is in
@@ -337,6 +343,9 @@ func on_needs_saving():
 func reset_panning():
 	container.rect_position = bounds.size / 2.0 / zoom
 	update_grid_origin()
+
+func is_saving_needed() -> bool:
+	return !save_button.disabled
 
 # Button events
 
