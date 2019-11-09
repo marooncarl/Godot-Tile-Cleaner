@@ -32,7 +32,8 @@ static func create_bitmask_save_data(working_data: Dictionary) -> Dictionary:
 				var power : int = subcell.x + bitmask_mode * subcell.y
 				bitmask += int(pow(2, power))
 			
-			save_data[tile_id][cell] = bitmask
+			if bitmask != 0:
+				save_data[tile_id][cell] = bitmask
 	
 	return save_data
 
