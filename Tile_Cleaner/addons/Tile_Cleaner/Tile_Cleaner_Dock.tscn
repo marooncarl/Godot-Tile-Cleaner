@@ -29,3 +29,4 @@ text = "Clean Tiles"
 margin_right = 275.0
 margin_bottom = 130.0
 window_title = "Save Autotile Rules"
+filters = PoolStringArray( "*.tres" )
