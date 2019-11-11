@@ -148,7 +148,7 @@ func _input(event):
 		if event is InputEventMouse:
 			
 			# Mouse events only activate when mouses is in the window
-			var relative_mouse_pos : Vector2 = event.position - get_global_rect().position - Vector2.RIGHT * CONTROLS_WIDTH
+			var relative_mouse_pos : Vector2 = event.position - get_global_rect().position - Vector2(CONTROLS_WIDTH, GRID_BORDER)
 			if bounds.has_point(relative_mouse_pos + Vector2.RIGHT * CONTROLS_WIDTH):
 			
 				if event is InputEventMouseMotion:
