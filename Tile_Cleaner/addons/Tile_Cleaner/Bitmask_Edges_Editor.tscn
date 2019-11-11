@@ -1,0 +1,214 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Bitmask_Edges_Editor.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Grid.gd" type="Script" id=2]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Normal.png" type="Texture" id=3]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Pressed.png" type="Texture" id=4]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Hover.png" type="Texture" id=5]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Up_Disabled.png" type="Texture" id=6]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Normal.png" type="Texture" id=7]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Pressed.png" type="Texture" id=8]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Hover.png" type="Texture" id=9]
+[ext_resource path="res://addons/Tile_Cleaner/Buttons/Btn_Down_Disabled.png" type="Texture" id=10]
+
+[node name="Bitmask_Edges_Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Grid" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+focus_mode = 2
+script = ExtResource( 2 )
+size = Vector2( 64, 64 )
+sub_cells = Vector2( 2, 2 )
+grid_color = Color( 0.737255, 0.819608, 1, 0.25098 )
+sub_cell_color = Color( 0.737255, 0.819608, 1, 0.12549 )
+origin = Vector2( 582, 288 )
+
+[node name="Sprite_Container" type="Control" parent="Grid"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 70.0
+margin_top = 288.0
+margin_right = 110.0
+margin_bottom = 328.0
+
+[node name="Tile" type="Sprite" parent="Grid/Sprite_Container"]
+centered = false
+region_enabled = true
+
+[node name="ID_Selector" type="Control" parent="."]
+margin_left = 105.546
+margin_top = 158.971
+margin_right = 145.546
+margin_bottom = 198.971
+
+[node name="Next_ID_Button" type="TextureButton" parent="ID_Selector"]
+margin_left = 5.0
+margin_top = -30.0
+margin_right = 21.0
+margin_bottom = -14.0
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 5 )
+
+[node name="Prev_ID_Button" type="TextureButton" parent="ID_Selector"]
+margin_left = 5.0
+margin_top = 30.0
+margin_right = 21.0
+margin_bottom = 46.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 9 )
+texture_disabled = ExtResource( 10 )
+texture_focused = ExtResource( 9 )
+
+[node name="ID_Label" type="Label" parent="ID_Selector"]
+margin_left = -6.393
+margin_top = -4.85739
+margin_right = 33.607
+margin_bottom = 9.14266
+grow_horizontal = 2
+text = "0"
+align = 1
+
+[node name="Load_Button" type="Button" parent="."]
+margin_left = 68.0115
+margin_top = 35.7126
+margin_right = 169.011
+margin_bottom = 55.7126
+text = "Load Tileset..."
+
+[node name="Load_Bitmask_Button" type="Button" parent="."]
+margin_left = 47.7598
+margin_top = 75.5176
+margin_right = 190.76
+margin_bottom = 95.5176
+disabled = true
+text = "Load Bitmask Data..."
+
+[node name="Save_Button" type="Button" parent="."]
+margin_left = 53.7916
+margin_top = 502.759
+margin_right = 183.792
+margin_bottom = 522.759
+disabled = true
+text = "Save Bitmask Data"
+
+[node name="Clear_Button" type="Button" parent="."]
+margin_left = 77.7433
+margin_top = 253.045
+margin_right = 155.743
+margin_bottom = 273.045
+disabled = true
+text = "Clear Tile"
+
+[node name="Load_Tileset_Dialog" type="FileDialog" parent="."]
+margin_right = 275.0
+margin_bottom = 130.0
+window_title = "Load Tileset"
+mode_overrides_title = false
+mode = 0
+filters = PoolStringArray( "*.tres ; Resource Files" )
+
+[node name="Load_Bitmask_Dialog" type="FileDialog" parent="."]
+margin_right = 275.0
+margin_bottom = 130.0
+window_title = "Load Bitmask Data"
+mode_overrides_title = false
+mode = 0
+filters = PoolStringArray( "*.tres ; Resource Files" )
+
+[node name="Save_Dialog" type="FileDialog" parent="."]
+margin_right = 275.0
+margin_bottom = 130.0
+window_title = "Save Bitmask Data"
+filters = PoolStringArray( "*.tres ; Resource Files" )
+
+[node name="Grid_Config" type="Control" parent="."]
+margin_left = 98.6541
+margin_top = 302.552
+margin_right = 138.654
+margin_bottom = 342.552
+
+[node name="Grid_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -26.5
+margin_top = 0.21994
+margin_right = 26.5
+margin_bottom = 14.2199
+text = "Tile Size"
+
+[node name="Grid_X_Entry" type="LineEdit" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -67.705
+margin_top = 38.382
+margin_right = -9.70503
+margin_bottom = 62.382
+text = "64"
+placeholder_text = "X"
+
+[node name="Grid_Y_Entry" type="LineEdit" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 25.8647
+margin_top = 38.382
+margin_right = 83.8647
+margin_bottom = 62.382
+text = "64"
+placeholder_text = "Y"
+
+[node name="X_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -87.2612
+margin_top = 37.6639
+margin_right = -47.2612
+margin_bottom = 51.6639
+text = "X:"
+
+[node name="Y_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 8.11349
+margin_top = 37.6639
+margin_right = 48.1135
+margin_bottom = 51.6639
+text = "Y:"
+
+[node name="Bitmask_Mode_Selector" type="OptionButton" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -32.0
+margin_top = 136.175
+margin_right = 32.0
+margin_bottom = 156.175
+text = "2x2"
+items = [ "2x2", null, false, 0, null, "3x3", null, false, 1, null ]
+selected = 0
+
+[node name="Bitmask_Mode_Label" type="Label" parent="Grid_Config"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.0
+margin_top = 104.052
+margin_right = 46.0
+margin_bottom = 118.052
+text = "Bitmask Mode"

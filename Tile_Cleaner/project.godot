@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "AutotileRuleset",
 "language": "GDScript",
 "path": "res://addons/Tile_Cleaner/Autotile_Ruleset.gd"
+}, {
+"base": "Resource",
+"class": "BitmaskEdgesData",
+"language": "GDScript",
+"path": "res://addons/Tile_Cleaner/Bitmask_Edges_Data.gd"
 } ]
 _global_script_class_icons={
-"AutotileRuleset": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png"
+"AutotileRuleset": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png",
+"BitmaskEdgesData": "res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png"
 }
 
 [application]
