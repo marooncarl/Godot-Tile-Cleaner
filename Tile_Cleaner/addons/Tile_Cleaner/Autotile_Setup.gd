@@ -140,5 +140,5 @@ func gather_cell(cell : Vector2, target_region : Dictionary, all_regions : Array
 	target_region[cell] = {}
 	for adj_pos in ADJACENT_POSITIONS:
 		var adj_cell : Vector2 = cell + adj_pos
-		if regions_map.get_cell(adj_cell.x, adj_cell.y) != TileMap.INVALID_CELL && !is_cell_in_any_region(adj_cell, all_regions):
+		if regions_map.get_cell(int(adj_cell.x), int(adj_cell.y)) != TileMap.INVALID_CELL && !is_cell_in_any_region(adj_cell, all_regions):
 			gather_cell(adj_cell, target_region, all_regions, regions_map)
