@@ -22,6 +22,10 @@ func clean_tiles(undoredo : UndoRedo):
 	
 	var changes := run_autotile(t)
 	
+	var bitmask_data := {}
+	if bitmask_edges_data && "bitmask_data" in bitmask_edges_data:
+		bitmask_data = bitmask_edges_data.bitmask_data
+	
 	if undoredo:
 		# Record the tilemap's current state at the cells that need changing
 		# Also include tiles that are adjacent to the changed cells, due to updating the bitmasks
@@ -47,10 +51,6 @@ func clean_tiles(undoredo : UndoRedo):
 							"autotile_coord": t.get_cell_autotile_coord(x, y),
 						}
 		
-		var bitmask_data := {}
-		if bitmask_edges_data && "bitmask_data" in bitmask_edges_data:
-			bitmask_data = bitmask_edges_data.bitmask_data
-		
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
 		undoredo.add_do_method(self, "change_tilemap", t, changes, update_bitmasks, bitmask_data)
@@ -58,7 +58,7 @@ func clean_tiles(undoredo : UndoRedo):
 		undoredo.commit_action()
 	else:
 		# Just change the tiles if undo/redo isn't available
-		change_tilemap(t, changes, update_bitmasks)
+		change_tilemap(t, changes, update_bitmasks, bitmask_data)
 
 func run_autotile(t : TileMap) -> Dictionary:
 	var num_matches := 0
