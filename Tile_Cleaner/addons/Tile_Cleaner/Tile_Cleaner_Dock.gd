@@ -15,6 +15,16 @@ func _ready():
 	$Save_File_Dialog.connect("file_selected", self, "on_save_file_selected")
 	$Clean_Button.connect("pressed", self, "on_clean_pressed")
 
+func _input(event):
+	if event is InputEventKey && event.pressed && event.control && event.scancode == KEY_S && editor_interface:
+		var setup = editor_interface.get_edited_scene_root()
+		if setup && setup.has_method("create_autotile_rules"):
+			# Auto save rules with the same name as the setup scene, except for file extension
+			var path : String = setup.filename
+			if path != "":
+				path = path.split(".", false, 1)[0] + ".tres"
+				on_save_file_selected(path)
+
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
 	if editor_interface:
