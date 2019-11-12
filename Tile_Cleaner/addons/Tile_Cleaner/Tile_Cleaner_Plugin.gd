@@ -1,6 +1,6 @@
 # Tile Cleaner Plugin
 # 
-# Adds dock to the editor
+# Adds Tile Cleaner dock and main screen to the editor
 
 tool
 extends EditorPlugin
