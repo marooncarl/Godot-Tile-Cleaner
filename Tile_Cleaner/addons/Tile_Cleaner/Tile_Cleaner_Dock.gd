@@ -20,9 +20,21 @@ func _input(event):
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
 			# Auto save rules with the same name as the setup scene, except for file extension
+			# If an alternate name is provided, use that instead.
 			var path : String = setup.filename
+			if "rule_filename" in setup && setup.rule_filename != "":
+				# Construct custom filename
+				path = setup.filename.get_base_dir()
+				if !path.ends_with("/"):
+					path += "/"
+				path += setup.rule_filename
+				if !path.ends_with(".tres"):
+					path += ".tres"
+			elif path != "":
+				# Replace .tscn with .tres
+				path = path.get_basename() + ".tres"
+			
 			if path != "":
-				path = path.split(".", false, 1)[0] + ".tres"
 				on_save_file_selected(path)
 
 func on_save_pressed():
