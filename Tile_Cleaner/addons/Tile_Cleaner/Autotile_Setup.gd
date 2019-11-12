@@ -29,7 +29,7 @@ export(bool) var any_includes_empty := false
 func _ready():
 	# Create regions, input, and output if not already present
 	for map_name in ["Regions", "Input", "Output"]:
-		if !has_node(map_name):
+		if !has_node(map_name) && !has_node(map_name.to_lower()):
 			var new_map := TileMap.new()
 			add_child(new_map)
 			new_map.name = map_name
