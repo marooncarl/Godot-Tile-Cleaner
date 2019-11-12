@@ -40,26 +40,32 @@ func _ready():
 func create_autotile_rules() -> Array:
 	# Make sure the required tilemaps are present
 	var regions_map : TileMap = null
-	if has_node("Regions"):
-		regions_map = get_node("Regions")
+	for map_name in ["Regions", "regions"]:
+		if has_node(map_name):
+			regions_map = get_node(map_name)
+			break
 		
 	var input_maps := []
 	var output_maps := []
 	for map in get_children():
 		if map is TileMap:
-			if map.name.begins_with("Input"):
+			if map.name.begins_with("Input") || map.name.begins_with("input"):
 				input_maps.append(map)
-			elif map.name.begins_with("Output"):
+			elif map.name.begins_with("Output") || map.name.begins_with("output"):
 				output_maps.append(map)
 	
 	# Optional maps
 	var empty_map : TileMap = null
-	if has_node("Empty"):
-		empty_map = get_node("Empty")
+	for map_name in ["Empty", "empty"]:
+		if has_node(map_name):
+			empty_map = get_node(map_name)
+			break
 	
 	var delete_map : TileMap = null
-	if has_node("Delete"):
-		delete_map = get_node("Delete")
+	for map_name in ["Delete", "delete"]:
+		if has_node(map_name):
+			delete_map = get_node(map_name)
+			break
 	
 	# Abort if a required map isn't present
 	if !regions_map:
