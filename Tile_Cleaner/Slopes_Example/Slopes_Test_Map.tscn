@@ -23,4 +23,5 @@ __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
 rulesets = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
+update_bitmasks = true
 bitmask_edges_data = ExtResource( 8 )

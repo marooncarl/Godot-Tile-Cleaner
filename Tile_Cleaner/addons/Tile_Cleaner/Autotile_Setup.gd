@@ -34,6 +34,8 @@ func _ready():
 			add_child(new_map)
 			new_map.name = map_name
 			new_map.owner = self
+			if map_name == "Regions":
+				new_map.modulate = Color(1.0, 1.0, 1.0, 0.5)
 
 func create_autotile_rules() -> Array:
 	# Make sure the required tilemaps are present
