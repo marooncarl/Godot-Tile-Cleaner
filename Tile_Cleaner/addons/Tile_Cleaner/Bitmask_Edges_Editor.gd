@@ -254,8 +254,9 @@ func apply_bit_changes(tile_id: int, changes: Dictionary):
 			set_bit(tile_id, cell, subcell, changes[cell][subcell])
 	
 	grid.update()
-	if tile_id == current_id:
-		clear_button.disabled = is_tile_clear(tile_id)
+	# View undone / redone action
+	if tile_id != current_id:
+		set_current_tile(tile_id)
 
 # Sets bit for cell / subcell to on or off using value
 # (Actually removes or adds the subcell to the working data)
