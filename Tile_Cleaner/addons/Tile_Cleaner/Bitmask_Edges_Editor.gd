@@ -83,7 +83,6 @@ func set_tileset(new_tileset : TileSet):
 		if tileset.tile_get_tile_mode(first_id) != TileSet.SINGLE_TILE:
 			first_id = get_next_id()
 		set_current_tile(first_id)
-		id_label.text = str(first_id)
 		
 		load_bitmask_button.disabled = false
 		reset_panning()
@@ -96,6 +95,7 @@ func set_current_tile(new_id):
 	current_id = new_id
 	tile.texture = tileset.tile_get_texture(current_id)
 	tile.region_rect = tileset.tile_get_region(current_id)
+	id_label.text = str(new_id)
 	
 	# If the tile has a bitmask mode set, update to that
 	if selected_bits.has(new_id) && selected_bits[new_id].has("bitmask_mode"):
@@ -359,12 +359,10 @@ func is_saving_needed() -> bool:
 func next_id_pressed():
 	if tileset:
 		set_current_tile(get_next_id())
-		id_label.text = str(current_id)
 
 func prev_id_pressed():
 	if tileset:
 		set_current_tile(get_prev_id())
-		id_label.text = str(current_id)
 
 func on_load_pressed():
 	$Load_Tileset_Dialog.popup_centered(get_file_window_size())
