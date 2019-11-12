@@ -6,1105 +6,836 @@
 script = ExtResource( 1 )
 rules = [ {
 Vector2( 4, 1 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 5, 2 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 7, 2 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 8, 1 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 9, 2 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 10, 1 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "delete",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
-},
-Vector2( 11, 2 ): {
-"input": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
+}, {
+"autotile_coord": 0,
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ]
 },
-"output": {
+Vector2( 11, 2 ): {
+"input": [ {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 5,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 15, 3 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 15, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 1, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 15, 5 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 2 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 16, 3 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 16, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 2, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 16, 5 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 17, 3 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 17, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 17, 5 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 1, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 17,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 1, 5 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 2, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 3, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 18,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 4, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 4, 5 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 6, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 17,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 18,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 6, 5 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 27,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 28,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 7, 4 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+"input": [  ],
+"output": [  ]
 },
 Vector2( 7, 5 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+"input": [  ],
+"output": [  ]
 },
 Vector2( 8, 4 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 18,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 17,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 8, 5 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 28,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 27,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 9, 4 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+"input": [  ],
+"output": [  ]
 },
 Vector2( 9, 5 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+"input": [  ],
+"output": [  ]
 }
 }, {
 Vector2( 1, 7 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 1, 8 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 1, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 1, 10 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 2, 10 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 2, 11 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 2, 12 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 2, 13 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
+"input": [  ],
+"output": [ {
 "autotile_coord": Vector2( 10, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 2, 14 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 3, 14 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 }
 }, {
 Vector2( 11, 7 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 11, 8 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
+"input": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 11, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 12, 7 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
+"input": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 12, 8 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
+"input": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 2, 1 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 12, 9 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
+"input": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 2 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 13, 7 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 13, 8 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
+"input": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 13, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 }
 }, {
 Vector2( 5, 8 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 5, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 6, 8 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 6, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 5, 11 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 4,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 6, 11 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 1, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 7, 11 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 3, 3 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 8, 8 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 5,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 8, 9 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ],
+"output": [  ]
 },
 Vector2( 8, 10 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 2 ),
 "id": 0,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-},
-"output": {
+} ],
+"output": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 8,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
+} ]
 },
 Vector2( 8, 11 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+"input": [  ],
+"output": [  ]
 }
 }, {
 Vector2( 9, 13 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 27,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
+} ],
+"output": [  ]
 },
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
+Vector2( 10, 13 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
-},
-Vector2( 10, 13 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "delete",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 12, 13 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 28,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
+} ],
+"output": [  ]
 },
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
+Vector2( 13, 13 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
-},
-Vector2( 13, 13 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "delete",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 9, 15 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 17,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
+} ],
+"output": [  ]
 },
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
+Vector2( 10, 15 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
-},
-Vector2( 10, 15 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "delete",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ]
 }
 }, {
 Vector2( 12, 15 ): {
-"input": {
+"input": [ {
 "autotile_coord": Vector2( 0, 0 ),
 "id": 18,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
+} ],
+"output": [  ]
 },
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
+Vector2( 13, 15 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
 "id": -1,
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}
-},
-Vector2( 13, 15 ): {
-"input": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "any",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-},
-"output": {
-"autotile_coord": Vector2( 0, 0 ),
-"id": "delete",
-"transpose": false,
-"x_flip": false,
-"y_flip": false
-}
+} ]
 }
 } ]
 match_flipping = true
 match_bitmask = false
+any_includes_empty = false
