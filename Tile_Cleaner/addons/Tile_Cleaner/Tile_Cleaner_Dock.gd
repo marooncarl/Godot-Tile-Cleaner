@@ -67,7 +67,7 @@ func on_save_file_selected(path: String):
 			
 			ResourceSaver.save(path, ruleset)
 			
-			print("Saved autotile rules")
+			print("Saved autotile rules at path: %s" % path)
 			return
 	
 	# Didn't return, so there was an error
