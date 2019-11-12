@@ -99,8 +99,7 @@ func set_current_tile(new_id):
 	
 	# If the tile has a bitmask mode set, update to that
 	if selected_bits.has(new_id) && selected_bits[new_id].has("bitmask_mode"):
-		bitmask_selector.select(0 if selected_bits[new_id]["bitmask_mode"] == 2 else 1)
-		on_bitmask_mode_selected(bitmask_selector.selected)
+		set_bitmask_mode(0 if selected_bits[new_id]["bitmask_mode"] == 2 else 1)
 	
 	# Need to show selected bits for the new tile
 	grid.update()
