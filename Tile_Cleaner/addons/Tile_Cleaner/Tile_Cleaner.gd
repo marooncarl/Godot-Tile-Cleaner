@@ -92,7 +92,7 @@ func run_autotile(t : TileMap) -> Dictionary:
 								for rule_cell2 in rule.keys():
 									var offset = rule_cell2 - rule_cell
 									if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, \
-									ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask):
+									ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask, ruleset.any_includes_empty):
 										matching = false
 										break
 								
@@ -114,7 +114,7 @@ func run_autotile(t : TileMap) -> Dictionary:
 	return changes
 
 func does_tile_match_input(input_tiles : Array, map : TileMap, changes: Dictionary, map_cell : Vector2, \
-		check_flip_x : bool, check_flip_y : bool, check_transpose : bool, check_autotile : bool):
+		check_flip_x : bool, check_flip_y : bool, check_transpose : bool, check_autotile : bool, any_includes_empty : bool):
 	
 	var x := int(map_cell.x)
 	var y := int(map_cell.y)
@@ -136,8 +136,12 @@ func does_tile_match_input(input_tiles : Array, map : TileMap, changes: Dictiona
 		compare["autotile_coord"] = map.get_cell_autotile_coord(x, y)
 	
 	if input_tiles.size() == 0:
-		# Any valid tile matches
-		return compare["id"] != TileMap.INVALID_CELL
+		if !any_includes_empty:
+			# Any valid tile matches
+			return compare["id"] != TileMap.INVALID_CELL
+		else:
+			# Always a match
+			return true
 	else:
 		for input_tile in input_tiles:
 			if (input_tile["id"] == compare["id"]) && \

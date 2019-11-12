@@ -1,6 +1,11 @@
 # Autotile Setup
 #
 # Creates autotile rules using child tilemaps
+# Options:
+#
+# Match Flipping: If true, exact tile rotation is taken into account when pattern matching, otherwise it is ignored.
+# Match Bitmask: If true, the exact bitmask for Godot autotiles is considered for pattern matching, otherwise it is ignored.
+# Any Includes Empty: If true, a blank tile in the pattern will match even if the tile is empty.
 
 tool
 extends Node
@@ -18,6 +23,8 @@ const ADJACENT_POSITIONS = [
 
 export(bool) var match_flipping := true
 export(bool) var match_bitmask := false
+export(bool) var any_includes_empty := false
+
 
 func _ready():
 	# Create regions, input, and output if not already present

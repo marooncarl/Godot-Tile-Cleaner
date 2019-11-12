@@ -467,3 +467,4 @@ Vector2( 19, 8 ): {
 } ]
 match_flipping = true
 match_bitmask = false
+any_includes_empty = false
