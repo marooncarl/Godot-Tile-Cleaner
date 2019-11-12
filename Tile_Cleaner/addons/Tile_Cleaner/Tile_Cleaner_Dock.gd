@@ -40,7 +40,7 @@ func on_save_file_selected(path: String):
 			
 			# Make sure it has the right properties
 			var valid := true
-			for prop in ["rules", "match_flipping", "match_bitmask"]:
+			for prop in ["rules", "match_flipping", "match_bitmask", "any_includes_empty"]:
 				if !prop in ruleset:
 					valid = false
 					break
@@ -52,6 +52,8 @@ func on_save_file_selected(path: String):
 				ruleset.match_flipping = setup.match_flipping
 			if "match_bitmask" in setup:
 				ruleset.match_bitmask = setup.match_bitmask
+			if "any_includes_empty" in setup:
+				ruleset.any_includes_empty = setup.any_includes_empty
 			
 			ResourceSaver.save(path, ruleset)
 			

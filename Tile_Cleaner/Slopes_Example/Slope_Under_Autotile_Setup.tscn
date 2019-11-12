@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
+any_includes_empty = true
 
 [node name="Regions" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )

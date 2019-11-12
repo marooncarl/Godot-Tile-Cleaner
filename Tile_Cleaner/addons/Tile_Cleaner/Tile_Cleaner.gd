@@ -68,53 +68,53 @@ func run_autotile(t : TileMap) -> Dictionary:
 	for ruleset in rulesets:
 		if "rules" in ruleset:
 			for rule in ruleset.rules:
+				var did_search := false
 				# Find a cell that isn't invalid or "any" in the input region to search for
 				for rule_cell in rule.keys():
-					var search_id = rule[rule_cell]["input"]["id"]
-					if search_id is int && search_id != TileMap.INVALID_CELL:
-						# Search through actual tilemap cells with the search id, as well as changes that will be set with the id
-						var search_cells = t.get_used_cells_by_id(search_id)
-						for cell in changes.keys():
-							if changes[cell].has("id") && changes[cell]["id"] == search_id && !search_cells.has(cell):
-								search_cells.append(cell)
-						
-						for map_cell in search_cells:
-							# Check surrounding cells to see if they all match the current pattern
-							var matching := true
-							for rule_cell2 in rule.keys():
-								var offset = rule_cell2 - rule_cell
-								if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, \
-								ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask):
-									matching = false
-									break
-							if matching:
-								# Record a change to be made later
+					# Only need to search for one valid tile in each rule
+					if did_search:
+						break
+					
+					for input in rule[rule_cell]["input"]:
+						var search_id = input["id"]
+						if search_id != TileMap.INVALID_CELL:
+							did_search = true
+							
+							# Search through actual tilemap cells with the search id, as well as changes that will be set with the id
+							var search_cells = t.get_used_cells_by_id(search_id)
+							for cell in changes.keys():
+								if changes[cell].has("id") && changes[cell]["id"] == search_id && !search_cells.has(cell):
+									search_cells.append(cell)
+							
+							for map_cell in search_cells:
+								# Check surrounding cells to see if they all match the current pattern
+								var matching := true
 								for rule_cell2 in rule.keys():
 									var offset = rule_cell2 - rule_cell
-									if !rule[rule_cell2]["output"]["id"] is int && rule[rule_cell2]["output"]["id"] == "delete":
-										changes[map_cell + offset] = {
-											"id": TileMap.INVALID_CELL,
-											"x_flip": false,
-											"y_flip": false,
-											"transpose": false,
-											"autotile_coord": Vector2(0, 0),
-										}
-									elif rule[rule_cell2]["output"]["id"] != TileMap.INVALID_CELL:
-										changes[map_cell + offset] = {
-											"id": rule[rule_cell2]["output"]["id"],
-											"x_flip": rule[rule_cell2]["output"]["x_flip"],
-											"y_flip": rule[rule_cell2]["output"]["y_flip"],
-											"transpose": rule[rule_cell2]["output"]["transpose"],
-										}
-								num_matches += 1
-						# Only need to search for one valid tile in each rule
-						break
+									if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, \
+									ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask, ruleset.any_includes_empty):
+										matching = false
+										break
+								
+								if matching:
+									# Record a change to be made later
+									for rule_cell2 in rule.keys():
+										var offset = rule_cell2 - rule_cell
+										if rule[rule_cell2]["output"].size() > 0:
+											var rand_index : int = randi() % rule[rule_cell2]["output"].size()
+											changes[map_cell + offset] = {
+												"id": rule[rule_cell2]["output"][rand_index]["id"],
+												"x_flip": rule[rule_cell2]["output"][rand_index]["x_flip"],
+												"y_flip": rule[rule_cell2]["output"][rand_index]["y_flip"],
+												"transpose": rule[rule_cell2]["output"][rand_index]["transpose"],
+											}
+									num_matches += 1
 	
 	print("Tile Cleaner: Found %s matches" % num_matches)
 	return changes
 
-func does_tile_match_input(input_tile : Dictionary, map : TileMap, changes: Dictionary, map_cell : Vector2, \
-		check_flip_x : bool, check_flip_y : bool, check_transpose : bool, check_autotile : bool):
+func does_tile_match_input(input_tiles : Array, map : TileMap, changes: Dictionary, map_cell : Vector2, \
+		check_flip_x : bool, check_flip_y : bool, check_transpose : bool, check_autotile : bool, any_includes_empty : bool):
 	
 	var x := int(map_cell.x)
 	var y := int(map_cell.y)
@@ -135,11 +135,23 @@ func does_tile_match_input(input_tile : Dictionary, map : TileMap, changes: Dict
 	if !compare.has("autotile_coord"):
 		compare["autotile_coord"] = map.get_cell_autotile_coord(x, y)
 	
-	return (!input_tile["id"] is int || input_tile["id"] == compare["id"]) && \
+	if input_tiles.size() == 0:
+		if !any_includes_empty:
+			# Any valid tile matches
+			return compare["id"] != TileMap.INVALID_CELL
+		else:
+			# Always a match
+			return true
+	else:
+		for input_tile in input_tiles:
+			if (input_tile["id"] == compare["id"]) && \
 			(!check_flip_x || input_tile["x_flip"] == compare["x_flip"]) && \
 			(!check_flip_y || input_tile["y_flip"] == compare["y_flip"]) && \
 			(!check_transpose || input_tile["transpose"] == compare["transpose"]) && \
-			(!check_autotile || input_tile["autotile_coord"] == compare["autotile_coord"])
+			(!check_autotile || input_tile["autotile_coord"] == compare["autotile_coord"]):
+				return true
+		# No matches found
+		return false
 
 # Used with undo/redo to actually change the tilemap
 func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = false, bitmask_data : Dictionary = {}):

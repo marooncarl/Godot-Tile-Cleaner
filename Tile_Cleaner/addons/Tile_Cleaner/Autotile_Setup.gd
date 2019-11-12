@@ -1,6 +1,11 @@
 # Autotile Setup
 #
 # Creates autotile rules using child tilemaps
+# Options:
+#
+# Match Flipping: If true, exact tile rotation is taken into account when pattern matching, otherwise it is ignored.
+# Match Bitmask: If true, the exact bitmask for Godot autotiles is considered for pattern matching, otherwise it is ignored.
+# Any Includes Empty: If true, a blank tile in the pattern will match even if the tile is empty.
 
 tool
 extends Node
@@ -18,6 +23,8 @@ const ADJACENT_POSITIONS = [
 
 export(bool) var match_flipping := true
 export(bool) var match_bitmask := false
+export(bool) var any_includes_empty := false
+
 
 func _ready():
 	# Create regions, input, and output if not already present
@@ -34,13 +41,14 @@ func create_autotile_rules() -> Array:
 	if has_node("Regions"):
 		regions_map = get_node("Regions")
 		
-	var input_map : TileMap = null
-	if has_node("Input"):
-		input_map = get_node("Input")
-		
-	var output_map : TileMap = null
-	if has_node("Output"):
-		output_map = get_node("Output")
+	var input_maps := []
+	var output_maps := []
+	for map in get_children():
+		if map is TileMap:
+			if map.name.begins_with("Input"):
+				input_maps.append(map)
+			elif map.name.begins_with("Output"):
+				output_maps.append(map)
 	
 	# Optional maps
 	var empty_map : TileMap = null
@@ -52,10 +60,15 @@ func create_autotile_rules() -> Array:
 		delete_map = get_node("Delete")
 	
 	# Abort if a required map isn't present
-	for map in [[regions_map, "regions"], [input_map, "input"], [output_map, "output"]]:
-		if !map[0]:
-			print("Missing %s map!" % map[1])
-			return []
+	if !regions_map:
+		print("Missing regions map!")
+		return []
+	if input_maps.size() == 0:
+		print("Missing input map!")
+		return []
+	if output_maps.size() == 0:
+		print("Missing output map!")
+		return []
 	
 	# Determine regions
 	var regions := []
@@ -68,27 +81,40 @@ func create_autotile_rules() -> Array:
 	# Add input and output data
 	for region in regions:
 		for cell in region.keys():
-			for prop in [[input_map, "input"], [output_map, "output"]]:
-				region[cell][prop[1]] = {
-					"id": prop[0].get_cell(cell.x, cell.y),
-					"x_flip": prop[0].is_cell_x_flipped(cell.x, cell.y),
-					"y_flip": prop[0].is_cell_y_flipped(cell.x, cell.y),
-					"transpose": prop[0].is_cell_transposed(cell.x, cell.y),
-					"autotile_coord": prop[0].get_cell_autotile_coord(cell.x, cell.y),
-				}
-				# In input, empty should be regarded as a wildcard
-				if prop[1] == "input" && region[cell]["input"]["id"] == TileMap.INVALID_CELL:
-					region[cell]["input"]["id"] = "any"
+			for prop in [[input_maps, "input"], [output_maps, "output"]]:
+				region[cell][prop[1]] = []
+				for i in range(prop[0].size()):
+					var map = prop[0][i]
+					if map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
+						region[cell][prop[1]].append({
+							"id": map.get_cell(cell.x, cell.y),
+							"x_flip": map.is_cell_x_flipped(cell.x, cell.y),
+							"y_flip": map.is_cell_y_flipped(cell.x, cell.y),
+							"transpose": map.is_cell_transposed(cell.x, cell.y),
+							"autotile_coord": map.get_cell_autotile_coord(cell.x, cell.y),
+						})
 			
-			# Cells marked empty overwrite input cells if present
+			# Empty is added as an additional input option if present in the empty layer
 			if empty_map:
 				if empty_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
-					region[cell]["input"]["id"] = TileMap.INVALID_CELL
+					region[cell]["input"].append({
+						"id": TileMap.INVALID_CELL,
+						"x_flip": false,
+						"y_flip": false,
+						"transpose": false,
+						"autotile_coord": 0,
+					})
 			
-			# Cells marked to be deleted overwrite output cells if present
+			# Delete is added as an additional output option if present in the delete layer
 			if delete_map:
 				if delete_map.get_cell(cell.x, cell.y) != TileMap.INVALID_CELL:
-					region[cell]["output"]["id"] = "delete"
+					region[cell]["output"].append({
+						"id": TileMap.INVALID_CELL,
+						"x_flip": false,
+						"y_flip": false,
+						"transpose": false,
+						"autotile_coord": 0,
+					})
 	
 	return regions
 
