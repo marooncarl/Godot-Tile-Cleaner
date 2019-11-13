@@ -94,12 +94,6 @@ Vector2( 10, 1 ): {
 "transpose": false,
 "x_flip": false,
 "y_flip": false
-}, {
-"autotile_coord": 0,
-"id": -1,
-"transpose": false,
-"x_flip": false,
-"y_flip": false
 } ]
 },
 Vector2( 11, 2 ): {
