@@ -25,32 +25,14 @@ func _input(event):
 	&& editor_interface:
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
-			# Auto save rules with the same name as the setup scene, except for file extension
-			# If an alternate name is provided, use that instead.
-			var path : String = setup.filename
-			if "rule_filename" in setup && setup.rule_filename != "":
-				# Construct custom filename
-				path = setup.filename.get_base_dir()
-				if !path.ends_with("/"):
-					path += "/"
-				path += setup.rule_filename
-				if !path.ends_with(".tres"):
-					path += ".tres"
-			elif path != "":
-				# Replace .tscn with .tres
-				path = path.get_basename() + ".tres"
-			
-			if path != "":
-				on_save_file_selected(path)
+			$Save_File_Dialog.popup_centered(get_save_window_size())
 
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
 	if editor_interface:
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
-			var window_size := Vector2(get_tree().root.size.x * SAVE_DIALOG_SCALE.x, \
-					get_tree().root.size.y * SAVE_DIALOG_SCALE.y)
-			$Save_File_Dialog.popup_centered(window_size)
+			$Save_File_Dialog.popup_centered(get_save_window_size())
 		else:
 			print("Open a Tile Pattern Setup to save rules!")
 
@@ -90,6 +72,9 @@ func on_save_file_selected(path: String):
 	
 	# Didn't return, so there was an error
 	print("Failed to save tile pattern")
+
+func get_save_window_size() -> Vector2:
+	return Vector2(get_tree().root.size.x * SAVE_DIALOG_SCALE.x, get_tree().root.size.y * SAVE_DIALOG_SCALE.y)
 
 func on_clean_pressed():
 	if undo_redo && editor_interface:
