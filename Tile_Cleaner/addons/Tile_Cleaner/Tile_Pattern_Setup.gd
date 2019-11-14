@@ -22,11 +22,30 @@ const ADJACENT_POSITIONS = [
 	Vector2(1, 1),
 ]
 
-export(bool) var match_flipping := true
-export(bool) var match_bitmask := false
-export(bool) var any_includes_empty := false
-export(String) var pattern_path := ""
+var match_flipping := true
+var match_bitmask := false
+var any_includes_empty := false
+var pattern_path := ""
 
+
+func _get_property_list():
+	return [{
+		"name": "match_flipping",
+		"type": TYPE_BOOL,
+		"usage": PROPERTY_USAGE_DEFAULT,
+	}, {
+		"name": "match_bitmask",
+		"type": TYPE_BOOL,
+		"usage": PROPERTY_USAGE_DEFAULT,
+	}, {
+		"name": "any_includes_empty",
+		"type": TYPE_BOOL,
+		"usage": PROPERTY_USAGE_DEFAULT,
+	}, {
+		"name": "pattern_path",
+		"type": TYPE_STRING,
+		"usage": PROPERTY_USAGE_STORAGE,
+	}]
 
 func _ready():
 	# Create regions, input, and output if not already present
