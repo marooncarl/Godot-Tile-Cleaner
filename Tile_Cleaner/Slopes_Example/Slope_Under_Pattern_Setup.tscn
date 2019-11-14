@@ -9,7 +9,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
+match_flipping = true
+match_bitmask = false
 any_includes_empty = true
+pattern_path = "res://Slopes_Example/Slope_Under_Tile_Pattern.tres"
 
 [node name="Regions" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )
