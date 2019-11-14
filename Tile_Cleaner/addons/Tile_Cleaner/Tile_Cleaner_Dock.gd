@@ -17,6 +17,13 @@ func _ready():
 	$Clean_Button.connect("pressed", self, "on_clean_pressed")
 	$Save_As_Button.connect("pressed", self, "on_save_as_pressed")
 
+# Save pattern when ctrl + s is pressed if it has been saved already
+func _input(event):
+	if event is InputEventKey && event.pressed && event.control && event.scancode == KEY_S:
+		var setup = get_setup()
+		if setup && setup.pattern_path != "":
+			on_save_file_selected(setup.pattern_path)
+
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
 	var setup = get_setup()
