@@ -33,8 +33,8 @@ func _exit_tree():
 	remove_control_from_docks(dock)
 	dock.free()
 	bitmask_editor.free()
-	remove_custom_type("Tile_Cleaner")
-	remove_custom_type("Autotile_Setup")
+	for custom_type in ["Tile_Cleaner", "Autotile_Setup"]:
+		remove_custom_type(custom_type)
 
 func has_main_screen():
 	return true
