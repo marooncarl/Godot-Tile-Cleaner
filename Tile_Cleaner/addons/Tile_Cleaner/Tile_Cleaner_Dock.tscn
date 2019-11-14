@@ -19,7 +19,7 @@ margin_left = -67.5
 margin_top = 103.008
 margin_right = 67.5
 margin_bottom = 123.008
-text = "Save Autotile Rules"
+text = "Save Tile Pattern"
 
 [node name="Clean_Button" type="Button" parent="."]
 anchor_left = 0.5
@@ -66,9 +66,9 @@ color = Color( 1, 1, 1, 0.501961 )
 [node name="Autotile_Setup_BG" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -53.0
+margin_left = -66.0
 margin_top = 41.0
-margin_right = 61.0
+margin_right = 81.0
 margin_bottom = 81.0
 color = Color( 0.196078, 0.231373, 0.309804, 1 )
 
@@ -76,19 +76,19 @@ color = Color( 0.196078, 0.231373, 0.309804, 1 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -47.0
-margin_top = 260.772
-margin_right = 52.0
-margin_bottom = 300.772
+margin_top = 261.0
+margin_right = 59.0
+margin_bottom = 301.0
 color = Color( 0.196078, 0.231373, 0.309804, 1 )
 
 [node name="Autotile_Setup_Heading" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -45.5
-margin_top = 54.15
-margin_right = 45.5
-margin_bottom = 68.15
-text = "Autotile Setup"
+margin_left = -56.5
+margin_top = 52.1285
+margin_right = 56.5
+margin_bottom = 66.1285
+text = "Tile Pattern Setup"
 align = 1
 
 [node name="Tile_Cleaner_Heading" type="Label" parent="."]
