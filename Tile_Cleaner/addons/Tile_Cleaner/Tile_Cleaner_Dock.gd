@@ -15,60 +15,71 @@ func _ready():
 	$Save_Button.connect("pressed", self, "on_save_pressed")
 	$Save_File_Dialog.connect("file_selected", self, "on_save_file_selected")
 	$Clean_Button.connect("pressed", self, "on_clean_pressed")
+	$Save_As_Button.connect("pressed", self, "on_save_as_pressed")
 
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
-	if editor_interface:
-		var setup = editor_interface.get_edited_scene_root()
-		if setup && setup.has_method("create_autotile_rules"):
-			if setup.pattern_path == "":
-				$Save_File_Dialog.popup_centered(get_save_window_size())
-			else:
-				on_save_file_selected(setup.pattern_path)
+	var setup = get_setup()
+	if setup:
+		if setup.pattern_path == "":
+			$Save_File_Dialog.popup_centered(get_save_window_size())
 		else:
-			print("Open a Tile Pattern Setup to save rules!")
+			on_save_file_selected(setup.pattern_path)
+	else:
+		print("Open a Tile Pattern Setup to save a pattern!")
+
+func on_save_as_pressed():
+	var setup = get_setup()
+	if setup:
+		$Save_File_Dialog.popup_centered(get_save_window_size())
+	else:
+		print("Open a Tile Pattern Setup to save a pattern!")
 
 func on_save_file_selected(path: String):
-	if editor_interface:
-		var setup = editor_interface.get_edited_scene_root()
-		if setup && setup.has_method("create_autotile_rules"):
-			
-			# Actually save the ruleset
-			var ruleset
-			if ResourceLoader.exists(path):
-				ruleset = load(path)
-			else:
-				ruleset = TilePattern.new()
-			
-			# Make sure it has the right properties
-			var valid := true
-			for prop in ["rules", "match_flipping", "match_bitmask", "any_includes_empty"]:
-				if !prop in ruleset:
-					valid = false
-					break
-			if !valid:
-				ruleset = TilePattern.new()
-			
-			ruleset.rules = setup.create_autotile_rules()
-			if "match_flipping" in setup:
-				ruleset.match_flipping = setup.match_flipping
-			if "match_bitmask" in setup:
-				ruleset.match_bitmask = setup.match_bitmask
-			if "any_includes_empty" in setup:
-				ruleset.any_includes_empty = setup.any_includes_empty
-			
-			ResourceSaver.save(path, ruleset)
-			
-			setup.pattern_path = path
-			
-			print("Saved tile pattern at path: %s" % path)
-			return
-	
-	# Didn't return, so there was an error
-	print("Failed to save tile pattern")
+	var setup = get_setup()
+	if setup:
+		# Actually save the ruleset
+		var ruleset
+		if ResourceLoader.exists(path):
+			ruleset = load(path)
+		else:
+			ruleset = TilePattern.new()
+		
+		# Make sure it has the right properties
+		var valid := true
+		for prop in ["rules", "match_flipping", "match_bitmask", "any_includes_empty"]:
+			if !prop in ruleset:
+				valid = false
+				break
+		if !valid:
+			ruleset = TilePattern.new()
+		
+		ruleset.rules = setup.create_autotile_rules()
+		if "match_flipping" in setup:
+			ruleset.match_flipping = setup.match_flipping
+		if "match_bitmask" in setup:
+			ruleset.match_bitmask = setup.match_bitmask
+		if "any_includes_empty" in setup:
+			ruleset.any_includes_empty = setup.any_includes_empty
+		
+		ResourceSaver.save(path, ruleset)
+		
+		setup.pattern_path = path
+		
+		print("Saved tile pattern at path: %s" % path)
+	else:
+		print("Failed to save tile pattern")
 
 func get_save_window_size() -> Vector2:
 	return Vector2(get_tree().root.size.x * SAVE_DIALOG_SCALE.x, get_tree().root.size.y * SAVE_DIALOG_SCALE.y)
+
+func get_setup() -> Node:
+	if editor_interface:
+		var setup = editor_interface.get_edited_scene_root()
+		if setup && setup.has_method("create_autotile_rules"):
+			return setup
+	
+	return null
 
 func on_clean_pressed():
 	if undo_redo && editor_interface:
