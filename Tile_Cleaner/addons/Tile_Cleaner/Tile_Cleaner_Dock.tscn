@@ -42,7 +42,7 @@ text = "Clean Tiles"
 [node name="Save_File_Dialog" type="FileDialog" parent="."]
 margin_right = 275.0
 margin_bottom = 130.0
-window_title = "Save Autotile Rules"
+window_title = "Save Tile Pattern"
 filters = PoolStringArray( "*.tres" )
 
 [node name="Horizontal_Rule" type="ColorRect" parent="."]
