@@ -21,13 +21,22 @@ margin_right = 67.5
 margin_bottom = 123.008
 text = "Save Tile Pattern"
 
+[node name="Save_As_Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -67.5
+margin_top = 140.475
+margin_right = 67.5
+margin_bottom = 160.475
+text = "Save As..."
+
 [node name="Clean_Button" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -67.5
-margin_top = 319.856
+margin_top = 279.131
 margin_right = 67.5
-margin_bottom = 339.856
+margin_bottom = 299.131
 text = "Clean Tiles"
 
 [node name="Save_File_Dialog" type="FileDialog" parent="."]
@@ -35,21 +44,6 @@ margin_right = 275.0
 margin_bottom = 130.0
 window_title = "Save Autotile Rules"
 filters = PoolStringArray( "*.tres" )
-
-[node name="Autosave_Checkbox" type="CheckBox" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -88.0
-margin_top = 152.95
-margin_right = -64.0
-margin_bottom = 176.95
-
-[node name="Autosave_Label" type="Label" parent="Autosave_Checkbox"]
-margin_left = 30.6998
-margin_top = -1.00209
-margin_right = 160.7
-margin_bottom = 12.9979
-text = "Create rules on save"
 
 [node name="Horizontal_Rule" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -59,8 +53,8 @@ color = Color( 1, 1, 1, 0.501961 )
 
 [node name="Horizontal_Rule2" type="ColorRect" parent="."]
 anchor_right = 1.0
-margin_top = 286.712
-margin_bottom = 287.712
+margin_top = 245.987
+margin_bottom = 246.987
 color = Color( 1, 1, 1, 0.501961 )
 
 [node name="Autotile_Setup_BG" type="ColorRect" parent="."]
@@ -76,9 +70,9 @@ color = Color( 0.196078, 0.231373, 0.309804, 1 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -47.0
-margin_top = 261.0
+margin_top = 220.275
 margin_right = 59.0
-margin_bottom = 301.0
+margin_bottom = 260.275
 color = Color( 0.196078, 0.231373, 0.309804, 1 )
 
 [node name="Autotile_Setup_Heading" type="Label" parent="."]
@@ -95,8 +89,8 @@ align = 1
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -37.5
-margin_top = 274.172
+margin_top = 233.447
 margin_right = 37.5
-margin_bottom = 288.172
+margin_bottom = 247.447
 text = "Tile Cleaner"
 align = 1
