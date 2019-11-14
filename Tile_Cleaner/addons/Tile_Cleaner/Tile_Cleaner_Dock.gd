@@ -21,7 +21,10 @@ func on_save_pressed():
 	if editor_interface:
 		var setup = editor_interface.get_edited_scene_root()
 		if setup && setup.has_method("create_autotile_rules"):
-			$Save_File_Dialog.popup_centered(get_save_window_size())
+			if setup.pattern_path == "":
+				$Save_File_Dialog.popup_centered(get_save_window_size())
+			else:
+				on_save_file_selected(setup.pattern_path)
 		else:
 			print("Open a Tile Pattern Setup to save rules!")
 
@@ -55,6 +58,8 @@ func on_save_file_selected(path: String):
 				ruleset.any_includes_empty = setup.any_includes_empty
 			
 			ResourceSaver.save(path, ruleset)
+			
+			setup.pattern_path = path
 			
 			print("Saved tile pattern at path: %s" % path)
 			return
