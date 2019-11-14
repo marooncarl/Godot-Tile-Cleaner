@@ -10,22 +10,11 @@ const SAVE_DIALOG_SCALE = Vector2(0.66, 0.66)
 var editor_interface : EditorInterface = null
 var undo_redo : UndoRedo = null
 
-# Option for whether to save autotile rules whenever an autotile setup scene is saved
-var auto_save_rules := false
-
 
 func _ready():
 	$Save_Button.connect("pressed", self, "on_save_pressed")
 	$Save_File_Dialog.connect("file_selected", self, "on_save_file_selected")
 	$Clean_Button.connect("pressed", self, "on_clean_pressed")
-	$Autosave_Checkbox.connect("toggled", self, "on_autosave_toggled")
-
-func _input(event):
-	if auto_save_rules && event is InputEventKey && event.pressed && event.control && event.scancode == KEY_S \
-	&& editor_interface:
-		var setup = editor_interface.get_edited_scene_root()
-		if setup && setup.has_method("create_autotile_rules"):
-			$Save_File_Dialog.popup_centered(get_save_window_size())
 
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
@@ -81,6 +70,3 @@ func on_clean_pressed():
 		var current_scene = editor_interface.get_edited_scene_root()
 		# Call clean_tiles on anything in the edited scene that has the method
 		current_scene.propagate_call("clean_tiles", [undo_redo], true)
-
-func on_autosave_toggled(button_pressed : bool):
-	auto_save_rules = button_pressed
