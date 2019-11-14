@@ -1,6 +1,6 @@
 # Tile Cleaner Dock
 #
-# Used to save autotile rules
+# Used to save tile pattern data and run the Tile Cleaner in the editor
 
 tool
 extends Panel
@@ -52,7 +52,7 @@ func on_save_pressed():
 					get_tree().root.size.y * SAVE_DIALOG_SCALE.y)
 			$Save_File_Dialog.popup_centered(window_size)
 		else:
-			print("Open an Autotile Setup to save rules!")
+			print("Open a Tile Pattern Setup to save rules!")
 
 func on_save_file_selected(path: String):
 	if editor_interface:
@@ -64,7 +64,7 @@ func on_save_file_selected(path: String):
 			if ResourceLoader.exists(path):
 				ruleset = load(path)
 			else:
-				ruleset = AutotileRuleset.new()
+				ruleset = TilePattern.new()
 			
 			# Make sure it has the right properties
 			var valid := true
@@ -73,7 +73,7 @@ func on_save_file_selected(path: String):
 					valid = false
 					break
 			if !valid:
-				ruleset = AutotileRuleset.new()
+				ruleset = TilePattern.new()
 			
 			ruleset.rules = setup.create_autotile_rules()
 			if "match_flipping" in setup:
@@ -85,11 +85,11 @@ func on_save_file_selected(path: String):
 			
 			ResourceSaver.save(path, ruleset)
 			
-			print("Saved autotile rules at path: %s" % path)
+			print("Saved tile pattern at path: %s" % path)
 			return
 	
 	# Didn't return, so there was an error
-	print("Failed to save autotile rules")
+	print("Failed to save tile pattern")
 
 func on_clean_pressed():
 	if undo_redo && editor_interface:

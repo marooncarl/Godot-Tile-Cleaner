@@ -1,14 +1,15 @@
 # Tile Cleaner
 #
-# Add as child to a tile map, load an autotile ruleset(s),
-# and use the tile cleaner dock to run autotiling.
+# Add as child to a tile map, load a tile pattern(s),
+# and/or load bitmask edges data,
+# and use the tile cleaner dock to clean tiles.
 
 tool
 extends Node
 
-const ADJACENT_POSITIONS = preload("Autotile_Setup.gd").ADJACENT_POSITIONS
+const ADJACENT_POSITIONS = preload("Tile_Pattern_Setup.gd").ADJACENT_POSITIONS
 
-export(Array, Resource) var rulesets := []
+export(Array, Resource) var patterns := []
 export(bool) var update_bitmasks := true
 export(Resource) var bitmask_edges_data
 
@@ -65,9 +66,9 @@ func run_autotile(t : TileMap) -> Dictionary:
 	var changes := {}
 	
 	# Search for input patterns
-	for ruleset in rulesets:
-		if "rules" in ruleset:
-			for rule in ruleset.rules:
+	for pattern in patterns:
+		if "rules" in pattern:
+			for rule in pattern.rules:
 				var did_search := false
 				# Find a cell that isn't invalid or "any" in the input region to search for
 				for rule_cell in rule.keys():
@@ -92,7 +93,7 @@ func run_autotile(t : TileMap) -> Dictionary:
 								for rule_cell2 in rule.keys():
 									var offset = rule_cell2 - rule_cell
 									if !does_tile_match_input(rule[rule_cell2]["input"], t, changes, map_cell + offset, \
-									ruleset.match_flipping, ruleset.match_flipping, ruleset.match_flipping, ruleset.match_bitmask, ruleset.any_includes_empty):
+									pattern.match_flipping, pattern.match_flipping, pattern.match_flipping, pattern.match_bitmask, pattern.any_includes_empty):
 										matching = false
 										break
 								

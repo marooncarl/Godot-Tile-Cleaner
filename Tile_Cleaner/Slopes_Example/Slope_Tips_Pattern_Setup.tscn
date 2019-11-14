@@ -1,14 +1,15 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Pattern_Setup.gd" type="Script" id=1]
 [ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup_Icon.png" type="Texture" id=2]
 [ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=3]
 
-[node name="Slope_Tips_Autotile_Setup" type="Node"]
+[node name="Slope_Tips_Pattern_Setup" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )
 }
+any_includes_empty = true
 
 [node name="Regions" type="TileMap" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )

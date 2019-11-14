@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Pattern_Setup.gd" type="Script" id=1]
 [ext_resource path="res://addons/Tile_Cleaner/Autotile_Setup_Icon.png" type="Texture" id=2]
 [ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=3]
 
-[node name="Slope_Wall_Autotile_Setup" type="Node"]
+[node name="Slope_Wall_Pattern_Setup" type="Node"]
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_icon": ExtResource( 2 )

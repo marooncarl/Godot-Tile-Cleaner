@@ -1,12 +1,12 @@
-# Autotile Setup
+# Tile Pattern Setup
 #
-# Creates autotile rules using child tilemaps
+# Creates patterns for finding / replacing tiles using child tilemaps
 # Options:
 #
 # Match Flipping: If true, exact tile rotation is taken into account when pattern matching, otherwise it is ignored.
 # Match Bitmask: If true, the exact bitmask for Godot autotiles is considered for pattern matching, otherwise it is ignored.
 # Any Includes Empty: If true, a blank tile in the pattern will match even if the tile is empty.
-# Rule Filename: If not empty, is the name to use for the ruleset file instead of the name of the autotile setup scene.
+# Rule Filename: If not empty, is the name to use for the pattern file instead of the name of the pattern setup scene.
 #   Does not contain .tres
 
 tool

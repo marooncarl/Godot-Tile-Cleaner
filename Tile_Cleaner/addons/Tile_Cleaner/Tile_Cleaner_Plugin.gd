@@ -27,13 +27,13 @@ func _enter_tree():
 	
 	# Create custom node types
 	add_custom_type("Tile_Cleaner", "Node", preload("Tile_Cleaner.gd"), preload("Tile_Cleaner_Icon.png"))
-	add_custom_type("Autotile_Setup", "Node", preload("Autotile_Setup.gd"), preload("Autotile_Setup_Icon.png"))
+	add_custom_type("Tile_Pattern_Setup", "Node", preload("Tile_Pattern.gd"), preload("Autotile_Setup_Icon.png"))
 
 func _exit_tree():
 	remove_control_from_docks(dock)
 	dock.free()
 	bitmask_editor.free()
-	for custom_type in ["Tile_Cleaner", "Autotile_Setup"]:
+	for custom_type in ["Tile_Cleaner", "Tile_Pattern_Setup"]:
 		remove_custom_type(custom_type)
 
 func has_main_screen():

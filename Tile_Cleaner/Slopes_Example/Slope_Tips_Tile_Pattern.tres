@@ -1,6 +1,6 @@
 [gd_resource type="Resource" load_steps=2 format=2]
 
-[ext_resource path="res://addons/Tile_Cleaner/Autotile_Ruleset.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Pattern.gd" type="Script" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -471,4 +471,4 @@ Vector2( 15, 7 ): {
 } ]
 match_flipping = true
 match_bitmask = false
-any_includes_empty = false
+any_includes_empty = true

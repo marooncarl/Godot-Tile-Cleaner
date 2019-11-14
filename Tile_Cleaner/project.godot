@@ -10,18 +10,18 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
-"class": "AutotileRuleset",
-"language": "GDScript",
-"path": "res://addons/Tile_Cleaner/Autotile_Ruleset.gd"
-}, {
-"base": "Resource",
 "class": "BitmaskEdgesData",
 "language": "GDScript",
 "path": "res://addons/Tile_Cleaner/Bitmask_Edges_Data.gd"
+}, {
+"base": "Resource",
+"class": "TilePattern",
+"language": "GDScript",
+"path": "res://addons/Tile_Cleaner/Tile_Pattern.gd"
 } ]
 _global_script_class_icons={
-"AutotileRuleset": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png",
-"BitmaskEdgesData": "res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png"
+"BitmaskEdgesData": "res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png",
+"TilePattern": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png"
 }
 
 [application]
