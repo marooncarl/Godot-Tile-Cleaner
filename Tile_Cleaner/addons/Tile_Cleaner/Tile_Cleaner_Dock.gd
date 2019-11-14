@@ -64,7 +64,13 @@ func on_save_file_selected(path: String):
 		
 		ResourceSaver.save(path, ruleset)
 		
-		setup.pattern_path = path
+		# Add undo / redo action for updating the pattern path on the scene, since it needs to be saved
+		var old_path = setup.pattern_path
+		if path != old_path:
+			undo_redo.create_action("Update Pattern Path")
+			undo_redo.add_do_property(setup, "pattern_path", path)
+			undo_redo.add_undo_property(setup, "pattern_path", old_path)
+			undo_redo.commit_action()
 		
 		print("Saved tile pattern at path: %s" % path)
 	else:
