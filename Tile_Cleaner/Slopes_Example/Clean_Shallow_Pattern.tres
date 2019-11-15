@@ -1,0 +1,94 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Pattern.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+rules = [ {
+Vector2( 1, 1 ): {
+"input": [ {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 17,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ],
+"output": [  ]
+},
+Vector2( 2, 1 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ]
+}
+}, {
+Vector2( 4, 1 ): {
+"input": [ {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 18,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ],
+"output": [  ]
+},
+Vector2( 5, 1 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ]
+}
+}, {
+Vector2( 1, 3 ): {
+"input": [ {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 27,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ],
+"output": [  ]
+},
+Vector2( 2, 3 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ]
+}
+}, {
+Vector2( 4, 3 ): {
+"input": [ {
+"autotile_coord": Vector2( 0, 0 ),
+"id": 28,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ],
+"output": [  ]
+},
+Vector2( 5, 3 ): {
+"input": [  ],
+"output": [ {
+"autotile_coord": 0,
+"id": -1,
+"transpose": false,
+"x_flip": false,
+"y_flip": false
+} ]
+}
+} ]
+match_flipping = true
+match_bitmask = false
+any_includes_empty = false

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Pattern_Setup.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Icons/Pattern_Setup_Icon.png" type="Texture" id=2]
+[ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=3]
+
+[node name="Clean_Shallow_Pattern_Setup" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+match_flipping = true
+match_bitmask = false
+any_includes_empty = false
+pattern_path = "res://Slopes_Example/Clean_Shallow_Pattern.tres"
+
+[node name="Regions" type="TileMap" parent="."]
+modulate = Color( 1, 1, 1, 0.5 )
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65537, 0, 196609, 65538, 0, 196611, 65540, 0, 196609, 65541, 0, 196611, 196609, 0, 196609, 196610, 0, 196611, 196612, 0, 196609, 196613, 0, 196611 )
+
+[node name="Input" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65537, 17, 0, 65540, 18, 0, 196609, 27, 0, 196612, 28, 0 )
+
+[node name="Output" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+
+[node name="Delete" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 12, 12 )
+format = 1
+tile_data = PoolIntArray( 65538, 0, 65546, 65541, 0, 65546, 196610, 0, 65546, 196613, 0, 65546 )
