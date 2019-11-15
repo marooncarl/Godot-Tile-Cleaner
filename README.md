@@ -12,7 +12,9 @@ When activated, this plugin adds a dock tab named "Tile Cleaner", a main screen 
 In order to set up the Tile Cleaner with your tileset, you'll need to create a tile pattern and / or bitmask edges data and add them to a Tile Cleaner node.  You can optionally create multiple tile patterns and use them all at once.
 
 ## Setup
-- Clone or download the repo and copy the "Tile_Cleaner" folder to a folder named "addons" within your project.
+- Clone or download the repo
+
+- Copy the "Tile_Cleaner" folder within "addons" to a folder named "addons" within your project.
 
 - In Project >> Project Settings >> Plugins, find Tile Cleaner and switch "Inactive" to "Active"
 
