@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Slopes_Test_Map_Runtime.gd" type="Script" id=1]
+[ext_resource path="res://Slopes_Example/Runtime_Example/Slopes_Test_Map_Runtime.gd" type="Script" id=1]
 [ext_resource path="res://Blob_With_Slopes_Tileset.tres" type="TileSet" id=2]
 [ext_resource path="res://addons/Tile_Cleaner/Tile_Cleaner.gd" type="Script" id=3]
 [ext_resource path="res://addons/Tile_Cleaner/Icons/Tile_Cleaner_Icon.png" type="Texture" id=4]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Slopes_Example/Slope_Edge_Tile_Pattern.tres" type="Resource" id=7]
 [ext_resource path="res://Slopes_Example/Slope_Wall_Tile_Pattern.tres" type="Resource" id=8]
 [ext_resource path="res://Slopes_Example/Slope_Bitmask_Data.tres" type="Resource" id=9]
-
 
 [node name="Slopes_Test_Map_Runtime" type="Node2D"]
 script = ExtResource( 1 )
