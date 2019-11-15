@@ -1,0 +1,18 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://addons/Tile_Cleaner/Tile_Cleaner.gd" type="Script" id=1]
+[ext_resource path="res://addons/Tile_Cleaner/Icons/Tile_Cleaner_Icon.png" type="Texture" id=2]
+[ext_resource path="res://Slopes_Example/Clean_Shallow_Pattern.tres" type="Resource" id=3]
+[ext_resource path="res://Slopes_Example/Slope_Tips_Tile_Pattern.tres" type="Resource" id=4]
+[ext_resource path="res://Slopes_Example/Slope_Under_Tile_Pattern.tres" type="Resource" id=5]
+[ext_resource path="res://Slopes_Example/Slope_Edge_Tile_Pattern.tres" type="Resource" id=6]
+[ext_resource path="res://Slopes_Example/Slope_Wall_Tile_Pattern.tres" type="Resource" id=7]
+[ext_resource path="res://Slopes_Example/Slope_Bitmask_Data.tres" type="Resource" id=8]
+
+[node name="Slope_Tile_Cleaner" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_icon": ExtResource( 2 )
+}
+patterns = [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
+bitmask_edges_data = ExtResource( 8 )
