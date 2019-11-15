@@ -11,12 +11,12 @@ When activated, this plugin adds a dock tab named "Tile Cleaner", a main screen 
 
 In order to set up the Tile Cleaner with your tileset, you'll need to create a tile pattern and / or bitmask edges data and add them to a Tile Cleaner node.  You can optionally create multiple tile patterns and use them all at once.
 
-# Setup
+## Setup
 - Clone or download the repo and copy the "Tile_Cleaner" folder to a folder named "addons" within your project.
 
 - In Project >> Project Settings >> Plugins, find Tile Cleaner and switch "Inactive" to "Active"
 
-# Creating a Tile Pattern
+## Creating a Tile Pattern
 - Create a scene with a Tile Pattern Setup as the base node.  It automatically adds three tilemaps as children named "Regions", "Input", and "Output".
 
 - Set the tile size and tile sets for each of the tilemaps, using the same tile set and tile size for each.
@@ -33,7 +33,7 @@ In order to set up the Tile Cleaner with your tileset, you'll need to create a t
 
 - Once you have saved a tile pattern, the setup scene updates with a path to that pattern.  Save the scene, and later when "Save Tile Pattern" is clicked, or ctrl + S is pressed, the tile pattern will update.
 
-# Creating Bitmask Edges Data
+## Creating Bitmask Edges Data
 The BitmaskEdges main screen is used to specify which bits around which tiles should become filled, thus changing surrounding autotile tiles.
 
 - First, load a tile set by clicking "Load Tileset" and choosing a file.  A single tile from the tileset will appear on the grid.
@@ -54,7 +54,7 @@ The BitmaskEdges main screen is used to specify which bits around which tiles sh
 
 - Later, if you want to edit bitmask data, click "Load Bitmask Data" after loading a tileset.
 
-# Cleaning Tiles
+## Cleaning Tiles
 Once you have a tilemap you want to clean and some autotile rules and / or bitmask data:
 
 - Add a Tile Cleaner node to the tilemap as a child node.
@@ -69,5 +69,21 @@ Now you can clean the tilemap whenever you make changes by going to the Tile Cle
 
 To clean tiles at runtime, call clean_tiles(null) on the Tile Cleaner node.
 
-# Known Issues
+## Tile Pattern Setup options
+- **Match Flipping:** When on, tiles must have the same rotation as the tiles in "Input" to match.  When off, rotation is ignored.  Default is on.
+
+- **Match Bitmask:** When on, autotile tiles must have the same bitmask as in "Input" to match.  When off, any tile within the same autotile region will match.  Default is off.
+
+- **Any Includes Empty:** When on, tiles left empty in "Input" will match with empty tiles as well as any other tile.  When off, they only match with non-empty tiles.  Default is off.
+
+## Optional tilemaps in Tile Pattern Setup
+- Adding multiple input maps allows multiple inputs to result in the same output.  Each input map needs to have a name beginning with "Input" or "input".  When multiple input maps have a tile in the same spot, either one will be a match for that pattern.  Each tile is considered indepedently for this.
+
+- Adding multiple output maps allows for random output.  Each output map needs to have a name beginning with "Output" or "output".  Each tile is considered independently, meaning that if two tiles each have two random output tiles, then there are four possible combinations.
+
+- Placing tiles in a map called "Empty" will cause them to match if they are empty.  It doesn't matter what type of tile is placed in Empty.  If there are tiles in both input and empty, then the tile can either be empty or have the tile in the input layer, or one of the tiles in input if there are multiple input layers.
+
+- Placing tiles in a map called "Delete" removes tiles when replacing the pattern.  This can be used to remove unwanted tiles, for example if you have a tile that takes up more than one grid space and you don't want any tiles to overlap with it.
+
+## Known Issues
 - Viewing a tile pattern resource in the inspector doesn't show the icon correctly and can flood the output window with errors, but doesn't seem to cause any other problems.  Removing the icon from the resource in script and then re-adding it fixes the problem, but then it returns when the editor is restarted.
