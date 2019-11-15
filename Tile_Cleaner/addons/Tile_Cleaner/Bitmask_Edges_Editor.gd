@@ -40,10 +40,11 @@ var selected_bits := {}
 var undo_changes := {}
 var redo_changes := {}
 
-onready var container := $Grid/Sprite_Container
-onready var tile := $Grid/Sprite_Container/Tile
+onready var container := $Grid_Container/Grid/Sprite_Container
+onready var tile := $Grid_Container/Tile
 onready var id_label := $ID_Selector/ID_Label
-onready var grid := $Grid
+onready var grid := $Grid_Container/Grid
+onready var grid_container := $Grid_Container
 onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
 onready var clear_button := $Clear_Button
 onready var load_bitmask_button := $Load_Bitmask_Button
@@ -287,7 +288,8 @@ func update_bounds():
 	bounds = Rect2(get_viewport_rect().position + Vector2(CONTROLS_WIDTH, GRID_BORDER), \
 			get_parent().get_rect().size - Vector2(CONTROLS_WIDTH + GRID_BORDER, GRID_BORDER * 2))
 	# pass bounds to grid
-	grid.rect_position = bounds.position
+	grid_container.rect_position = bounds.position
+	grid_container.rect_size = bounds.size
 	grid.rect_size = bounds.size / zoom
 
 func update_grid_origin():
