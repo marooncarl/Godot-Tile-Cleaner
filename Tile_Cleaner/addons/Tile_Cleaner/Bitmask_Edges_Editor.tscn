@@ -100,6 +100,14 @@ margin_bottom = 522.759
 disabled = true
 text = "Save Bitmask Data"
 
+[node name="Save_As_Button" type="Button" parent="."]
+margin_left = 53.7916
+margin_top = 539.411
+margin_right = 183.792
+margin_bottom = 559.411
+disabled = true
+text = "Save As..."
+
 [node name="Clear_Button" type="Button" parent="."]
 margin_left = 77.7433
 margin_top = 253.045

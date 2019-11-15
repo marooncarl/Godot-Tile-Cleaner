@@ -46,8 +46,9 @@ onready var id_label := $ID_Selector/ID_Label
 onready var grid := $Grid
 onready var bitmask_selector := $Grid_Config/Bitmask_Mode_Selector
 onready var clear_button := $Clear_Button
-onready var save_button := $Save_Button
 onready var load_bitmask_button := $Load_Bitmask_Button
+
+onready var save_buttons := [$Save_Button, $Save_As_Button]
 
 
 func _ready():
@@ -61,7 +62,8 @@ func _ready():
 	$Grid_Config/Grid_Y_Entry.connect("text_entered", self, "on_grid_y_entered")
 	$Grid_Config/Grid_Y_Entry.connect("focus_exited", self, "on_grid_y_exit_focus")
 	bitmask_selector.connect("item_selected", self, "on_bitmask_mode_selected")
-	save_button.connect("pressed", self, "on_save_pressed")
+	$Save_Button.connect("pressed", self, "on_save_pressed")
+	$Save_As_Button.connect("pressed", self, "on_save_as_pressed")
 	$Save_Dialog.connect("file_selected", self, "on_save_file_selected")
 	load_bitmask_button.connect("pressed", self, "on_load_bitmask_pressed")
 	$Load_Bitmask_Dialog.connect("file_selected", self, "on_load_bitmask_file_selected")
@@ -72,9 +74,8 @@ func _ready():
 	connect("needs_saving", self, "on_needs_saving")
 	
 	# Buttons disabled by default
-	clear_button.disabled = true
-	save_button.disabled = true
-	load_bitmask_button.disabled = true
+	for button in [clear_button, $Save_Button, $Save_As_Button, load_bitmask_button]:
+		button.disabled = true
 
 func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
@@ -345,14 +346,15 @@ func is_tile_clear(tile_id: int):
 	return true
 
 func on_needs_saving():
-	save_button.disabled = false
+	for button in save_buttons:
+		button.disabled = false
 
 func reset_panning():
 	container.rect_position = bounds.size / 2.0 / zoom
 	update_grid_origin()
 
 func is_saving_needed() -> bool:
-	return !save_button.disabled
+	return !$Save_Button.disabled
 
 # Button events
 
@@ -375,6 +377,12 @@ func on_load_file_selected(path: String):
 		print("Loaded file was not a tileset.")
 
 func on_save_pressed():
+	if save_path != "":
+		on_save_file_selected(save_path)
+	else:
+		$Save_Dialog.popup_centered(get_file_window_size())
+
+func on_save_as_pressed():
 	$Save_Dialog.popup_centered(get_file_window_size())
 
 func on_save_file_selected(path: String):
@@ -389,7 +397,8 @@ func on_save_file_selected(path: String):
 	save_data.bitmask_data = BitmaskEdgesData.create_bitmask_save_data(selected_bits)
 	save_data.grid_size = grid.size
 	ResourceSaver.save(path, save_data)
-	save_button.disabled = true
+	for button in save_buttons:
+		button.disabled = true
 	save_path = path
 	print("Saved bitmask edges data")
 
