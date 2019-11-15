@@ -176,8 +176,10 @@ func _input(event):
 				elif event is InputEventMouseButton:
 					# Zooming
 					if event.button_index == BUTTON_WHEEL_UP || event.button_index == BUTTON_WHEEL_DOWN:
+						var mouse_pos_before : Vector2 = (relative_mouse_pos - (grid.origin * zoom)) / zoom
 						set_zoom(zoom + ZOOM_STEP * (1 if event.button_index == BUTTON_WHEEL_UP else -1))
-						container.rect_position = relative_mouse_pos / zoom
+						var mouse_pos_after : Vector2 = (relative_mouse_pos - (grid.origin * zoom)) / zoom
+						container.rect_position += mouse_pos_after - mouse_pos_before
 						update_grid_origin()
 						grid.grab_focus()
 					
