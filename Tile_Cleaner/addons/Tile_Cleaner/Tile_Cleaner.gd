@@ -51,6 +51,25 @@ func clean_tiles(undoredo : UndoRedo):
 							"transpose": t.is_cell_transposed(x, y),
 							"autotile_coord": t.get_cell_autotile_coord(x, y),
 						}
+		# Also add cells that may be changed by bitmask edges data
+		if bitmask_data.keys().size() > 0:
+			for tile_id in bitmask_data.keys():
+				for cell in t.get_used_cells_by_id(tile_id):
+					for adj_cell in bitmask_data[tile_id].keys():
+						if adj_cell is String:
+							continue
+						
+						var x : int = (cell + adj_cell).x
+						var y : int = (cell + adj_cell).y
+						var id_at_cell : int = t.get_cell(x, y)
+						if id_at_cell != TileMap.INVALID_CELL && t.tile_set.tile_get_tile_mode(id_at_cell) == TileSet.AUTO_TILE:
+							before[cell + adj_cell] = {
+								"id": id_at_cell,
+								"x_flip": t.is_cell_x_flipped(x, y),
+								"y_flip": t.is_cell_y_flipped(x, y),
+								"transpose": t.is_cell_transposed(x, y),
+								"autotile_coord": t.get_cell_autotile_coord(x, y),
+							}
 		
 		# Add undo/redo action
 		undoredo.create_action("Clean Tiles")
