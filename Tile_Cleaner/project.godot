@@ -20,15 +20,15 @@ _global_script_classes=[ {
 "path": "res://addons/Tile_Cleaner/Tile_Pattern.gd"
 } ]
 _global_script_class_icons={
-"BitmaskEdgesData": "res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png",
-"TilePattern": "res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png"
+"BitmaskEdgesData": "res://addons/Tile_Cleaner/Icons/Bitmask_Edges_Icon.png",
+"TilePattern": "res://addons/Tile_Cleaner/Icons/Tile_Pattern_Icon.png"
 }
 
 [application]
 
 config/name="Tile Cleaner"
 run/main_scene="res://Slopes_Example/Slopes_Test_Map.tscn"
-config/icon="res://addons/Tile_Cleaner/Tile_Cleaner_Icon.png"
+config/icon="res://addons/Tile_Cleaner/Icons/Tile_Cleaner_Icon.png"
 
 [debug]
 

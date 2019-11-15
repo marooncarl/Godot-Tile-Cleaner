@@ -3,7 +3,7 @@
 # Data generated using Tile Pattern Setup
 
 extends Resource
-class_name TilePattern, "Autotile_Ruleset_Icon.png"
+class_name TilePattern, "Icons/Tile_Pattern_Icon.png"
 
 # Each rule is a dictionary with cell position as a key
 # Each value is a dictionary containing data on input and output tiles for that cell position

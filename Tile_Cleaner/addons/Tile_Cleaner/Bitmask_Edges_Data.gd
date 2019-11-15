@@ -4,7 +4,7 @@
 # Contains bitmasks for tiles surrounding a non-autotile tile.
 
 extends Resource
-class_name BitmaskEdgesData, "Bitmask_Edges_Icon.png"
+class_name BitmaskEdgesData, "Icons/Bitmask_Edges_Icon.png"
 
 export(Dictionary) var bitmask_data := {}
 # For editing convenience; used to set the grid size when loading

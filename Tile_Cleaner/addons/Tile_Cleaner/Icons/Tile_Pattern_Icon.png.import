@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tile_Cleaner_Icon.png-ed4840fcbefab967b067186898d3c6f0.stex"
+path="res://.import/Tile_Pattern_Icon.png-ec498ae49ad62805f0a42294087ff313.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Tile_Cleaner/Tile_Cleaner_Icon.png"
-dest_files=[ "res://.import/Tile_Cleaner_Icon.png-ed4840fcbefab967b067186898d3c6f0.stex" ]
+source_file="res://addons/Tile_Cleaner/Icons/Tile_Pattern_Icon.png"
+dest_files=[ "res://.import/Tile_Pattern_Icon.png-ec498ae49ad62805f0a42294087ff313.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bitmask_Edges_Icon.png-7d4825aa47ba111e6c988456858fde2a.stex"
+path="res://.import/Bitmask_Edges_Icon.png-686627840e798dfa31bbd7276dc9d29e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Tile_Cleaner/Bitmask_Edges_Icon.png"
-dest_files=[ "res://.import/Bitmask_Edges_Icon.png-7d4825aa47ba111e6c988456858fde2a.stex" ]
+source_file="res://addons/Tile_Cleaner/Icons/Bitmask_Edges_Icon.png"
+dest_files=[ "res://.import/Bitmask_Edges_Icon.png-686627840e798dfa31bbd7276dc9d29e.stex" ]
 
 [params]
 

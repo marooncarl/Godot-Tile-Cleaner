@@ -26,8 +26,8 @@ func _enter_tree():
 	make_visible(false)
 	
 	# Create custom node types
-	add_custom_type("Tile_Cleaner", "Node", preload("Tile_Cleaner.gd"), preload("Tile_Cleaner_Icon.png"))
-	add_custom_type("Tile_Pattern_Setup", "Node", preload("Tile_Pattern_Setup.gd"), preload("Autotile_Setup_Icon.png"))
+	add_custom_type("Tile_Cleaner", "Node", preload("Tile_Cleaner.gd"), preload("Icons/Tile_Cleaner_Icon.png"))
+	add_custom_type("Tile_Pattern_Setup", "Node", preload("Tile_Pattern_Setup.gd"), preload("Icons/Pattern_Setup_Icon.png"))
 
 func _exit_tree():
 	remove_control_from_docks(dock)
@@ -49,4 +49,4 @@ func get_plugin_name():
 	return "BitmaskEdges"
 
 func get_plugin_icon():
-	return preload("Bitmask_Edges_Icon.png")
+	return preload("Icons/Bitmask_Edges_Icon.png")

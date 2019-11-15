@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Autotile_Ruleset_Icon.png-063c39f70f44d7c4ee7013aed7cdbf31.stex"
+path="res://.import/Tile_Cleaner_Icon.png-231f4cf04a19fd3feda8258db9bccc7f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/Tile_Cleaner/Autotile_Ruleset_Icon.png"
-dest_files=[ "res://.import/Autotile_Ruleset_Icon.png-063c39f70f44d7c4ee7013aed7cdbf31.stex" ]
+source_file="res://addons/Tile_Cleaner/Icons/Tile_Cleaner_Icon.png"
+dest_files=[ "res://.import/Tile_Cleaner_Icon.png-231f4cf04a19fd3feda8258db9bccc7f.stex" ]
 
 [params]
 
