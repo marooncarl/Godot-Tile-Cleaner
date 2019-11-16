@@ -1,4 +1,6 @@
 # Tile Cleaner
+![Slope Example](https://images2.imgbox.com/0e/2c/no2nxaep_o.jpg)
+
 Tile Cleaner is a plugin for Godot engine 3.1.1.  It provides custom autotiling for Godot tilemaps by finding and replacing patterns, similar to automapping in Tiled.
 
 It can also make non-autotile tiles combine with Godot autotiles by customizing which bits should be filled around the non-autotile tiles.  For example, slope tiles in a platform game can combine with blob autotiles.
@@ -36,6 +38,8 @@ In order to set up the Tile Cleaner with your tileset, you'll need to create a t
 - Once you have saved a tile pattern, the setup scene updates with a path to that pattern.  Save the scene, and later when "Save Tile Pattern" is clicked, or ctrl + S is pressed, the tile pattern will update.
 
 ## Creating Bitmask Edges Data
+![Bitmask Edges Data - Before and After](https://images2.imgbox.com/a4/ef/9OjA2vvO_o.jpg)
+
 The BitmaskEdges main screen is used to specify which bits around which tiles should become filled, thus changing surrounding autotile tiles.
 
 - First, load a tile set by clicking "Load Tileset" and choosing a file.  A single tile from the tileset will appear on the grid.
