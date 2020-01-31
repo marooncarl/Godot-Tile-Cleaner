@@ -1,7 +1,9 @@
 # Tile Cleaner
 ![Slope Example](https://images2.imgbox.com/0e/2c/no2nxaep_o.jpg)
 
-Tile Cleaner is a plugin for Godot engine 3.1.1.  It provides custom autotiling for Godot tilemaps by finding and replacing patterns, similar to automapping in Tiled.
+Updated for Godot 3.2
+
+Tile Cleaner is a plugin for Godot engine.  It provides custom autotiling for Godot tilemaps by finding and replacing patterns, similar to automapping in Tiled.
 
 It can also make non-autotile tiles combine with Godot autotiles by customizing which bits should be filled around the non-autotile tiles.  For example, slope tiles in a platform game can combine with blob autotiles.
 
