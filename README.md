@@ -93,3 +93,8 @@ To clean tiles at runtime, call clean_tiles(null) on the Tile Cleaner node.
 
 ## Known Issues
 - Viewing a tile pattern resource in the inspector doesn't show the icon correctly and can flood the output window with errors, but doesn't seem to cause any other problems.  Removing the icon from the resource in script and then re-adding it fixes the problem, but then it returns when the editor is restarted.
+
+## License Change
+When I created the Tile Cleaner, I initially chose the GPL v3 license for it.  I did not know at the time that this license would require anything that incorporates GPL software to also use the GPL license.  This was my mistake.  My intention was for this addon to be usable in commercial games, if anyone besides me found it useful.  I believe that choosing the GPL license contradicted this intention.
+
+Therefore, I have changed the license to MIT.  This should remove any barriers to using this addon in any application, commercial or otherwise, and is the license I should have chosen in the first place.  However, a version with the GPL license is available by switching to the "GPL" branch.
