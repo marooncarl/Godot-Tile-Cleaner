@@ -93,7 +93,7 @@ func set_tileset(new_tileset : TileSet):
 		load_bitmask_button.disabled = true
 
 func set_current_tile(new_id):
-	assert tileset
+	assert(tileset)
 	current_id = new_id
 	tile.texture = tileset.tile_get_texture(current_id)
 	tile.region_rect = tileset.tile_get_region(current_id)
@@ -111,7 +111,7 @@ func set_current_tile(new_id):
 # Returns next non-autotile id.
 # If it loops around the whole list, returns the same id as current.
 func get_next_id() -> int:
-	assert tileset
+	assert(tileset)
 	var ids : Array = tileset.get_tiles_ids()
 	var id_index : int = ids.find(current_id)
 	
@@ -129,7 +129,7 @@ func get_next_id() -> int:
 # Returns previous non-autotile id.
 # If it loops around the whole list, returns the same id as current.
 func get_prev_id() -> int:
-	assert tileset
+	assert(tileset)
 	var ids : Array = tileset.get_tiles_ids()
 	var id_index = ids.find(current_id)
 	
