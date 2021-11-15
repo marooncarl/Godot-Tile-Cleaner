@@ -100,6 +100,7 @@ func set_current_tile(new_id):
 	if tileset.tile_get_tile_mode(current_id) != TileSet.SINGLE_TILE:
 		tile.region_rect.size = tileset.autotile_get_size(current_id)
 	
+	tile.offset = tileset.tile_get_texture_offset(current_id)
 	id_label.text = str(new_id)
 	
 	# If the tile has a bitmask mode set, update to that
