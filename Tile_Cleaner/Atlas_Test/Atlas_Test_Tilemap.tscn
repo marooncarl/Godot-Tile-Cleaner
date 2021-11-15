@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Atlas_Test/Atlas_Test_Tiles.tres" type="TileSet" id=1]
+
+[node name="Atlas_Test_Tilemap" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 12, 12 )
+format = 1
