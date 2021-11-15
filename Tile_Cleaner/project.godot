@@ -37,7 +37,7 @@ gdscript/warnings/return_value_discarded=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "Tile_Cleaner" )
+enabled=PoolStringArray( "res://addons/Tile_Cleaner/plugin.cfg" )
 
 [importer_defaults]
 

@@ -82,7 +82,7 @@ func set_tileset(new_tileset : TileSet):
 	tileset = new_tileset
 	if tileset:
 		var first_id = tileset.get_tiles_ids()[0]
-		if tileset.tile_get_tile_mode(first_id) != TileSet.SINGLE_TILE:
+		if !can_show_tile(first_id):
 			first_id = get_next_id()
 		set_current_tile(first_id)
 		
@@ -121,7 +121,7 @@ func get_next_id() -> int:
 		id_index += 1
 		if id_index >= ids.size():
 			id_index = 0
-		if tileset.tile_get_tile_mode(ids[id_index]) == TileSet.SINGLE_TILE:
+		if can_show_tile(ids[id_index]):
 			break
 	
 	return ids[id_index]
@@ -139,10 +139,13 @@ func get_prev_id() -> int:
 		id_index -= 1
 		if id_index < 0:
 			id_index = ids.size() - 1
-		if tileset.tile_get_tile_mode(ids[id_index]) == TileSet.SINGLE_TILE:
+		if can_show_tile(ids[id_index]):
 			break
 	
 	return ids[id_index]
+
+func can_show_tile(tile_id: int) -> bool:
+	return tileset.tile_get_tile_mode(tile_id) != TileSet.AUTO_TILE
 
 func _input(event):
 	if visible:
