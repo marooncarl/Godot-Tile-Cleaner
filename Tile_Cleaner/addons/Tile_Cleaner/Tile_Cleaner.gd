@@ -236,7 +236,7 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 					
 					# If didn't find an exact match, pick the bitmask that has the fewest bits 
 					# but still contains combined mask
-					if new_mask == 0:
+					if new_mask == 0 && considered_masks.size() > 0:
 						new_mask = get_smallest_bitmask(considered_masks)
 						new_coord = considered_coords[considered_masks.find(new_mask)]
 					if new_mask != 0:
