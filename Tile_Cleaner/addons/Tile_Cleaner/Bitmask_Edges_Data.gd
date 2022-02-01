@@ -64,7 +64,13 @@ static func create_working_data(save_data: Dictionary) -> Dictionary:
 			working_data[tile_id][cell] = []
 			
 			var left : int = save_data[tile_id][cell]
-			for power in range(pow(bitmask_mode, 2) - 1, -1, -1):
+			var power_range := []
+			if bitmask_mode == 2:
+				power_range = [8, 6, 2, 0]
+			else:
+				power_range = range(pow(bitmask_mode, 2) - 1, -1, -1)
+			
+			for power in power_range:
 				var bit := int(pow(2, power))
 				if left >= bit:
 					left -= bit
