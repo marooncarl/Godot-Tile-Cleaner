@@ -7,7 +7,10 @@ extends Panel
 
 const SAVE_DIALOG_SCALE = Vector2(0.66, 0.66)
 
+# Hotkey for Clean Tiles button
+# If desired, change this to one of the KeyList constants in @GlobalScope.
 const CLEAN_HOTKEY = KEY_C
+# These must match one of the properties of InputEventWithModifiers.
 const CLEAN_MODIFIERS = ["control", "alt"]
 
 var editor_interface : EditorInterface = null
