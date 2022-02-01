@@ -286,6 +286,7 @@ func get_autotile_region_size(tile_set : TileSet, tile_id : int):
 	autotile_region_size.y = test_coord.y - 1
 	return autotile_region_size
 
+
 func get_random_autotile_for_bitmask(
 	tile_set : TileSet,
 	tile_id : int,
@@ -300,5 +301,41 @@ func get_random_autotile_for_bitmask(
 			if tile_set.autotile_get_bitmask(tile_id, coord) == bitmask:
 				matching_autotiles.push_back(coord)
 	
-	var index := randi() % matching_autotiles.size()
-	return matching_autotiles[index]
+	return get_weighted_random_autotile(tile_set, tile_id, matching_autotiles)
+
+
+func get_weighted_random_autotile(
+	tile_set : TileSet,
+	tile_id : int,
+	autotile_coords : Array
+) -> Vector2:
+	
+	if autotile_coords.size() == 0:
+		return Vector2.ZERO
+	
+	var prioritized_coords := []
+	var priority_sum := 0.0
+	
+	# Create an array of subtiles as [priority, coord]
+	for coord in autotile_coords:
+		var priority := float(tile_set.autotile_get_subtile_priority(tile_id, coord))
+		prioritized_coords.push_back([priority, coord])
+		priority_sum += priority
+	
+	prioritized_coords.sort_custom(Subtile_Sorter, "sort_by_priority")
+	var roll := randf()
+	
+	var accumulated_priority := 0.0
+	for coord in prioritized_coords:
+		accumulated_priority += coord[0] / priority_sum
+		if roll < accumulated_priority:
+			return coord[1]
+	
+	# Return last by default
+	return prioritized_coords[prioritized_coords.size() - 1][1]
+
+
+class Subtile_Sorter:
+	# Subtiles with higher priority go first
+	static func sort_by_priority(a: Array, b: Array):
+		return a[0] >= b[0]
