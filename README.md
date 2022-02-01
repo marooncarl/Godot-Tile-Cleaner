@@ -73,7 +73,7 @@ Once you have a tilemap you want to clean and some autotile rules and / or bitma
 
 - Before bitmask edges data is applied, by default, the Tile Cleaner updates the bitmasks of autotiles surrounding tiles that were replaced by pattern matching.  If this is not desired, you can uncheck "Update Bitmasks."
 
-Now you can clean the tilemap whenever you make changes by going to the Tile Cleaner dock and clicking "Clean Tiles."
+Now you can clean the tilemap whenever you make changes by going to the Tile Cleaner dock and clicking "Clean Tiles."  Or you can press the hotkey, which by default is Control + Alt + C.  The hotkey can be changed in Tile_Cleaner_Dock.gd.
 
 To clean tiles at runtime, call clean_tiles(null) on the Tile Cleaner node.
 
