@@ -191,6 +191,39 @@ func change_tilemap(t : TileMap, changes : Dictionary, update_bitmasks : bool = 
 # Changes the bitmasks of autotiles next to non-autotiles that have bitmask edges data
 func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 	var autotile_regions := {}
+	var altered_bitmasks := {}
+	
+	# For 2x2 autotiles, change bitmasks which are invalid
+	# in case adding bitmask edges can make them valid
+	for tile_id in bitmask_data.keys():
+		if !"bitmask_mode" in bitmask_data[tile_id] || bitmask_data[tile_id]["bitmask_mode"] != 2:
+			continue
+		
+		for cell in t.get_used_cells_by_id(tile_id):
+			for adj_cell in bitmask_data[tile_id].keys():
+				if adj_cell is String:
+					continue
+				
+				var check_cell := Vector2(cell.x + adj_cell.x, cell.y + adj_cell.y)
+				if check_cell in altered_bitmasks:
+					continue
+				
+				var bitmask := t.tile_set.autotile_get_bitmask(
+					t.get_cell(check_cell.x, check_cell.y),
+					t.get_cell_autotile_coord(check_cell.x, check_cell.y)
+				)
+				
+				for corner in [
+					TileSet.BIND_TOPLEFT,
+					TileSet.BIND_TOPRIGHT,
+					TileSet.BIND_BOTTOMLEFT,
+					TileSet.BIND_BOTTOMRIGHT,
+				]:
+					if (bitmask & corner) != 0 && !is_2x2_bit_valid(t, check_cell, corner):
+						bitmask = (bitmask ^ corner)
+				
+				altered_bitmasks[check_cell] = bitmask
+	
 	for tile_id in bitmask_data.keys():
 		for cell in t.get_used_cells_by_id(tile_id):
 			for adj_cell in bitmask_data[tile_id].keys():
@@ -199,11 +232,15 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 				
 				var x := int((cell + adj_cell).x)
 				var y := int((cell + adj_cell).y)
+				var check_cell := Vector2(x, y)
 				var changed_id : int = t.get_cell(x, y)
 				# Make sure the tile we're changing is an autotile
 				if changed_id != TileMap.INVALID_CELL && t.tile_set.tile_get_tile_mode(changed_id) == TileSet.AUTO_TILE:
 					var autotile_coord := t.get_cell_autotile_coord(x, y)
 					var original_bitmask := t.tile_set.autotile_get_bitmask(changed_id, autotile_coord)
+					if check_cell in altered_bitmasks:
+						original_bitmask = altered_bitmasks[check_cell]
+					
 					var combined_bitmask : int = bitmask_data[tile_id][adj_cell] | original_bitmask
 					
 					# Determine autotile region size once for each tile id
@@ -246,6 +283,8 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 							t.is_cell_y_flipped(x, y), 
 							t.is_cell_transposed(x, y),
 							tile_coord)
+						
+						altered_bitmasks.erase(check_cell)
 
 # Returns true if mask1 contains every bit in mask2
 func bitmask_contains(mask1 : int, mask2 : int):
@@ -285,6 +324,45 @@ func get_autotile_region_size(tile_set : TileSet, tile_id : int):
 	
 	autotile_region_size.y = test_coord.y - 1
 	return autotile_region_size
+
+
+func is_2x2_bit_valid(t : TileMap, cell : Vector2, bit: int) -> bool:
+	var adj_cells := {}
+	match bit:
+		TileSet.BIND_TOPLEFT:
+			adj_cells = {
+				cell + Vector2.LEFT: TileSet.BIND_TOPRIGHT,
+				cell + Vector2.UP: TileSet.BIND_BOTTOMLEFT,
+				cell + Vector2(-1, -1): TileSet.BIND_BOTTOMRIGHT,
+			}
+		TileSet.BIND_TOPRIGHT:
+			adj_cells = {
+				cell + Vector2.RIGHT: TileSet.BIND_TOPLEFT,
+				cell + Vector2.UP: TileSet.BIND_BOTTOMRIGHT,
+				cell + Vector2(1, -1): TileSet.BIND_BOTTOMLEFT,
+			}
+		TileSet.BIND_BOTTOMLEFT:
+			adj_cells = {
+				cell + Vector2.LEFT: TileSet.BIND_BOTTOMRIGHT,
+				cell + Vector2.DOWN : TileSet.BIND_TOPLEFT,
+				cell + Vector2(-1, 1): TileSet.BIND_TOPRIGHT,
+			}
+		TileSet.BIND_BOTTOMRIGHT:
+			adj_cells = {
+				cell + Vector2.RIGHT: TileSet.BIND_BOTTOMLEFT,
+				cell + Vector2.DOWN: TileSet.BIND_TOPRIGHT,
+				cell + Vector2(1, 1): TileSet.BIND_TOPLEFT,
+			}
+	
+	for adj_cell in adj_cells.keys():
+		var adj_bitmask := t.tile_set.autotile_get_bitmask(
+			t.get_cellv(adj_cell),
+			t.get_cell_autotile_coord(adj_cell.x, adj_cell.y)
+		)
+		if (adj_bitmask & adj_cells[adj_cell]) == 0:
+			return false
+	
+	return true
 
 
 func get_random_autotile_for_bitmask(
