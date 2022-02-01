@@ -213,9 +213,7 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 					
 					# Find a bitmask matching the combined one, or at least a bitmask that contains it
 					var new_mask := 0
-					var new_coord := Vector2()
 					var considered_masks := []
-					var considered_coords := []
 					
 					for coord_x in range(0, region_size.x):
 						for coord_y in range(0, region_size.y):
@@ -223,12 +221,11 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 							if mask == combined_bitmask:
 								# Found a match!
 								new_mask = mask
-								new_coord = Vector2(coord_x, coord_y)
 								break
+							
 							elif mask != 0 && bitmask_contains(mask, combined_bitmask):
 								# Consider this mask if we don't find a match
 								considered_masks.append(mask)
-								considered_coords.append(Vector2(coord_x, coord_y))
 						
 						if new_mask != 0:
 							# Found a match, so break here as well
@@ -238,11 +235,17 @@ func fix_bitmask_edges(t : TileMap, bitmask_data : Dictionary):
 					# but still contains combined mask
 					if new_mask == 0 && considered_masks.size() > 0:
 						new_mask = get_smallest_bitmask(considered_masks)
-						new_coord = considered_coords[considered_masks.find(new_mask)]
+					
 					if new_mask != 0:
 						# Change the tile
-						t.set_cell(x, y, changed_id, t.is_cell_x_flipped(x, y), t.is_cell_y_flipped(x, y), \
-								t.is_cell_transposed(x, y), new_coord)
+						var tile_coord := get_random_autotile_for_bitmask(
+							t.tile_set, changed_id, new_mask, region_size)
+						
+						t.set_cell(x, y, changed_id,
+							t.is_cell_x_flipped(x, y),
+							t.is_cell_y_flipped(x, y), 
+							t.is_cell_transposed(x, y),
+							tile_coord)
 
 # Returns true if mask1 contains every bit in mask2
 func bitmask_contains(mask1 : int, mask2 : int):
@@ -282,3 +285,20 @@ func get_autotile_region_size(tile_set : TileSet, tile_id : int):
 	
 	autotile_region_size.y = test_coord.y - 1
 	return autotile_region_size
+
+func get_random_autotile_for_bitmask(
+	tile_set : TileSet,
+	tile_id : int,
+	bitmask : int,
+	region_size: Vector2
+) -> Vector2:
+	
+	var matching_autotiles := []
+	for x in region_size.x:
+		for y in region_size.y:
+			var coord := Vector2(x, y)
+			if tile_set.autotile_get_bitmask(tile_id, coord) == bitmask:
+				matching_autotiles.push_back(coord)
+	
+	var index := randi() % matching_autotiles.size()
+	return matching_autotiles[index]
