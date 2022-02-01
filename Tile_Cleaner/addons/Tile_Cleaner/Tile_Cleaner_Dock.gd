@@ -7,6 +7,9 @@ extends Panel
 
 const SAVE_DIALOG_SCALE = Vector2(0.66, 0.66)
 
+const CLEAN_HOTKEY = KEY_C
+const CLEAN_MODIFIERS = ["control", "alt"]
+
 var editor_interface : EditorInterface = null
 var undo_redo : UndoRedo = null
 
@@ -19,10 +22,14 @@ func _ready():
 
 # Save pattern when ctrl + s is pressed if it has been saved already
 func _input(event):
-	if event is InputEventKey && event.pressed && event.control && event.scancode == KEY_S:
-		var setup = get_setup()
-		if setup && setup.pattern_path != "":
-			on_save_file_selected(setup.pattern_path)
+	if event is InputEventKey && event.pressed:
+		if event.control && event.scancode == KEY_S:
+			var setup = get_setup()
+			if setup && setup.pattern_path != "":
+				on_save_file_selected(setup.pattern_path)
+		
+		elif is_clean_hotkey_pressed(event):
+			on_clean_pressed()
 
 func on_save_pressed():
 	# Make sure a ruleset can be saved before bringing up the save dialog
@@ -93,6 +100,18 @@ func get_setup() -> Node:
 			return setup
 	
 	return null
+
+
+func is_clean_hotkey_pressed(event: InputEventKey) -> bool:
+	if event.scancode != CLEAN_HOTKEY:
+		return false
+	
+	for mod in CLEAN_MODIFIERS:
+		if !event.get(mod):
+			return false
+	
+	return true
+
 
 func on_clean_pressed():
 	if undo_redo && editor_interface:
