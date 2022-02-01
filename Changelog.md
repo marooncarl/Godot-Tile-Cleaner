@@ -1,3 +1,11 @@
+v1.0.3 \
+Feb 1, 2022
+
+- Fixed incorrect loading of bitmask data for 2x2 autotiles in Bitmask Edges Editor.
+- Autotiles changed by bitmask edges use random variants, with chances affected by priority.
+- Added hotkey for cleaning tiles: Control + Alt + C.
+- 2x2 autotiles affected by bitmask edges remove bits that aren't connected to an adjacent tile before adding bits from bitmask edges.
+
 v1.0.2 \
 Jan 30, 2022
 
